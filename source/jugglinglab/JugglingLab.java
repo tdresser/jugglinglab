@@ -45,6 +45,9 @@ public class JugglingLab {
             JMLPattern pattern = JMLPattern.fromBasePattern("siteswap", "531");
             pattern.layoutPattern();
             System.out.println("Paths: " + pattern.getNumberOfPaths());
+            Coordinate c = new Coordinate();
+            pattern.getHandCoordinate(1, 0, 0.1, c);
+            System.out.println(c.toString());
         } catch (JuggleExceptionUser e) {
             System.out.println("Failure" + e.getMessage());
         } catch (JuggleExceptionInternal e) {
