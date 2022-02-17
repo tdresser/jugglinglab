@@ -12,9 +12,6 @@ import jugglinglab.util.*;
 // the movement of an object during the time between throw and catch.
 
 public abstract class Path {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
-
     protected double start_time;
     protected double end_time;
     protected Coordinate start_coord;

@@ -12,7 +12,6 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ResourceBundle;
 
 import javax.imageio.*;
 import javax.imageio.metadata.*;
@@ -502,76 +501,6 @@ public class Animator {
             throw new Error(e);
         }
     }
-
-
-    // Version that uses our own standalone GIF writer. It has trouble building
-    // the color map when there are many individual colors, for example with the
-    // image prop.
-    /*
-    public void writeGIF(OutputStream os, Animator.WriteGIFMonitor wgm) throws
-                IOException, JuggleExceptionInternal {
-
-        // Create the object that will actually do the writing
-        GIFAnimWriter gaw = new GIFAnimWriter();
-
-        int appWidth = dim.width;
-        int appHeight = dim.height;
-
-        BufferedImage image = new BufferedImage(appWidth, appHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = image.createGraphics();
-        // antialiased rendering creates too many distinct color values for
-        // GIF to handle well
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                           RenderingHints.VALUE_ANTIALIAS_OFF);
-
-        // reset prop assignments so we'll generate an identical GIF every time
-        for (int i = 0; i < pat.getNumberOfPaths(); i++)
-            animpropnum[i] = pat.getPropAssignment(i + 1);
-
-        int totalframes = pat.getPeriod() * num_frames * 2;
-        int framecount = 0;
-
-        // loop through the individual frames twice, first to build the
-        // color map and the second to write the GIF frames
-        for (int pass = 0; pass < 2; pass++) {
-            if (pass == 1)
-                gaw.writeHeader(os);
-
-            for (int i = 0; i < pat.getPeriod(); i++)  {
-                double time = pat.getLoopStartTime();
-
-                for (int j = 0; j < num_frames; j++) {
-                    if (pass == 1)
-                        gaw.writeDelay((int)(0.5 + real_interval_millis / 10), os);
-
-                    drawFrame(time, g, false);
-
-                    if (pass == 0)
-                        gaw.doColorMap(image);
-                    else
-                        gaw.writeGIF(image, os);
-
-                    if (wgm != null) {
-                        framecount++;
-                        wgm.update(framecount, totalframes);
-                        if (wgm.isCanceled()) {
-                            os.close();
-                            return;
-                        }
-                    }
-
-                    time += sim_interval_secs;
-                }
-
-                advanceProps();
-            }
-        }
-
-        gaw.writeTrailer(os);
-        g.dispose();
-        os.close();
-    }
-    */
 
     public interface WriteGIFMonitor {
         // callback method invoked when a processing step is completed

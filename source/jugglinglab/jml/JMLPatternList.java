@@ -5,11 +5,9 @@
 package jugglinglab.jml;
 
 import java.io.*;
-import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
+// TODO(tdresser): why this swing dependency?
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 
 import jugglinglab.core.AnimationPrefs;
 import jugglinglab.util.*;
@@ -19,8 +17,6 @@ import jugglinglab.util.*;
 // visualization is in PatternListPanel and PatternListWindow.
 
 public class JMLPatternList {
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
-
     // whether to maintain a blank line at the end of every pattern list,
     // so that items can be inserted at the end
     public static final boolean BLANK_AT_END = true;
@@ -168,20 +164,18 @@ public class JMLPatternList {
 
     public void readJML(JMLNode root) throws JuggleExceptionUser {
         if (!root.getNodeType().equalsIgnoreCase("jml"))
-            throw new JuggleExceptionUser(errorstrings.getString("Error_missing_JML_tag"));
+            throw new JuggleExceptionUser("Error_missing_JML_tag");
 
         String vers = root.getAttributes().getAttribute("version");
         if (vers != null) {
             if (JLFunc.compareVersions(vers, JMLDefs.CURRENT_JML_VERSION) > 0)
-                throw new JuggleExceptionUser(errorstrings.getString("Error_JML_version"));
+                throw new JuggleExceptionUser("Error_JML_version");
             loadingversion = vers;
         }
 
         JMLNode listnode = root.getChildNode(0);
         if (!listnode.getNodeType().equalsIgnoreCase("patternlist"))
-            throw new JuggleExceptionUser(errorstrings.getString("Error_missing_patternlist_tag"));
-
-        int linenumber = 0;
+            throw new JuggleExceptionUser("Error_missing_patternlist_tag");
 
         for (int i = 0; i < listnode.getNumberOfChildren(); i++) {
             JMLNode child = listnode.getChildNode(i);
@@ -190,7 +184,6 @@ public class JMLPatternList {
             } else if (child.getNodeType().equalsIgnoreCase("info")) {
                 info = child.getNodeValue().strip();
             } else if (child.getNodeType().equalsIgnoreCase("line")) {
-                linenumber++;
                 JMLAttributes attr = child.getAttributes();
 
                 String display = attr.getAttribute("display");
@@ -204,9 +197,7 @@ public class JMLPatternList {
                     if (notation.equalsIgnoreCase("jml")) {
                         patnode = child.findNode("pattern");
                         if (patnode == null) {
-                            String template = errorstrings.getString("Error_missing_pattern");
-                            Object[] arguments = { Integer.valueOf(linenumber) };
-                            throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                            throw new JuggleExceptionUser("Error_missing_pattern");
                         }
                         infonode = patnode.findNode("info");
                     } else {
@@ -217,7 +208,7 @@ public class JMLPatternList {
 
                 addLine(-1, display, animprefs, notation, anim, patnode, infonode);
             } else
-                throw new JuggleExceptionUser(errorstrings.getString("Error_illegal_tag"));
+                throw new JuggleExceptionUser("Error_illegal_tag");
         }
     }
 

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import jugglinglab.core.Constants;
 import jugglinglab.jml.JMLPattern;
 import jugglinglab.util.Coordinate;
-import jugglinglab.util.JLFunc;
 import jugglinglab.util.JuggleExceptionInternal;
 import jugglinglab.prop.Prop;
 
@@ -513,12 +512,9 @@ public class Renderer2D extends Renderer {
 
                     double LheadBx = ob.coord[4].x;
                     double LheadBy = ob.coord[4].y;
-                    double LheadTx = ob.coord[5].x;
                     double LheadTy = ob.coord[5].y;
                     double RheadBx = ob.coord[6].x;
                     double RheadBy = ob.coord[6].y;
-                    double RheadTx = ob.coord[7].x;
-                    double RheadTy = ob.coord[7].y;
 
                     if (Math.abs(RheadBx - LheadBx) > 2.0) {
                         // head is at least 2 pixels wide; draw it as a polygon

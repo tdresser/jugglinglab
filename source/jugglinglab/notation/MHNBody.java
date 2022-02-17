@@ -4,8 +4,6 @@
 
 package jugglinglab.notation;
 
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
@@ -17,9 +15,6 @@ import jugglinglab.util.*;
 // This class parses the "body" parameter in MHN notation.
 
 public class MHNBody {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
-
     protected int jugglers = 0;
     protected int[] size;
     protected int[][] coords;
@@ -75,7 +70,7 @@ public class MHNBody {
                 if (ch == '(') {
                     int closeindex = str.indexOf(')', pos + 1);
                     if (closeindex < 0)
-                        throw new JuggleExceptionUser(errorstrings.getString("Error_body_noparen"));
+                        throw new JuggleExceptionUser("Error_body_noparen");
                     if (pass == 3) {
                         bodypath[juggler][beat][coordnum] = new double[4];
                         bodypath[juggler][beat][coordnum][3] = 100.0;     // default z
@@ -96,7 +91,7 @@ public class MHNBody {
                                 bodypath[juggler][beat][coordnum][3] =
                                     JLFunc.parseDouble(st4.nextToken());
                         } catch (NumberFormatException e) {
-                            throw new JuggleExceptionUser(errorstrings.getString("Error_body_coordinate"));
+                            throw new JuggleExceptionUser("Error_body_coordinate");
                         } catch (NoSuchElementException e) {
                             throw new JuggleExceptionInternal("No such element exception in MHNBody");
                         }
@@ -107,7 +102,7 @@ public class MHNBody {
                 }
                 if (ch == '|' || ch == '!') {
                     if (coordnum != 0)
-                        throw new JuggleExceptionUser(errorstrings.getString("Error_body_badending"));
+                        throw new JuggleExceptionUser("Error_body_badending");
                     if (pass == 1) {
                         this.size[juggler] = beat;
                         this.coords[juggler] = new int[beat];
@@ -119,13 +114,11 @@ public class MHNBody {
                     continue;
                 }
 
-                String template = errorstrings.getString("Error_body_character");
-                Object[] arguments = { Character.toString(ch) };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_body_character");
             }
 
             if (coordnum != 0)
-                throw new JuggleExceptionUser(errorstrings.getString("Error_body_badending"));
+                throw new JuggleExceptionUser("Error_body_badending");
 
             if (pass == 0) {
                 this.jugglers = juggler + 1;

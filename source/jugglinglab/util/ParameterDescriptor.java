@@ -4,9 +4,7 @@
 
 package jugglinglab.util;
 
-import java.util.*;
-import javax.swing.*;
-
+import java.util.ArrayList;
 
 public class ParameterDescriptor {
     public static final int TYPE_BOOLEAN = 1;

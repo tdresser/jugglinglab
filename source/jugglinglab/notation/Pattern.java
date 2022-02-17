@@ -4,8 +4,6 @@
 
 package jugglinglab.notation;
 
-import java.util.ResourceBundle;
-
 import jugglinglab.jml.JMLPattern;
 import jugglinglab.util.*;
 
@@ -15,9 +13,6 @@ import jugglinglab.util.*;
 // itself for the animator.
 
 public abstract class Pattern {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
-
     // The built-in notations
     public static final String[] builtinNotations = { "Siteswap" };
 

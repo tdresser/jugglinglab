@@ -6,7 +6,6 @@ package jugglinglab.prop;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -141,9 +140,7 @@ public class RingProp extends Prop {
             if (temp != null)
                 color = temp;
             else {
-                String template = errorstrings.getString("Error_prop_color");
-                Object[] arguments = { colorstr };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_prop_color");
             }
         }
 
@@ -154,11 +151,9 @@ public class RingProp extends Prop {
                 if (temp > 0.0)
                     outside_diam = temp;
                 else
-                    throw new JuggleExceptionUser(errorstrings.getString("Error_prop_diameter"));
+                    throw new JuggleExceptionUser("Error_prop_diameter");
             } catch (NumberFormatException nfe) {
-                String template = errorstrings.getString("Error_number_format");
-                Object[] arguments = { "diam" };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_number_format");
             }
         }
 
@@ -169,11 +164,9 @@ public class RingProp extends Prop {
                 if (temp > 0.0)
                     inside_diam = temp;
                 else
-                    throw new JuggleExceptionUser(errorstrings.getString("Error_prop_diameter"));
+                    throw new JuggleExceptionUser("Error_prop_diameter");
             } catch (NumberFormatException nfe) {
-                String template = errorstrings.getString("Error_number_format");
-                Object[] arguments = { "diam" };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_number_format");
             }
         }
     }

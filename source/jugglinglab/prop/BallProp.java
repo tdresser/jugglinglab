@@ -5,13 +5,12 @@
 package jugglinglab.prop;
 
 import java.util.*;
+
+// TODO(tdresser): eliminate dependency on awt.
 import java.awt.*;
 import java.awt.image.*;
-import java.text.MessageFormat;
 
-import jugglinglab.core.*;
 import jugglinglab.util.*;
-import jugglinglab.renderer.*;
 
 
 public class BallProp extends Prop {
@@ -131,23 +130,17 @@ public class BallProp extends Prop {
                         token = st2.nextToken().trim();
                         blue = Integer.valueOf(token).intValue();
                     } catch (NumberFormatException nfe) {
-                        String template = errorstrings.getString("Error_number_format");
-                        Object[] arguments = { token };
-                        throw new JuggleExceptionUser("Ball prop color: " +
-                                MessageFormat.format(template, arguments));
+                        throw new JuggleExceptionUser("Error_number_format");
                     }
                     temp = new Color(red, green, blue);
                 } else
-                    throw new JuggleExceptionUser("Ball prop color: " +
-                            errorstrings.getString("Error_token_count"));
+                    throw new JuggleExceptionUser("Error_token_count");
             }
 
             if (temp != null)
                 color = temp;
             else {
-                String template = errorstrings.getString("Error_prop_color");
-                Object[] arguments = { colorstr };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_prop_color");
             }
         }
 
@@ -158,12 +151,9 @@ public class BallProp extends Prop {
                 if (temp > 0.0)
                     diam = temp;
                 else
-                    throw new JuggleExceptionUser(errorstrings.getString("Error_prop_diameter"));
+                    throw new JuggleExceptionUser("Error_prop_diameter");
             } catch (NumberFormatException nfe) {
-                String template = errorstrings.getString("Error_number_format");
-                Object[] arguments = { "diam" };
-                throw new JuggleExceptionUser("Ball prop diameter: " +
-                        MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_number_format");
             }
         }
 
@@ -221,8 +211,6 @@ public class BallProp extends Prop {
         int ball_pixel_size = (int)(0.5 + zoom * diam);
         if (ball_pixel_size < 1)
             ball_pixel_size = 1;
-        int offsetx = -ball_pixel_size / 2;
-        int offsety = -ball_pixel_size;
 
         // Create a ball image of diameter ball_pixel_size, and transparent background
 

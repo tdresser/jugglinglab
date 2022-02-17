@@ -4,41 +4,12 @@
 
 package jugglinglab;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ResourceBundle;
-import org.xml.sax.SAXException;
-
-import jugglinglab.core.*;
-import jugglinglab.jml.JMLParser;
 import jugglinglab.jml.JMLPattern;
-import jugglinglab.jml.JMLPatternList;
-import jugglinglab.generator.SiteswapGenerator;
-import jugglinglab.generator.SiteswapTransitioner;
-import jugglinglab.generator.GeneratorTarget;
-import jugglinglab.notation.Pattern;
-import jugglinglab.notation.SiteswapPattern;
-import jugglinglab.util.*;
+import jugglinglab.util.Coordinate;
+import jugglinglab.util.JuggleExceptionInternal;
+import jugglinglab.util.JuggleExceptionUser;
 
-public class JugglingLab {
-    // TODO(tdresser): eliminate these globals.
-    public static final ResourceBundle guistrings;
-    public static final ResourceBundle errorstrings;
-    public static final boolean isMacOS = false;
-    public static final boolean isWindows = false;
-    public static final boolean isLinux = false;
-
-    static {
-        guistrings = JLLocale.getBundle("GUIStrings");
-        errorstrings = JLLocale.getBundle("ErrorStrings");
-    }
-
-    // Command line arguments as an ArrayList that we trim as portions are parsed
-    private static ArrayList<String> jlargs;
-
+public class JugglingLab {   
     public static void main(String[] args) {
         System.out.println("MAIN");
         try {

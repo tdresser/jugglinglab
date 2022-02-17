@@ -4,9 +4,9 @@
 
 package jugglinglab.prop;
 
-import java.awt.*;
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
 
 import jugglinglab.util.*;
 
@@ -14,9 +14,6 @@ import jugglinglab.util.*;
 // This is the base type of all props in Juggling Lab.
 
 public abstract class Prop {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
-
     protected String initString;
 
     public static final String[] builtinProps =
@@ -34,14 +31,10 @@ public abstract class Prop {
 
         if (type.equalsIgnoreCase("ball"))
             return new BallProp();
-        else if (type.equalsIgnoreCase("image"))
-            return new ImageProp();
         else if (type.equalsIgnoreCase("ring"))
             return new RingProp();
 
-        String template = errorstrings.getString("Error_prop_type");
-        Object[] arguments = { type };
-        throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+        throw new JuggleExceptionUser("Error_prop_type");
     }
 
     public void initProp(String st) throws JuggleExceptionUser {

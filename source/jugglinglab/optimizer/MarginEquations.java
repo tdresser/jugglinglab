@@ -12,8 +12,6 @@ import jugglinglab.util.*;
 
 
 public class MarginEquations {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
     static final protected double epsilon = 0.000001;
 
     public int varsNum;  // number of variables in margin equations
@@ -75,9 +73,9 @@ public class MarginEquations {
             System.out.println("finding margin equations");
 
         if (pat.getNumberOfJugglers() > 1)
-            throw new JuggleExceptionUser(errorstrings.getString("Error_optimizer_no_passing"));
+            throw new JuggleExceptionUser("Error_optimizer_no_passing");
         if (pat.isBouncePattern())
-            throw new JuggleExceptionUser(errorstrings.getString("Error_optimizer_no_bouncing"));
+            throw new JuggleExceptionUser("Error_optimizer_no_bouncing");
 
         // Step 1: Lay out the pattern. This generates two things we need, the pattern event
         // list and the pattern pathlink list.
@@ -227,7 +225,7 @@ public class MarginEquations {
                     sym_switchdelay = true;
                     break;
                 case JMLSymmetry.TYPE_SWITCH:
-                    throw new JuggleExceptionUser(errorstrings.getString("Error_no_optimize_switch"));
+                    throw new JuggleExceptionUser("Error_no_optimize_switch");
             }
         }
 
@@ -529,7 +527,6 @@ public class MarginEquations {
                 return 0;
             }
 
-            public boolean equals(LinearEquation eq) { return false; }
         };
 
         Arrays.sort(marginsEqs, comp);

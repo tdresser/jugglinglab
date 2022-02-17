@@ -11,9 +11,6 @@ import java.io.*;
 
 
 public class JMLEvent {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
-
     protected double x, y, z;  // coordinates in local frame
     protected double gx, gy, gz;  // coordinates in global frame
     protected boolean globalvalid;  // global coordinates need to be recalced?
@@ -80,8 +77,7 @@ public class JMLEvent {
             else if (strhand.equalsIgnoreCase("right"))
                 hand = HandLink.RIGHT_HAND;
             else
-                throw new JuggleExceptionUser(errorstrings.getString("Error_hand_name") +
-                            " '" + strhand + "'");
+                throw new JuggleExceptionUser("Error_hand_name");
         } else {
             juggler = Integer.valueOf(strhand.substring(0,index)).intValue();
             String substr = strhand.substring(index+1);
@@ -90,8 +86,7 @@ public class JMLEvent {
             else if (substr.equalsIgnoreCase("right"))
                 hand = HandLink.RIGHT_HAND;
             else
-                throw new JuggleExceptionUser(errorstrings.getString("Error_hand_name") +
-                            " '" + strhand + "'");
+                throw new JuggleExceptionUser("Error_hand_name");
         }
     }
     public void setHand(int j, int h) {
@@ -308,7 +303,7 @@ public class JMLEvent {
                     handstr = at.getAttributeValue(i);
             }
         } catch (NumberFormatException nfe) {
-            throw new JuggleExceptionUser(errorstrings.getString("Error_event_coordinate"));
+            throw new JuggleExceptionUser("Error_event_coordinate");
         }
 
         // JML version 1.0 used a different coordinate system -- convert
@@ -321,10 +316,10 @@ public class JMLEvent {
         setLocalCoordinate(new Coordinate(tempx, tempy, tempz));
         setT(tempt);
         if (handstr == null)
-            throw new JuggleExceptionUser(errorstrings.getString("Error_unspecified_hand"));
+            throw new JuggleExceptionUser("Error_unspecified_hand");
         setHand(handstr);
         if (juggler > njugglers || juggler < 1)
-            throw new JuggleExceptionUser(errorstrings.getString("Error_juggler_out_of_range"));
+            throw new JuggleExceptionUser("Error_juggler_out_of_range");
 
         // process current event node children
         for (int i = 0; i < current.getNumberOfChildren(); i++) {
@@ -344,11 +339,11 @@ public class JMLEvent {
             }
 
             if (path == null)
-                throw new JuggleExceptionUser(errorstrings.getString("Error_no_path"));
+                throw new JuggleExceptionUser("Error_no_path");
 
             int pnum = Integer.valueOf(path).intValue();
             if ((pnum > npaths) || (pnum < 1))
-                throw new JuggleExceptionUser(errorstrings.getString("Error_path_out_of_range"));
+                throw new JuggleExceptionUser("Error_path_out_of_range");
 
             if (nodetype.equalsIgnoreCase("throw"))
                 addTransition(new JMLTransition(JMLTransition.TRANS_THROW, pnum, transtype, mod));
@@ -362,7 +357,7 @@ public class JMLEvent {
                 addTransition(new JMLTransition(JMLTransition.TRANS_HOLDING, pnum, null, null));
 
             if (child.getNumberOfChildren() != 0)
-                throw new JuggleExceptionUser(errorstrings.getString("Error_event_subtag"));
+                throw new JuggleExceptionUser("Error_event_subtag");
         }
     }
 

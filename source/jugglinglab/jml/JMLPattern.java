@@ -5,10 +5,8 @@
 package jugglinglab.jml;
 
 import java.io.*;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.ResourceBundle;
 import org.xml.sax.*;
 
 import jugglinglab.core.Constants;
@@ -39,9 +37,6 @@ form. It is used in three steps:
 ------------------------------------------------------------------------------*/
 
 public class JMLPattern {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
-
     protected String version = JMLDefs.CURRENT_JML_VERSION;
     protected String title;
     protected String info;
@@ -149,7 +144,8 @@ public class JMLPattern {
         } catch (JuggleExceptionUser jeu) {
             // can't be a user error since base pattern has already successfully
             // compiled
-            ErrorDialog.handleFatalException(new JuggleExceptionInternal(jeu.getMessage()));
+            // TODO(tdresser): maybe do something more here? Used to pop up a dialog.
+            System.out.println(jeu.getMessage());
         }
     }
 
@@ -658,10 +654,6 @@ public class JMLPattern {
                                     JuggleExceptionUser, JuggleExceptionInternal {
         layoutPattern();  // to ensure we have PathLinks
 
-        int n_events = 0;  // for reporting stats
-        int n_holds = 0;
-        int n_removed = 0;
-
         JMLEvent ev = getEventList();
 
         while (ev != null) {
@@ -683,20 +675,9 @@ public class JMLPattern {
 
             if (remove) {
                 removeEvent(ev);
-                n_removed++;
             }
 
-            n_events++;
-            if (holding_only)
-                n_holds++;
-
             ev = ev.getNext();
-        }
-
-        if (Constants.DEBUG_LAYOUT) {
-            System.out.println("Streamlined with time window " + twindow + " secs:");
-            System.out.println("    Removed " + n_removed + " of " + n_holds +
-                               " holding events (" + n_events + " events total)");
         }
     }
 
@@ -773,7 +754,7 @@ public class JMLPattern {
         JMLEvent current = eventlist;
         while (current != null) {
             if (current.getJuggler() < 1 || current.getJuggler() > numjugglers)
-                throw new JuggleExceptionUser(errorstrings.getString("Error_juggler_outofrange"));
+                throw new JuggleExceptionUser("Error_juggler_outofrange");
             if (current.isMaster())
                 numevents++;
             else
@@ -813,14 +794,10 @@ public class JMLPattern {
                     hasVDHandJMLTransition[i][1] = ei[j].hasVDJMLTransitionForHand(i+1, HandLink.RIGHT_HAND);
             }
             if (hasJMLTransitionForLeft == false) {
-                String template = errorstrings.getString("Error_no_left_events");
-                Object[] arguments = { Integer.valueOf(i+1) };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_no_left_events");
             }
             if (hasJMLTransitionForRight == false) {
-                String template = errorstrings.getString("Error_no_right_events");
-                Object[] arguments = { Integer.valueOf(i+1) };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_no_right_events");
             }
             needVDHandEvent[i][0] = hasVDHandJMLTransition[i][0];   // set up for later
             needVDHandEvent[i][1] = hasVDHandJMLTransition[i][1];
@@ -837,9 +814,7 @@ public class JMLPattern {
                     hasVDPathJMLTransition[i] = ei[j].hasVDJMLTransitionForPath(i+1);
             }
             if (hasPathJMLTransition == false) {
-                String template = errorstrings.getString("Error_no_path_events");
-                Object[] arguments = { Integer.valueOf(i+1) };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_no_path_events");
             }
             needPathEvent[i] = true;            // set up for later
             needSpecialPathEvent[i] = false;
@@ -1059,9 +1034,7 @@ public class JMLPattern {
 
     public void findPositions() throws JuggleExceptionInternal {
         jugglercurve = new SplineCurve[getNumberOfJugglers()];
-        jugglerangle = ( (Constants.ANGLE_LAYOUT_METHOD == Curve.CURVE_LINE) ?
-                              (Curve[])(new LineCurve[getNumberOfJugglers()]) :
-                              (Curve[])(new SplineCurve[getNumberOfJugglers()]) );
+        jugglerangle = (Curve[])(new SplineCurve[getNumberOfJugglers()]);
 
         for (int i = 1; i <= getNumberOfJugglers(); i++) {
             int num = 0;
@@ -1075,8 +1048,7 @@ public class JMLPattern {
 
             if (num == 0) {
                 jugglercurve[i - 1] = new SplineCurve();
-                jugglerangle[i - 1] = ( (Constants.ANGLE_LAYOUT_METHOD == Curve.CURVE_LINE) ?
-                                        (Curve)(new LineCurve()) : (Curve)(new SplineCurve()) );
+                jugglerangle[i - 1] = (Curve)(new SplineCurve());
                 double[] times = new double[2];
                 times[0] = getLoopStartTime();
                 times[1] = getLoopEndTime();
@@ -1107,8 +1079,7 @@ public class JMLPattern {
                 jugglerangle[i - 1].calcCurve();
             } else {
                 jugglercurve[i - 1] = new SplineCurve();
-                jugglerangle[i - 1] = ( (Constants.ANGLE_LAYOUT_METHOD == Curve.CURVE_LINE) ?
-                                        (Curve)(new LineCurve()) : (Curve)(new SplineCurve()) );
+                jugglerangle[i - 1] = (Curve)(new SplineCurve());
                 double[] times = new double[num + 1];
                 Coordinate[] positions = new Coordinate[num + 1];
                 Coordinate[] angles = new Coordinate[num + 1];
@@ -1198,19 +1169,13 @@ public class JMLPattern {
                         case JMLTransition.TRANS_THROW:
                         case JMLTransition.TRANS_HOLDING:
                             if (lasttr.getType() == JMLTransition.TRANS_THROW) {
-                                String template = errorstrings.getString("Error_successive_throws");
-                                Object[] arguments = { Integer.valueOf(i+1) };
-                                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                                throw new JuggleExceptionUser("Error_successive_throws");
                             }
                             if (lastev.getJuggler() != ev.getJuggler()) {
-                                String template = errorstrings.getString("Error_juggler_changed");
-                                Object[] arguments = { Integer.valueOf(i+1) };
-                                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                                throw new JuggleExceptionUser("Error_juggler_changed");
                             }
                             if (lastev.getHand() != ev.getHand()) {
-                                String template = errorstrings.getString("Error_hand_changed");
-                                Object[] arguments = { Integer.valueOf(i+1) };
-                                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                                throw new JuggleExceptionUser("Error_hand_changed");
                             }
                             pl.setInHand(ev.getJuggler(), ev.getHand());
                             break;
@@ -1218,9 +1183,7 @@ public class JMLPattern {
                         case JMLTransition.TRANS_SOFTCATCH:
                         case JMLTransition.TRANS_GRABCATCH:
                             if (lasttr.getType() != JMLTransition.TRANS_THROW) {
-                                String template = errorstrings.getString("Error_successive_catches");
-                                Object[] arguments = { Integer.valueOf(i+1) };
-                                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                                throw new JuggleExceptionUser("Error_successive_catches");
                             }
                             pl.setThrow(lasttr.getThrowType(), lasttr.getMod());
                             break;
@@ -1827,7 +1790,7 @@ public class JMLPattern {
             String vers = current.getAttributes().getAttribute("version");
             if (vers != null) {
                 if (JLFunc.compareVersions(vers, JMLDefs.CURRENT_JML_VERSION) > 0)
-                    throw new JuggleExceptionUser(errorstrings.getString("Error_JML_version"));
+                    throw new JuggleExceptionUser("Error_JML_version");
                 loadingversion = vers;
             }
         } else if (type.equalsIgnoreCase("pattern")) {
@@ -1863,22 +1826,22 @@ public class JMLPattern {
                     setNumberOfJugglers(1);
                 setNumberOfPaths(Integer.valueOf(pathstring).intValue());
             } catch (Exception ex) {
-                throw new JuggleExceptionUser(errorstrings.getString("Error_setup_tag"));
+                throw new JuggleExceptionUser("Error_setup_tag");
             }
 
             int[] pa = new int[numpaths];
             if (propstring != null) {
                 StringTokenizer st = new StringTokenizer(propstring, ",");
                 if (st.countTokens() != numpaths)
-                    throw new JuggleExceptionUser(errorstrings.getString("Error_prop_assignments"));
+                    throw new JuggleExceptionUser("Error_prop_assignments");
                 try {
                     for (int i = 0; i < numpaths; i++) {
                         pa[i] = Integer.valueOf(st.nextToken()).intValue();
                         if (pa[i] < 1 || pa[i] > getNumberOfProps())
-                            throw new JuggleExceptionUser(errorstrings.getString("Error_prop_number"));
+                            throw new JuggleExceptionUser("Error_prop_number");
                     }
                 } catch (NumberFormatException nfe) {
-                    throw new JuggleExceptionUser(errorstrings.getString("Error_prop_format"));
+                    throw new JuggleExceptionUser("Error_prop_format");
                 }
             } else {
                 for (int i = 0; i < numpaths; i++)
@@ -1900,9 +1863,7 @@ public class JMLPattern {
             addPosition(pos);
             return;
         } else {
-            String template = errorstrings.getString("Error_unknown_tag");
-            Object[] arguments = { type };
-            throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+            throw new JuggleExceptionUser("Error_unknown_tag");
         }
 
         for (int i = 0; i < current.getNumberOfChildren(); i++)

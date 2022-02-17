@@ -18,10 +18,6 @@ public class Constants {
     // how juggler angles are interpolated
     public static final int ANGLE_LAYOUT_METHOD = jugglinglab.curve.Curve.CURVE_SPLINE;
 
-    // method for communicating open-file messages between two running instances
-    // of Juggling Lab (used on Windows when the user double-clicks a JML file)
-    public static final int OPEN_FILES_METHOD = jugglinglab.util.OpenFilesServer.SERVER_MMF;
-
     // for positioning windows on screen; scale to a box of this pixel width,
     // centered on the screen
     public static final int RESERVED_WIDTH_PIXELS = 1200;

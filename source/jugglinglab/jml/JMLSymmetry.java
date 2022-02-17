@@ -5,15 +5,11 @@
 package jugglinglab.jml;
 
 import java.io.*;
-import java.util.*;
 
 import jugglinglab.util.*;
 
 
 public class JMLSymmetry {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
-
     int type;
     int numjugglers;
     int numpaths;
@@ -111,12 +107,12 @@ public class JMLSymmetry {
             try {
                 delay = JLFunc.parseDouble(delaystring);
             } catch (NumberFormatException nfe) {
-                throw new JuggleExceptionUser(errorstrings.getString("Error_symmetry_format"));
+                throw new JuggleExceptionUser("Error_symmetry_format");
             }
         }
 
         if (symtype == null)
-            throw new JuggleExceptionUser(errorstrings.getString("Error_symmetry_notype"));
+            throw new JuggleExceptionUser("Error_symmetry_notype");
         if (symtype.equalsIgnoreCase("delay"))
             symtypenum = TYPE_DELAY;
         else if (symtype.equalsIgnoreCase("switch"))
@@ -124,7 +120,7 @@ public class JMLSymmetry {
         else if (symtype.equalsIgnoreCase("switchdelay"))
             symtypenum = TYPE_SWITCHDELAY;
         else
-            throw new JuggleExceptionUser(errorstrings.getString("Error_symmetry_type"));
+            throw new JuggleExceptionUser("Error_symmetry_type");
 
         setType(symtypenum);
         setJugglerPerm(numjug, jugglerperm);

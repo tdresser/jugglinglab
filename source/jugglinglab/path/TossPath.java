@@ -4,7 +4,6 @@
 
 package jugglinglab.path;
 
-import java.text.MessageFormat;
 import jugglinglab.util.*;
 
 
@@ -44,12 +43,10 @@ public class TossPath extends Path {
                 try {
                     g = JLFunc.parseDouble(pvalue);
                 } catch (NumberFormatException nfe) {
-                    String template = errorstrings.getString("Error_number_format");
-                    Object[] arguments = { "g" };
-                    throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                    throw new JuggleExceptionUser("Error_number_format");
                 }
             } else
-                throw new JuggleExceptionUser(errorstrings.getString("Error_path_badmod")+": '"+pname+"'");
+                throw new JuggleExceptionUser("Error_path_badmod");
         }
         this.g = g;
         az = -0.5 * g;

@@ -5,13 +5,10 @@
 package jugglinglab.notation;
 
 import java.util.ArrayList;
-import java.text.MessageFormat;
 
 import jugglinglab.core.Constants;
-import jugglinglab.jml.JMLPattern;
 import jugglinglab.util.*;
 import jugglinglab.notation.ssparser.*;
-
 
 // This class represents a pattern in the generalized form of siteswap notation
 // used by Juggling Lab. The real work here is to parse siteswap notation into
@@ -28,7 +25,7 @@ public class SiteswapPattern extends MHNPattern {
 
     @Override
     public SiteswapPattern fromString(String conf) throws JuggleExceptionUser, JuggleExceptionInternal {
-        if (conf.indexOf((int)'=') == -1)  // just the pattern
+        if (conf.indexOf((int) '=') == -1) // just the pattern
             conf = "pattern=" + conf;
 
         ParameterList pl = new ParameterList(conf);
@@ -38,20 +35,22 @@ public class SiteswapPattern extends MHNPattern {
     }
 
     @Override
-    public SiteswapPattern fromParameters(ParameterList pl) throws
-                                JuggleExceptionUser, JuggleExceptionInternal {
+    public SiteswapPattern fromParameters(ParameterList pl) throws JuggleExceptionUser, JuggleExceptionInternal {
         if (Constants.DEBUG_SITESWAP_PARSING)
             System.out.println("Starting siteswap parser...");
 
         super.fromParameters(pl);
-        
-        //hss Begin
-        if (hss != null) {
-            ModParms modinfo = HSS.processHSS(pattern, hss, hold, dwellmax, handspec, dwell);
-            pattern = modinfo.convertedPattern;
-            dwellarray = modinfo.dwellBeatsArray;
-        }
-        //hss End
+
+        // hss Begin
+        /*
+         * if (hss != null) {
+         * ModParms modinfo = HSS.processHSS(pattern, hss, hold, dwellmax, handspec,
+         * dwell);
+         * pattern = modinfo.convertedPattern;
+         * dwellarray = modinfo.dwellBeatsArray;
+         * }
+         */
+        // hss End
 
         // pattern = JLFunc.expandRepeats(pattern);
         parseSiteswapNotation();
@@ -109,9 +108,9 @@ public class SiteswapPattern extends MHNPattern {
         return (oddperiod ? getPeriod() / 2 : getPeriod());
     }
 
-    //--------------------------------------------------------------------------
+    // --------------------------------------------------------------------------
     // Parse siteswap notation into the MHNPattern data structures
-    //--------------------------------------------------------------------------
+    // --------------------------------------------------------------------------
 
     protected void parseSiteswapNotation() throws JuggleExceptionUser, JuggleExceptionInternal {
         // first clear out the internal variables
@@ -138,38 +137,30 @@ public class SiteswapPattern extends MHNPattern {
             }
 
             if (pe.currentToken == null) {
-                String template = errorstrings.getString("Error_pattern_parsing");
-                Object[] arguments = { pe.getMessage() };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_pattern_parsing");
             } else {
-                String template = errorstrings.getString("Error_pattern_syntax");
-                String problem = ParseException.add_escapes(pe.currentToken.next.image);
-                Object[] arguments = { problem, Integer.valueOf(pe.currentToken.next.beginColumn) };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_pattern_syntax");
             }
         } catch (TokenMgrError tme) {
-            String template = errorstrings.getString("Error_pattern_syntax");
-            String problem = TokenMgrError.addEscapes(String.valueOf(tme.curChar));
-            Object[] arguments = { problem, Integer.valueOf(tme.errorColumn - 1) };
-            throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+            throw new JuggleExceptionUser("Error_pattern_syntax");
         }
 
         // Use tree to fill in MHNPattern internal variables:
         /*
-        protected int numjugglers;
-        protected int numpaths;
-        protected int period;
-        protected int max_occupancy;
-        protected MHNThrow[][][][] th;
-        protected MHNHands hands;
-        protected MHNBody bodies;
-        protected int max_throw;
-        protected int indexes;
-        protected ArrayList<MHNSymmetry> symmetry;
-        */
+         * protected int numjugglers;
+         * protected int numpaths;
+         * protected int period;
+         * protected int max_occupancy;
+         * protected MHNThrow[][][][] th;
+         * protected MHNHands hands;
+         * protected MHNBody bodies;
+         * protected int max_throw;
+         * protected int indexes;
+         * protected ArrayList<MHNSymmetry> symmetry;
+         */
 
         numjugglers = tree.jugglers;
-        max_occupancy = 0;  // calculated in doFirstPass()
+        max_occupancy = 0; // calculated in doFirstPass()
         max_throw = 0;
 
         right_on_even = new boolean[this.numjugglers];
@@ -194,14 +185,14 @@ public class SiteswapPattern extends MHNPattern {
 
         period = tree.beats;
         if (tree.throw_sum % tree.beats != 0)
-            throw new JuggleExceptionUser(errorstrings.getString("Error_siteswap_bad_average"));
+            throw new JuggleExceptionUser("Error_siteswap_bad_average");
         numpaths = tree.throw_sum / tree.beats;
         indexes = max_throw + period + 1;
         th = new MHNThrow[numjugglers][2][indexes][max_occupancy];
 
         if (Constants.DEBUG_SITESWAP_PARSING) {
-            System.out.println("period = "+period+", numpaths = "+numpaths+", max_throw = "+
-                            max_throw+", max_occupancy = "+max_occupancy);
+            System.out.println("period = " + period + ", numpaths = " + numpaths + ", max_throw = " +
+                    max_throw + ", max_occupancy = " + max_occupancy);
             System.out.println("Starting second pass...");
         }
 
@@ -211,31 +202,30 @@ public class SiteswapPattern extends MHNPattern {
 
         // Finally, add pattern symmetries
         addSymmetry(new MHNSymmetry(MHNSymmetry.TYPE_DELAY, numjugglers, null, period));
-        if (tree.switchrepeat) {    // know that tree is of type Pattern
+        if (tree.switchrepeat) { // know that tree is of type Pattern
             StringBuffer sb = new StringBuffer();
             for (int i = 1; i <= numjugglers; i++)
-                sb.append("("+i+","+i+"*)");
-            addSymmetry(new MHNSymmetry(MHNSymmetry.TYPE_SWITCHDELAY, numjugglers, sb.toString(), period/2));
+                sb.append("(" + i + "," + i + "*)");
+            addSymmetry(new MHNSymmetry(MHNSymmetry.TYPE_SWITCHDELAY, numjugglers, sb.toString(), period / 2));
         }
 
         // Random error check, not sure where this should go
         if (bodies != null && bodies.getNumberOfJugglers() < this.getNumberOfJugglers())
-            throw new JuggleExceptionUser(errorstrings.getString("Error_jugglers_body"));
+            throw new JuggleExceptionUser("Error_jugglers_body");
 
         if (Constants.DEBUG_SITESWAP_PARSING)
             System.out.println("Done with initial parse.");
     }
 
-
     // First pass through the tree:
-    // 1)  Assign hands to "Single Throw" types
-    // 2)  Determine whether any Pattern items need switchrepeat turned on
-    // 3)  Calculate sti.beats for Pattern and GroupedPattern types
-    // 4)  Determine absolute beat numbers for each throw
-    // 5)  Calculate max_throw, period, numpaths, and max_occupancy
-    // 6)  Resolve wildcards (not implemented)
+    // 1) Assign hands to "Single Throw" types
+    // 2) Determine whether any Pattern items need switchrepeat turned on
+    // 3) Calculate sti.beats for Pattern and GroupedPattern types
+    // 4) Determine absolute beat numbers for each throw
+    // 5) Calculate max_throw, period, numpaths, and max_occupancy
+    // 6) Resolve wildcards (not implemented)
 
-    boolean[] right_on_even;    // async throws on even beat numbers made with right hand?
+    boolean[] right_on_even; // async throws on even beat numbers made with right hand?
 
     protected void doFirstPass(SiteswapTreeItem sti) throws JuggleExceptionUser, JuggleExceptionInternal {
         SiteswapTreeItem child = null;
@@ -253,96 +243,106 @@ public class SiteswapPattern extends MHNPattern {
                     child.beatnum = sti.beatnum + sti.beats;
 
                     /*
-                    if (child.type == SiteswapTreeItem.TYPE_WILDCARD) {
-                        // resolve this wildcard by finding a suitable transition sequence
-
-                        child.transition = null;    // remove any previously-found transition sequence
-
-                        // First find the pattern state immediately prior to the wildcard
-                        SiteswapTreeItem[] item = new SiteswapTreeItem[sti.getNumberOfChildren()];
-                        int index = sti.getNumberOfChildren() - 1;
-                        boolean done = false;
-                        for (int j = i-1; j >= 0; j--) {
-                            item[index--] = sti.getChild(j);
-                            if (sti.getChild(j).type == SiteswapTreeItem.TYPE_GROUPED_PATTERN) {
-                                done = true;
-                                break;
-                            }
-                            if (sti.getChild(j).type == SiteswapTreeItem.TYPE_WILDCARD)
-                                throw new JuggleExceptionUser("Can only have one wildcard between grouped patterns");
-                        }
-                        if (!done) {
-                            int beatsum = 0;
-                            for (int j = sti.getNumberOfChildren()-1; j > i; j--) {
-                                SiteswapTreeItem c = sti.getChild(j);
-                                item[index--] = c;
-                                if (c.type == SiteswapTreeItem.TYPE_GROUPED_PATTERN) {
-                                    done = true;
-                                    break;
-                                }
-                                if (c.type == SiteswapTreeItem.TYPE_WILDCARD)
-                                    throw new JuggleExceptionUser("Can only have one wildcard between grouped patterns");
-                            }
-                        }
-                        if (!done)
-                            throw new JuggleExceptionUser("Must have at least one grouped subpattern to use wildcard");
-                        SiteswapTreeItem[] item2 = new SiteswapTreeItem[sti.getNumberOfChildren() - 1 - index];
-                        index++;
-                        for (int j = 0; index < sti.getNumberOfChildren(); j++, index++)
-                            item2[j] = item[index];
-                        for (int j = item2.length; j >= 0; j--) {
-                            //  Need to assign beatnum to items in item2[]
-
-                            //  beatsum += c.beats;
-                            //  c.beatnum = sti.beat - beatsum;
-                            //  doFirstPass(c);     // make sure child has hands assigned
-                        }
-                        // int[][] start_state = findExitState(item2);
-
-                        // Next find the pattern state we need to end up at.  Two cases: even number of transition beats, and odd.
-                        index = 0;
-                        done = false;
-                        for (int j = i+1; j < sti.getNumberOfChildren(); j++) {
-                            item[index++] = sti.getChild(j);
-                            if (sti.getChild(j).type == SiteswapTreeItem.TYPE_GROUPED_PATTERN) {
-                                done = true;
-                                break;
-                            }
-                            if (sti.getChild(j).type == SiteswapTreeItem.TYPE_WILDCARD)
-                                throw new JuggleExceptionUser("Can only have one wildcard between grouped patterns");
-                        }
-                        if (!done) {
-                            for (int j = 0; j < i; j++) {
-                                SiteswapTreeItem c = sti.getChild(j);
-                                item[index++] = c;
-                                if (c.type == SiteswapTreeItem.TYPE_GROUPED_PATTERN) {
-                                    done = true;
-                                    break;
-                                }
-                                if (c.type == SiteswapTreeItem.TYPE_WILDCARD)
-                                    throw new JuggleExceptionUser("Can only have one wildcard between grouped patterns");
-                            }
-                        }
-                        if (!done)
-                            throw new JuggleExceptionUser("Must have at least one grouped subpattern to use wildcard");
-                        item2 = new SiteswapTreeItem[index];
-                        for (int j = 0; j < index; j++)
-                            item2[j] = item[j];
-
-                        for (int transition_beats = 0; transition_beats < 2; transition_beats++) {
-                            for (int j = 0; j < item2.length; j++) {
-                                //  Need to assign beatnum to items in item2[]
-
-                                //    beatsum += c.beats;
-                                //    c.beatnum = sti.beat - beatsum;
-                                //    doFirstPass(c);     // make sure child has hands assigned
-                            }
-                            int[][] finish_state = findEntranceState(item2);
-
-                            // Rest of stuff goes here (find transition, fill in child.transition)
-                        }
-                    }
-                    */
+                     * if (child.type == SiteswapTreeItem.TYPE_WILDCARD) {
+                     * // resolve this wildcard by finding a suitable transition sequence
+                     * 
+                     * child.transition = null; // remove any previously-found transition sequence
+                     * 
+                     * // First find the pattern state immediately prior to the wildcard
+                     * SiteswapTreeItem[] item = new SiteswapTreeItem[sti.getNumberOfChildren()];
+                     * int index = sti.getNumberOfChildren() - 1;
+                     * boolean done = false;
+                     * for (int j = i-1; j >= 0; j--) {
+                     * item[index--] = sti.getChild(j);
+                     * if (sti.getChild(j).type == SiteswapTreeItem.TYPE_GROUPED_PATTERN) {
+                     * done = true;
+                     * break;
+                     * }
+                     * if (sti.getChild(j).type == SiteswapTreeItem.TYPE_WILDCARD)
+                     * throw new
+                     * JuggleExceptionUser("Can only have one wildcard between grouped patterns");
+                     * }
+                     * if (!done) {
+                     * int beatsum = 0;
+                     * for (int j = sti.getNumberOfChildren()-1; j > i; j--) {
+                     * SiteswapTreeItem c = sti.getChild(j);
+                     * item[index--] = c;
+                     * if (c.type == SiteswapTreeItem.TYPE_GROUPED_PATTERN) {
+                     * done = true;
+                     * break;
+                     * }
+                     * if (c.type == SiteswapTreeItem.TYPE_WILDCARD)
+                     * throw new
+                     * JuggleExceptionUser("Can only have one wildcard between grouped patterns");
+                     * }
+                     * }
+                     * if (!done)
+                     * throw new
+                     * JuggleExceptionUser("Must have at least one grouped subpattern to use wildcard"
+                     * );
+                     * SiteswapTreeItem[] item2 = new SiteswapTreeItem[sti.getNumberOfChildren() - 1
+                     * - index];
+                     * index++;
+                     * for (int j = 0; index < sti.getNumberOfChildren(); j++, index++)
+                     * item2[j] = item[index];
+                     * for (int j = item2.length; j >= 0; j--) {
+                     * // Need to assign beatnum to items in item2[]
+                     * 
+                     * // beatsum += c.beats;
+                     * // c.beatnum = sti.beat - beatsum;
+                     * // doFirstPass(c); // make sure child has hands assigned
+                     * }
+                     * // int[][] start_state = findExitState(item2);
+                     * 
+                     * // Next find the pattern state we need to end up at. Two cases: even number
+                     * of transition beats, and odd.
+                     * index = 0;
+                     * done = false;
+                     * for (int j = i+1; j < sti.getNumberOfChildren(); j++) {
+                     * item[index++] = sti.getChild(j);
+                     * if (sti.getChild(j).type == SiteswapTreeItem.TYPE_GROUPED_PATTERN) {
+                     * done = true;
+                     * break;
+                     * }
+                     * if (sti.getChild(j).type == SiteswapTreeItem.TYPE_WILDCARD)
+                     * throw new
+                     * JuggleExceptionUser("Can only have one wildcard between grouped patterns");
+                     * }
+                     * if (!done) {
+                     * for (int j = 0; j < i; j++) {
+                     * SiteswapTreeItem c = sti.getChild(j);
+                     * item[index++] = c;
+                     * if (c.type == SiteswapTreeItem.TYPE_GROUPED_PATTERN) {
+                     * done = true;
+                     * break;
+                     * }
+                     * if (c.type == SiteswapTreeItem.TYPE_WILDCARD)
+                     * throw new
+                     * JuggleExceptionUser("Can only have one wildcard between grouped patterns");
+                     * }
+                     * }
+                     * if (!done)
+                     * throw new
+                     * JuggleExceptionUser("Must have at least one grouped subpattern to use wildcard"
+                     * );
+                     * item2 = new SiteswapTreeItem[index];
+                     * for (int j = 0; j < index; j++)
+                     * item2[j] = item[j];
+                     * 
+                     * for (int transition_beats = 0; transition_beats < 2; transition_beats++) {
+                     * for (int j = 0; j < item2.length; j++) {
+                     * // Need to assign beatnum to items in item2[]
+                     * 
+                     * // beatsum += c.beats;
+                     * // c.beatnum = sti.beat - beatsum;
+                     * // doFirstPass(c); // make sure child has hands assigned
+                     * }
+                     * int[][] finish_state = findEntranceState(item2);
+                     * 
+                     * // Rest of stuff goes here (find transition, fill in child.transition)
+                     * }
+                     * }
+                     */
 
                     doFirstPass(child);
                     sti.beats += child.beats;
@@ -358,9 +358,9 @@ public class SiteswapPattern extends MHNPattern {
                 // Contains only a Pattern type (single child)
 
                 /*
-                if (sti.repeats > 20)
-                    throw new JuggleExceptionUser("Grouped repeats cannot exceed 20");
-                */
+                 * if (sti.repeats > 20)
+                 * throw new JuggleExceptionUser("Grouped repeats cannot exceed 20");
+                 */
 
                 child = sti.getChild(0);
                 if (sti.getNumberOfChildren() > 1) {
@@ -370,7 +370,7 @@ public class SiteswapPattern extends MHNPattern {
                 child.beatnum = sti.beatnum;
                 doFirstPass(child);
                 for (int i = 1; i < sti.repeats; i++) {
-                    SiteswapTreeItem child2 = (SiteswapTreeItem)(child.clone());
+                    SiteswapTreeItem child2 = (SiteswapTreeItem) (child.clone());
                     sti.addChild(child2);
                     child2.beatnum = sti.beatnum + i * child.beats;
                     doFirstPass(child2);
@@ -505,10 +505,10 @@ public class SiteswapPattern extends MHNPattern {
     }
 
     // Second pass through the tree:
-    // 1)  Fill in the th[] array with MHNThrow objects
+    // 1) Fill in the th[] array with MHNThrow objects
 
     protected void doSecondPass(SiteswapTreeItem sti, boolean switchhands, int beatoffset)
-                                            throws JuggleExceptionUser {
+            throws JuggleExceptionUser {
         SiteswapTreeItem child = null;
 
         switch (sti.type) {
@@ -522,7 +522,7 @@ public class SiteswapPattern extends MHNPattern {
                 if (sti.switchrepeat) {
                     for (int i = 0; i < sti.getNumberOfChildren(); i++) {
                         child = sti.getChild(i);
-                        doSecondPass(child, !switchhands, beatoffset + sti.beats/2);
+                        doSecondPass(child, !switchhands, beatoffset + sti.beats / 2);
                     }
                 }
                 break;
@@ -559,7 +559,7 @@ public class SiteswapPattern extends MHNPattern {
 
                         String mod = child.mod;
                         if (mod == null) {
-                            mod = "T";  // default throw modifier
+                            mod = "T"; // default throw modifier
                             if (child.source_juggler == child.dest_juggler && source_hand == dest_hand) {
                                 if (child.value <= 1) {
                                     mod = "H";
@@ -578,7 +578,7 @@ public class SiteswapPattern extends MHNPattern {
                         // serve as a placeholder in case of patterns like 24[504],
 
                         MHNThrow t = new MHNThrow(child.source_juggler, source_hand, index, i,
-                                          dest_juggler, dest_hand, index + child.value, -1, mod);
+                                dest_juggler, dest_hand, index + child.value, -1, mod);
                         if (hands != null) {
                             int idx = index;
                             if (sti.sync_throw && source_hand == RIGHT_HAND)

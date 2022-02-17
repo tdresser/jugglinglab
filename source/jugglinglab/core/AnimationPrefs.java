@@ -5,19 +5,12 @@
 package jugglinglab.core;
 
 import java.awt.*;
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
 
-import jugglinglab.jml.JMLPattern;
+import java.util.StringTokenizer;
 import jugglinglab.util.*;
-import jugglinglab.view.View;
 
 
 public class AnimationPrefs {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
-
     public static final int GROUND_AUTO = 0;  // must be sequential
     public static final int GROUND_ON = 1;  // starting from 0
     public static final int GROUND_OFF = 2;
@@ -33,16 +26,8 @@ public class AnimationPrefs {
     public static final boolean startPause_def = false;
     public static final boolean mousePause_def = false;
     public static final boolean catchSound_def = false;
-    public static final boolean bounceSound_def;
-    public static final int view_def = View.VIEW_NONE;
 
     static {
-        // audio clip playback seems to block on Linux
-        if (jugglinglab.JugglingLab.isLinux)
-            bounceSound_def = false;
-        else
-            bounceSound_def = false;
-
         // set default `fps` to screen refresh rate, if possible
         double fps_screen = 0.0;
 
@@ -69,9 +54,7 @@ public class AnimationPrefs {
     public boolean startPause = startPause_def;
     public boolean mousePause = mousePause_def;
     public boolean catchSound = catchSound_def;
-    public boolean bounceSound = bounceSound_def;
     public double[] camangle;  // in degrees! null means use default
-    public int view = view_def;  // one of the values in View
     public int[] hideJugglers;
 
 
@@ -95,10 +78,8 @@ public class AnimationPrefs {
         startPause = jc.startPause;
         mousePause = jc.mousePause;
         catchSound = jc.catchSound;
-        bounceSound = jc.bounceSound;
         if (jc.camangle != null)
             camangle = jc.camangle.clone();
-        view = jc.view;
         if (jc.hideJugglers != null)
             hideJugglers = jc.hideJugglers.clone();
     }
@@ -116,16 +97,12 @@ public class AnimationPrefs {
             mousePause = Boolean.parseBoolean(value);
         if ((value = pl.removeParameter("catchsound")) != null)
             catchSound = Boolean.parseBoolean(value);
-        if ((value = pl.removeParameter("bouncesound")) != null)
-            bounceSound = Boolean.parseBoolean(value);
         if ((value = pl.removeParameter("fps")) != null) {
             try {
                 tempdouble = Double.parseDouble(value);
                 fps = tempdouble;
             } catch (NumberFormatException e) {
-                String template = errorstrings.getString("Error_number_format");
-                Object[] arguments = { "fps" };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_number_format");
             }
         }
         if ((value = pl.removeParameter("slowdown")) != null) {
@@ -133,9 +110,7 @@ public class AnimationPrefs {
                 tempdouble = Double.parseDouble(value);
                 slowdown = tempdouble;
             } catch (NumberFormatException e) {
-                String template = errorstrings.getString("Error_number_format");
-                Object[] arguments = { "slowdown" };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_number_format");
             }
         }
         if ((value = pl.removeParameter("border")) != null) {
@@ -143,9 +118,7 @@ public class AnimationPrefs {
                 tempint = Integer.parseInt(value);
                 border = tempint;
             } catch (NumberFormatException e) {
-                String template = errorstrings.getString("Error_number_format");
-                Object[] arguments = { "border" };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_number_format");
             }
         }
         if ((value = pl.removeParameter("width")) != null) {
@@ -153,9 +126,7 @@ public class AnimationPrefs {
                 tempint = Integer.parseInt(value);
                 width = tempint;
             } catch (NumberFormatException e) {
-                String template = errorstrings.getString("Error_number_format");
-                Object[] arguments = { "width" };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_number_format");
             }
         }
         if ((value = pl.removeParameter("height")) != null) {
@@ -163,9 +134,7 @@ public class AnimationPrefs {
                 tempint = Integer.parseInt(value);
                 height = tempint;
             } catch (NumberFormatException e) {
-                String template = errorstrings.getString("Error_number_format");
-                Object[] arguments = { "height" };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_number_format");
             }
         }
         if ((value = pl.removeParameter("showground")) != null) {
@@ -178,9 +147,7 @@ public class AnimationPrefs {
                         || value.equalsIgnoreCase("no"))
                 showGround = GROUND_OFF;
             else {
-                String template = errorstrings.getString("Error_showground_value");
-                Object[] arguments = { value };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_showground_value");
             }
         }
         if ((value = pl.removeParameter("camangle")) != null) {
@@ -194,9 +161,7 @@ public class AnimationPrefs {
                 StringTokenizer st = new StringTokenizer(value, ",");
                 int numangles = st.countTokens();
                 if (numangles > 2) {
-                    String template = errorstrings.getString("Error_too_many_elements");
-                    Object[] arguments = { "camangle" };
-                    throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                    throw new JuggleExceptionUser("Error_too_many_elements");
                 }
 
                 for (int i = 0; i < numangles; i++)
@@ -206,22 +171,9 @@ public class AnimationPrefs {
                 camangle[0] = ca[0];
                 camangle[1] = ca[1];
             } catch (NumberFormatException e) {
-                String template = errorstrings.getString("Error_number_format");
-                Object[] arguments = { "camangle" };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_number_format");
             }
-        }
-        if ((value = pl.removeParameter("view")) != null) {
-            view = -1;
-            for (int view_index = 0; view_index < View.viewNames.length; view_index++)
-                if (value.equalsIgnoreCase(View.viewNames[view_index]))
-                    view = view_index + 1;
-            if (view == -1) {
-                String template = errorstrings.getString("Error_unrecognized_view");
-                Object[] arguments = { "'" + value + "'" };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
-            }
-        }
+        }        
         if ((value = pl.removeParameter("hidejugglers")) != null) {
             value = value.replace("(", "").replace(")", "");
 
@@ -233,9 +185,7 @@ public class AnimationPrefs {
                 for (int i = 0; i < numjugglers; i++)
                     hideJugglers[i] = Integer.parseInt(st.nextToken().trim());
             } catch (NumberFormatException e) {
-                String template = errorstrings.getString("Error_number_format");
-                Object[] arguments = { "hidejugglers" };
-                throw new JuggleExceptionUser(MessageFormat.format(template, arguments));
+                throw new JuggleExceptionUser("Error_number_format");
             }
         }
         return this;
@@ -291,13 +241,9 @@ public class AnimationPrefs {
         if (mousePause != mousePause_def)
             result += "mousepause=" + mousePause + ";";
         if (catchSound != catchSound_def)
-            result += "catchsound=" + catchSound + ";";
-        if (bounceSound != bounceSound_def)
-            result += "bouncesound=" + bounceSound + ";";
+            result += "catchsound=" + catchSound + ";";       
         if (camangle != null)
-            result += "camangle=(" + camangle[0] + "," + camangle[1] + ");";
-        if (view != view_def)
-            result += "view=" + View.viewNames[view - 1] + ";";
+            result += "camangle=(" + camangle[0] + "," + camangle[1] + ");";       
         if (hideJugglers != null) {
             result += "hidejugglers=(";
             for (int i = 0; i < hideJugglers.length; i++) {

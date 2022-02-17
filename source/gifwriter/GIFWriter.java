@@ -15,8 +15,6 @@ public class GIFWriter implements ImageObserver {
     private Image img;
     private int width;
     private int height;
-    private boolean loadingdata;    // we need these flags since loading is
-    private boolean loadingstarted; // done from another thread
     private IOException iox;
 
     private Hashtable<Integer, GIFEncoderHashitem> colorHash;

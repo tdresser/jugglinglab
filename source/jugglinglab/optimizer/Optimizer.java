@@ -24,8 +24,6 @@ import jugglinglab.util.*;
 // catch times unchanged.
 
 public class Optimizer {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
     static final protected double epsilon = 0.0000001;
     static final protected double infinity = java.lang.Double.POSITIVE_INFINITY;
 
@@ -57,7 +55,7 @@ public class Optimizer {
         if (!optimizerAvailable()) {
             if (Constants.DEBUG_OPTIMIZE)
                 System.out.println("---- Optimizer not loaded, bailing");
-            throw new JuggleExceptionUser(errorstrings.getString("Error_optimizer_unavailable"));
+            throw new JuggleExceptionUser("Error_optimizer_unavailable");
         }
 
         Optimizer opt = new Optimizer(pat);
@@ -67,7 +65,7 @@ public class Optimizer {
             if (success)
                 opt.updatePattern();
             else
-                throw new JuggleExceptionUser(errorstrings.getString("Error_optimizer_failed"));
+                throw new JuggleExceptionUser("Error_optimizer_failed");
         } else if (Constants.DEBUG_OPTIMIZE) {
             // do nothing if no margin equations
             System.out.println("---- No margin equations, bailing");

@@ -6,18 +6,12 @@ package jugglinglab.jml;
 
 import jugglinglab.util.*;
 
-import java.util.*;
 import java.io.*;
 
-
 public class JMLPosition {
-    static final ResourceBundle guistrings = jugglinglab.JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = jugglinglab.JugglingLab.errorstrings;
-
     protected double x, y, z, t, angle;
     protected int juggler;
     protected JMLPosition prev, next;  // for doubly-linked event list
-
 
     public JMLPosition() {}
 
@@ -101,18 +95,18 @@ public class JMLPosition {
                     jugglerstr = at.getAttributeValue(i);
             }
         } catch (NumberFormatException nfe) {
-            throw new JuggleExceptionUser(errorstrings.getString("Error_position_coordinate"));
+            throw new JuggleExceptionUser("Error_position_coordinate");
         }
 
         setCoordinate(new Coordinate(tempx,tempy,tempz));
         setT(tempt);
         setAngle(tempangle);
         if (jugglerstr == null)
-            throw new JuggleExceptionUser(errorstrings.getString("Error_position_nojuggler"));
+            throw new JuggleExceptionUser("Error_position_nojuggler");
         setJuggler(jugglerstr);
 
         if (current.getNumberOfChildren() != 0)
-            throw new JuggleExceptionUser(errorstrings.getString("Error_position_subtag"));
+            throw new JuggleExceptionUser("Error_position_subtag");
     }
 
     public void writeJML(PrintWriter wr) throws IOException {

@@ -4,29 +4,17 @@
 
 package jugglinglab.util;
 
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.io.*;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.ResourceBundle;
-import javax.swing.*;
-
-import jugglinglab.JugglingLab;
 
 // Some useful functions
 
 public class JLFunc {
-    static final ResourceBundle guistrings = JugglingLab.guistrings;
-    static final ResourceBundle errorstrings = JugglingLab.errorstrings;
-
     // Binomial coefficient (a choose b)
     public static int binomial(int a, int b) {
         int result = 1;
@@ -204,132 +192,5 @@ public class JLFunc {
             result = "0";
 
         return result;
-    }
-
-    //-------------------------------------------------------------------------
-    // Helpers for GridBagLayout
-    //-------------------------------------------------------------------------
-
-    public static GridBagConstraints constraints(int location, int gridx, int gridy) {
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        gbc.anchor = location;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.gridheight = gbc.gridwidth = 1;
-        gbc.gridx = gridx;
-        gbc.gridy = gridy;
-        gbc.weightx = gbc.weighty = 0.0;
-        return gbc;
-    }
-
-    public static GridBagConstraints constraints(int location, int gridx, int gridy,
-                                                         Insets ins) {
-        GridBagConstraints gbc = constraints(location, gridx, gridy);
-        gbc.insets = ins;
-        return gbc;
-    }
-
-    //-------------------------------------------------------------------------
-    // Helpers for file opening/saving
-    //-------------------------------------------------------------------------
-
-    protected static JFileChooser jfc;
-
-    public static JFileChooser jfc() {
-        if (jfc == null) {
-            jfc = new JFileChooser() {
-                @Override
-                public void approveSelection() {
-                    File f = getSelectedFile();
-
-                    if (f.exists() && getDialogType() == SAVE_DIALOG) {
-                        String template = guistrings.getString("JFC_File_exists_message");
-                        Object[] arguments = { f.getName() };
-                        String msg = MessageFormat.format(template, arguments);
-                        String title = guistrings.getString("JFC_File_exists_title");
-
-                        int result = JOptionPane.showConfirmDialog(this, msg, title,
-                                        JOptionPane.YES_NO_CANCEL_OPTION);
-                        switch (result) {
-                            case JOptionPane.YES_OPTION:
-                                super.approveSelection();
-                                return;
-                            case JOptionPane.NO_OPTION:
-                                return;
-                            case JOptionPane.CLOSED_OPTION:
-                                return;
-                            case JOptionPane.CANCEL_OPTION:
-                                cancelSelection();
-                                return;
-                        }
-                    }
-                    super.approveSelection();
-                }
-            };
-
-            if (JugglingLab.base_dir != null)
-                jfc.setCurrentDirectory(JugglingLab.base_dir.toFile());
-        }
-        return jfc;
-    }
-
-    // Sanitize filename based on platform restrictions
-    //
-    // See e.g.:
-    // https://stackoverflow.com/questions/1976007/
-    //       what-characters-are-forbidden-in-windows-and-linux-directory-names
-    public static String sanitizeFilename(String fname) {
-        int index = fname.lastIndexOf(".");
-
-        String base = index >= 0 ? fname.substring(0, index) : fname;
-        String extension = index >= 0 ? fname.substring(index) : "";
-
-        if (JugglingLab.isMacOS) {
-            // remove all instances of `:` and `/`
-            String b = base.replaceAll("[:/]", "");
-
-            // remove leading `.` and space
-            while (b.startsWith(".") || b.startsWith(" "))
-                b = b.substring(1);
-
-            if (b.length() == 0)
-                b = "Pattern";
-
-            return b + extension;
-        } else if (JugglingLab.isWindows) {
-            // remove all instances of `\/?:*"`
-            String b = base.replaceAll("[\\/?:*\"]", "");
-
-            // disallow strings with `><|`
-            boolean forbidden = (b.indexOf(">") >= 0);
-            forbidden = forbidden || (b.indexOf("<") >= 0);
-            forbidden = forbidden || (b.indexOf("|") >= 0);
-
-            if (forbidden || b.length() == 0)
-                b = "Pattern";
-
-            return b + extension;
-        } else if (JugglingLab.isLinux) {
-            // change all `/` to `:`
-            String b = base.replaceAll("/", ":");
-
-            // remove leading `.` and space
-            while (b.startsWith(".") || b.startsWith(" "))
-                b = b.substring(1);
-
-            if (b.length() == 0)
-                b = "Pattern";
-
-            return b + extension;
-        } else
-            return fname;
-    }
-
-    public static void errorIfNotSanitized(String fname) throws JuggleExceptionUser {
-        if (fname.equals(sanitizeFilename(fname)))
-            return;
-
-        throw new JuggleExceptionUser(errorstrings.getString(
-                                "Error_saving_disallowed_character"));
     }
 }
