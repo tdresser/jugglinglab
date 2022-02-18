@@ -4,3 +4,5 @@ build/
 packages/
 source/resources/package/windows/*.properties
 out
+www/node_modules
+www/resources

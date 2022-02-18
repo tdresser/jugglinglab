@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CheerpJ test</title>
+    <script src="https://cjrtnc.leaningtech.com/2.2/loader.js"></script>
+  </head>
+  <body></body>
+  <script>
+      async function main() {
+        var w = new CheerpJWorker();
+        await w.cheerpjInit();
+        await w.cheerpjRunMain("jugglingLab.JugglingLab", classPath);
+      }
+      main();
+  </script>
+</html>

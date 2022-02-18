@@ -1,0 +1,14 @@
+{
+  "name": "jugglinglabjs",
+  "version": "1.0.0",
+  "description": "Juggling Lab badly ported to the web.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tdresser@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.14.23"
+  }
+}

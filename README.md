@@ -1,3 +1,5 @@
+# Working on getting JugglingLab doing something in the browser
+
 # Juggling Lab juggling animator
 
 Juggling Lab is an open-source application for creating and animating juggling patterns. Its main goals are to help people learn juggling patterns, and to assist with inventing new ones.
