@@ -6,8 +6,6 @@ package jugglinglab.jml;
 
 import java.io.*;
 import java.util.ArrayList;
-// TODO(tdresser): why this swing dependency?
-import javax.swing.DefaultListModel;
 
 import jugglinglab.core.AnimationPrefs;
 import jugglinglab.util.*;
@@ -26,11 +24,11 @@ public class JMLPatternList {
 
     protected String title;
     protected String info;
-    protected DefaultListModel<PatternRecord> model;
+    protected ArrayList<PatternRecord> model;
 
 
     public JMLPatternList() {
-        model = new DefaultListModel<PatternRecord>();
+        model = new ArrayList<PatternRecord>();
         clearModel();
     }
 
@@ -43,7 +41,7 @@ public class JMLPatternList {
     // Methods to define the pattern list
     //-------------------------------------------------------------------------
 
-    public DefaultListModel<PatternRecord> getModel() {
+    public ArrayList<PatternRecord> getModel() {
         return model;
     }
 
@@ -51,7 +49,7 @@ public class JMLPatternList {
         model.clear();
 
         if (BLANK_AT_END)
-            model.addElement(new PatternRecord(" ", null, null, null, null, null, null));
+            model.add(new PatternRecord(" ", null, null, null, null, null, null));
     }
 
     public int size() {
@@ -103,7 +101,7 @@ public class JMLPatternList {
             if (BLANK_AT_END)
                 model.add(model.size() - 1, rec);
             else
-                model.addElement(rec);  // adds at end
+                model.add(rec);  // adds at end
         } else
             model.add(row, rec);
     }
