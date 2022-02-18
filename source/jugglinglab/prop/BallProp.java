@@ -6,9 +6,8 @@ package jugglinglab.prop;
 
 import java.util.*;
 
-// TODO(tdresser): eliminate dependency on awt.
-import java.awt.*;
-import java.awt.image.*;
+import alternatives.Dimension;
+import alternatives.Color;
 
 import jugglinglab.util.*;
 
@@ -53,7 +52,6 @@ public class BallProp extends Prop {
     protected Color color;
     protected boolean highlight = highlight_def;
 
-    protected BufferedImage ballimage;
     protected double lastzoom;
     protected Dimension size;
     protected Dimension center;
@@ -180,13 +178,6 @@ public class BallProp extends Prop {
     }
 
     @Override
-    public Image getProp2DImage(double zoom, double[] camangle) {
-        if (ballimage == null || zoom != lastzoom)  // first call or display resized?
-            recalc2D(zoom);
-        return ballimage;
-    }
-
-    @Override
     public Dimension getProp2DSize(double zoom) {
         if (size == null || zoom != lastzoom)       // first call or display resized?
             recalc2D(zoom);
@@ -211,47 +202,6 @@ public class BallProp extends Prop {
         int ball_pixel_size = (int)(0.5 + zoom * diam);
         if (ball_pixel_size < 1)
             ball_pixel_size = 1;
-
-        // Create a ball image of diameter ball_pixel_size, and transparent background
-
-        ballimage = new BufferedImage(ball_pixel_size + 1, ball_pixel_size + 1,
-                            BufferedImage.TYPE_INT_ARGB_PRE);
-        Graphics2D ballg = ballimage.createGraphics();
-
-        /*
-        ballg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                               RenderingHints.VALUE_ANTIALIAS_ON);
-        */
-        if (highlight) {
-            float highlightOvals = ball_pixel_size / 1.2f;  // Number of concentric circles to draw.
-            float[] rgb = new float[3];
-            rgb[0] = (float)color.getRed() / 255f;
-            rgb[1] = (float)color.getGreen() / 255f;
-            rgb[2] = (float)color.getBlue() / 255f;
-            // Make the color a little darker so that there is some contrast.
-            for (int i = 0; i < rgb.length; i++) {
-                rgb[i] = rgb[i] / 2.5f;
-            }
-
-            ballg.setColor(new Color(rgb[0], rgb[1], rgb[2]));
-            ballg.fillOval(0, 0, ball_pixel_size, ball_pixel_size); // Full sized ellipse.
-
-            // Now draw the highlight on the ball.
-            for (int i = 0; i < highlightOvals; i++) {
-                // Calculate the new color
-                for (int j = 0; j < rgb.length; j++) {
-                    rgb[j] = Math.min(rgb[j] + (1f / highlightOvals), 1f);
-                }
-                ballg.setColor(new Color(rgb[0], rgb[1], rgb[2]));
-                ballg.fillOval((int)(i/1.1), (int)(i/2.5),  // Literals control how fast highlight
-                                                            // moves right and down respectively.
-                               ball_pixel_size - (int)(i*1.3),   // These control how fast the
-                               ball_pixel_size - (int)(i*1.3));  // highlight converges to a point.
-            }
-        } else {
-            ballg.setColor(color);
-            ballg.fillOval(0, 0, ball_pixel_size, ball_pixel_size);
-        }
 
         size = new Dimension(ball_pixel_size, ball_pixel_size);
         center = new Dimension(ball_pixel_size/2, ball_pixel_size/2);

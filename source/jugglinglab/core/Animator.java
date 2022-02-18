@@ -4,24 +4,9 @@
 
 package jugglinglab.core;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.OutputStream;
-
-import javax.imageio.*;
-import javax.imageio.metadata.*;
-import javax.imageio.stream.ImageOutputStream;
-import javax.imageio.stream.MemoryCacheImageOutputStream;
-import org.w3c.dom.Node;
+import alternatives.Dimension;
 
 import jugglinglab.jml.*;
-import jugglinglab.renderer.Renderer;
-import jugglinglab.renderer.Renderer2D;
 import jugglinglab.util.*;
 
 // import gifwriter.GIFAnimWriter;
@@ -34,7 +19,7 @@ import jugglinglab.util.*;
 public class Animator {
     protected JMLPattern pat;
     protected AnimationPrefs jc;
-    protected Renderer ren1, ren2;
+    //protected Renderer ren1, ren2;
     protected Coordinate overallmax, overallmin;
 
     protected int num_frames;
@@ -60,7 +45,7 @@ public class Animator {
 
     // Do a full (re)start of the animator with a new pattern, new animation
     // preferences, or both. Passing in null indicates no update for that item.
-    public void restartAnimator(JMLPattern newpat, AnimationPrefs newjc)
+    /*public void restartAnimator(JMLPattern newpat, AnimationPrefs newjc)
                     throws JuggleExceptionUser, JuggleExceptionInternal {
         if (newpat != null) {
             newpat.layoutPattern();
@@ -361,7 +346,7 @@ public class Animator {
 
     public AnimationPrefs getAnimationPrefs() {
         return jc;
-    }
+    }*/
 
 
     // There are two versions of writeGIF, one that uses Java's ImageIO library
@@ -373,7 +358,7 @@ public class Animator {
     // hundredths of a second. This is an integer quantity, so only `fps` values
     // like 50, 33 1/3, 25, 20, ... are precisely achieveable.
 
-    public void writeGIF(OutputStream os,
+    /*public void writeGIF(OutputStream os,
                          Animator.WriteGIFMonitor wgm,
                          double fps)
                 throws IOException, JuggleExceptionInternal {
@@ -446,11 +431,11 @@ public class Animator {
         iw.endWriteSequence();
         ios.close();
         os.close();
-    }
+    }*/
 
     // Helper method for writeGIF() above
     // Adapted from https://community.oracle.com/thread/1264385
-    private static void configureGIFMetadata(IIOMetadata meta,
+    /*private static void configureGIFMetadata(IIOMetadata meta,
                                             String delayTime,
                                             int imageIndex) {
         String metaFormat = meta.getNativeMetadataFormatName();
@@ -500,13 +485,5 @@ public class Animator {
             //shouldn't happen
             throw new Error(e);
         }
-    }
-
-    public interface WriteGIFMonitor {
-        // callback method invoked when a processing step is completed
-        public void update(int step, int steps_total);
-
-        // callback method should return true when user wants to cancel
-        public boolean isCanceled();
-    }
+    }*/
 }

@@ -4,14 +4,11 @@
 
 package jugglinglab.renderer;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import alternatives.Color;
+import alternatives.Dimension;
 
 import jugglinglab.jml.JMLPattern;
 import jugglinglab.util.Coordinate;
-import jugglinglab.util.JuggleExceptionInternal;
-
 
 public abstract class Renderer {
     protected boolean showground;
@@ -45,8 +42,8 @@ public abstract class Renderer {
     public abstract Coordinate getScreenTranslatedCoordinate(Coordinate coord,
                 int dx, int dy);
 
-    public abstract void drawFrame(double time, int[] pnum, int[] hideJugglers, Graphics g)
-                throws JuggleExceptionInternal;
+    //public abstract void drawFrame(double time, int[] pnum, int[] hideJugglers, Graphics g)
+                //throws JuggleExceptionInternal;
 
     public abstract Color getBackground();
 

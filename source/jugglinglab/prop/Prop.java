@@ -4,9 +4,8 @@
 
 package jugglinglab.prop;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Image;
+import alternatives.Color;
+import alternatives.Dimension;
 
 import jugglinglab.util.*;
 
@@ -26,15 +25,8 @@ public abstract class Prop {
 
     // Creates a new prop of the given type
     public static Prop newProp(String type) throws JuggleExceptionUser {
-        if (type == null)
-            throw new JuggleExceptionUser("Prop type not specified");
-
-        if (type.equalsIgnoreCase("ball"))
-            return new BallProp();
-        else if (type.equalsIgnoreCase("ring"))
-            return new RingProp();
-
-        throw new JuggleExceptionUser("Error_prop_type");
+        // TODO(tdresser): re-add support for other prop types.
+        return new BallProp();
     }
 
     public void initProp(String st) throws JuggleExceptionUser {
@@ -59,8 +51,6 @@ public abstract class Prop {
     public abstract Coordinate getMin();  // in cm
 
     public abstract double getWidth();  // prop width in cm
-
-    public abstract Image getProp2DImage(double zoom, double[] camangle);
 
     public abstract Dimension getProp2DSize(double zoom);
 

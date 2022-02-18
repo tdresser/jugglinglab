@@ -4,8 +4,6 @@
 
 package jugglinglab.optimizer;
 
-import java.util.ResourceBundle;
-
 import com.google.ortools.linearsolver.MPConstraint;
 import com.google.ortools.linearsolver.MPObjective;
 import com.google.ortools.linearsolver.MPSolver;

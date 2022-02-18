@@ -4,24 +4,10 @@
 
 package jugglinglab.renderer;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-
-import jugglinglab.core.Constants;
-import jugglinglab.jml.JMLPattern;
-import jugglinglab.util.Coordinate;
-import jugglinglab.util.JuggleExceptionInternal;
-import jugglinglab.prop.Prop;
-
-
 // Class that draws the juggling into the frame
 //
 // It is designed so that no object allocation happens in drawFrame()
-
+/*
 public class Renderer2D extends Renderer {
     public static final int RENDER_POINT_FIELD = 0;
     public static final int RENDER_WIRE_FRAME = 1;
@@ -481,22 +467,9 @@ public class Renderer2D extends Renderer {
                     if (propimage != null) {
                         Dimension grip = pr.getProp2DGrip(zoom);
                         g.drawImage(propimage, x - grip.width, y - grip.height, null);
-                    } /* else {
-                        g.setColor(pr.getEditorColor());
-                        draw3DProp(ob.object, g);
-                    } */
+                    } 
 
-                    /*
-                    g.setColor(Color.black);
-                    g.drawLine(ob.boundingbox.x, ob.boundingbox.y,
-                               ob.boundingbox.x + ob.boundingbox.width, ob.boundingbox.y);
-                    g.drawLine(ob.boundingbox.x + ob.boundingbox.width, ob.boundingbox.y,
-                               ob.boundingbox.x + ob.boundingbox.width, ob.boundingbox.y + ob.boundingbox.height);
-                    g.drawLine(ob.boundingbox.x + ob.boundingbox.width, ob.boundingbox.y + ob.boundingbox.height,
-                               ob.boundingbox.x, ob.boundingbox.y + ob.boundingbox.height);
-                    g.drawLine(ob.boundingbox.x, ob.boundingbox.y + ob.boundingbox.height,
-                               ob.boundingbox.x, ob.boundingbox.y);
-                    */
+
                     break;
                 case DrawObject2D.TYPE_BODY:
                     int[] bodyx = new int[4];
@@ -550,17 +523,7 @@ public class Renderer2D extends Renderer {
                     break;
             }
 
-            /*
-            g.setColor(Color.black);
-            g.drawLine(ob.boundingbox.x, ob.boundingbox.y,
-                       ob.boundingbox.x+ob.boundingbox.width-1, ob.boundingbox.y);
-            g.drawLine(ob.boundingbox.x+ob.boundingbox.width-1, ob.boundingbox.y,
-                       ob.boundingbox.x+ob.boundingbox.width-1, ob.boundingbox.y+ob.boundingbox.height-1);
-            g.drawLine(ob.boundingbox.x+ob.boundingbox.width-1, ob.boundingbox.y+ob.boundingbox.height-1,
-                       ob.boundingbox.x, ob.boundingbox.y+ob.boundingbox.height-1);
-            g.drawLine(ob.boundingbox.x, ob.boundingbox.y+ob.boundingbox.height-1,
-                       ob.boundingbox.x, ob.boundingbox.y);
-            */
+
         }
     }
 
@@ -784,3 +747,4 @@ public class Renderer2D extends Renderer {
         }
     }
 }
+*/

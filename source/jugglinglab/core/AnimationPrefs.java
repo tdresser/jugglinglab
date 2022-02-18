@@ -4,11 +4,9 @@
 
 package jugglinglab.core;
 
-import java.awt.*;
-
+import alternatives.Dimension;
 import java.util.StringTokenizer;
 import jugglinglab.util.*;
-
 
 public class AnimationPrefs {
     public static final int GROUND_AUTO = 0;  // must be sequential
@@ -18,7 +16,6 @@ public class AnimationPrefs {
     // default values of all items
     public static final int width_def = 400;
     public static final int height_def = 450;
-    public static final double fps_def;
     public static final double slowdown_def = 2.0;
     public static final int border_def = 0;
     public static final int showGround_def = GROUND_AUTO;
@@ -27,26 +24,9 @@ public class AnimationPrefs {
     public static final boolean mousePause_def = false;
     public static final boolean catchSound_def = false;
 
-    static {
-        // set default `fps` to screen refresh rate, if possible
-        double fps_screen = 0.0;
-
-        try {
-            GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            GraphicsDevice[] devices = env.getScreenDevices();
-            if (devices.length > 0)
-                fps_screen = (double)devices[0].getDisplayMode().getRefreshRate();
-                // getRefreshRate() returns 0 when refresh is unknown
-        } catch (Exception e) {
-            // HeadlessException when running headless (from CLI)
-        }
-
-        fps_def = (fps_screen < 20.0 ? 60.0 : fps_screen);
-    }
-
     public int width = width_def;
     public int height = height_def;
-    public double fps = fps_def;
+    public double fps = 60;
     public double slowdown = slowdown_def;
     public int border = border_def;
     public int showGround = showGround_def;
@@ -215,8 +195,6 @@ public class AnimationPrefs {
             result += "width=" + width + ";";
         if (height != height_def)
             result += "height=" + height + ";";
-        if (fps != fps_def)
-            result += "fps=" + JLFunc.toStringRounded(fps, 2) + ";";
         if (slowdown != slowdown_def)
             result += "slowdown=" + JLFunc.toStringRounded(slowdown, 2) + ";";
         if (border != border_def)
