@@ -122,7 +122,7 @@ public class JMLPattern {
         if (t != null)
             t = t.replaceAll(";", "");  // semicolons not allowed in titles
 
-        title = ((t != null && t.strip().length() > 0) ? t.strip() : null);
+        title = ((t != null && t.trim().length() > 0) ? t.trim() : null);
 
         // Check if there is a base pattern defined, and if so set the new title
         // in the base pattern as well
@@ -150,8 +150,8 @@ public class JMLPattern {
     }
 
     public void setInfo(String info_string) {
-        if (info_string != null && info_string.strip().length() > 0)
-            info = info_string.strip();
+        if (info_string != null && info_string.trim().length() > 0)
+            info = info_string.trim();
         else
             info = null;
     }
@@ -433,13 +433,18 @@ public class JMLPattern {
     // Here `config` can be regular (like `pattern=3`) or not (like `3`)
     public static JMLPattern fromBasePattern(String notation, String config)
                 throws JuggleExceptionUser, JuggleExceptionInternal {
+        System.out.println("fromBasePattern A");
         Pattern p = Pattern.newPattern(notation).fromString(config);
+        System.out.println("fromBasePattern B");
+
 
         JMLPattern pat = p.asJMLPattern();
 
         // regularize the notation name and config string
         pat.base_pattern_notation = p.getNotationName();
         pat.base_pattern_config = p.toString();
+
+        System.out.println("fromBasePattern C");
 
         return pat;
     }
@@ -1802,12 +1807,12 @@ public class JMLPattern {
             String tagstr = current.getAttributes().getAttribute("tags");
             if (tagstr != null) {
                 for (String t : tagstr.split(","))
-                    addTag(t.strip());
+                    addTag(t.trim());
             }
         } else if (type.equalsIgnoreCase("basepattern")) {
             base_pattern_notation = Pattern.canonicalNotation(
                                 current.getAttributes().getAttribute("notation"));
-            base_pattern_config = current.getNodeValue().strip();
+            base_pattern_config = current.getNodeValue().trim();
         } else if (type.equalsIgnoreCase("prop")) {
             PropDef pd = new PropDef();
             pd.readJML(current, loadingversion);

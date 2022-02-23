@@ -4,7 +4,6 @@
 
 package jugglinglab.path;
 
-import java.util.*;
 import jugglinglab.util.*;
 
 

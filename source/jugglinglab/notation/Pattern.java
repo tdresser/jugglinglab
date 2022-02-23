@@ -23,11 +23,20 @@ public abstract class Pattern {
     // creates a new blank pattern in the given notation
     public static Pattern newPattern(String notation) throws JuggleExceptionUser,
                                                 JuggleExceptionInternal {
+        System.out.println("newPattern A");
+
         if (notation == null)
             throw new JuggleExceptionUser("Notation type not specified");
 
-        if (notation.equalsIgnoreCase("siteswap"))
+        System.out.println("newPattern B");
+
+
+        if (notation.equalsIgnoreCase("siteswap")) {
+            System.out.println("It's an SSP");
             return new SiteswapPattern();
+        }
+
+        System.out.println("newPattern C");
 
         throw new JuggleExceptionUser("Notation type '"+notation+"' not recognized");
     }

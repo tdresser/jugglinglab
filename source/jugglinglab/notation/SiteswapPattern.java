@@ -18,6 +18,10 @@ public class SiteswapPattern extends MHNPattern {
     protected boolean oddperiod = false;
     protected boolean has_hands_specifier = false;
 
+    SiteswapPattern() {
+        System.out.println("SSP constructor");
+    }
+
     @Override
     public String getNotationName() {
         return "Siteswap";
@@ -25,12 +29,23 @@ public class SiteswapPattern extends MHNPattern {
 
     @Override
     public SiteswapPattern fromString(String conf) throws JuggleExceptionUser, JuggleExceptionInternal {
+        System.out.println("SSP fromString A");
+        System.out.println("CONF: <" + conf + ">");
         if (conf.indexOf((int) '=') == -1) // just the pattern
             conf = "pattern=" + conf;
 
-        ParameterList pl = new ParameterList(conf);
-        fromParameters(pl);
-        pl.errorIfParametersLeft();
+        System.out.println("SSP fromString B");
+        try {
+            ParameterList pl = new ParameterList(conf);
+            System.out.println("SSP fromString C");
+            fromParameters(pl);
+            System.out.println("SSP fromString D");
+            pl.errorIfParametersLeft();
+            System.out.println("SSP fromString Z");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
         return this;
     }
 

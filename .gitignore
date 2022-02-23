@@ -6,3 +6,10 @@ source/resources/package/windows/*.properties
 out
 www/node_modules
 www/resources
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+gradle

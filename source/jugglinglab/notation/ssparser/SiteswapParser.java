@@ -13,6 +13,7 @@ public class SiteswapParser implements SiteswapParserConstants {
   private static int current_beat_sub;
 
   public static SiteswapTreeItem parsePattern(String pat) throws ParseException {
+    System.out.println("PARSE PATTERN");
     java.io.StringReader sr = new java.io.StringReader(pat);
     java.io.Reader r = new java.io.BufferedReader(sr);
     SiteswapParser parser = new SiteswapParser(r);
@@ -1956,6 +1957,7 @@ public class SiteswapParser implements SiteswapParserConstants {
 
   /** Constructor. */
   public SiteswapParser(java.io.Reader stream) {
+    System.out.println("SSParser A");
     jj_input_stream = new SimpleCharStream(stream, 1, 1);
     token_source = new SiteswapParserTokenManager(jj_input_stream);
     token = new Token();
@@ -1965,6 +1967,7 @@ public class SiteswapParser implements SiteswapParserConstants {
       jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++)
       jj_2_rtns[i] = new JJCalls();
+      System.out.println("SSParser B");
   }
 
   /** Reinitialise. */

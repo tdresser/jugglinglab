@@ -192,7 +192,7 @@ public abstract class MHNPattern extends Pattern {
         }
 
         if ((temp = pl.removeParameter("colors")) != null) {
-            if (temp.strip().equals("mixed"))
+            if (temp.trim().equals("mixed"))
                 temp = "{red}{green}{blue}{yellow}{cyan}{magenta}{orange}{pink}{gray}{black}";
             else
                 temp = JLFunc.expandRepeats(temp);
@@ -207,7 +207,7 @@ public abstract class MHNPattern extends Pattern {
             // Parse the colors parameter
             for (int i = 0; i < numcolors; i++) {
                 // Look for next {...} block
-                str = st1.nextToken().replace('{', ' ').strip();
+                str = st1.nextToken().replace('{', ' ').trim();
 
                 // Parse commas
                 st2 = new StringTokenizer(str, ",", false);
@@ -215,7 +215,7 @@ public abstract class MHNPattern extends Pattern {
                 switch (st2.countTokens()) {
                     case 1:
                         // Use the value as a color name
-                        color[i] = st2.nextToken().strip().toLowerCase();
+                        color[i] = st2.nextToken().trim().toLowerCase();
                         break;
                     case 3:
                         // Use the three values as RGB values
@@ -254,7 +254,7 @@ public abstract class MHNPattern extends Pattern {
         }
 
         if ((temp = pl.removeParameter("title")) != null) {
-            title = temp.strip();
+            title = temp.trim();
         }
 
         return this;

@@ -8,10 +8,20 @@
   <body></body>
   <script>
       async function main() {
-        var w = new CheerpJWorker();
-        await w.cheerpjInit();
-        await w.cheerpjRunMain("jugglingLab.JugglingLab", classPath);
+        //var w = new CheerpJWorker();
+        //await w.cheerpjInit();
+        //await w.cheerpjRunMain("jugglingLab.JugglingLab", classPath);
+        cheerpjInit({enableProguardTrace:true});
+        //cheerpjCreateDisplay(-1, -1, document.body);
+        cheerpjRunJar("resources/JugglingLab.jar"); 
+        //cheerpjRunMain("jugglinglab.JugglingLab", "resources/JugglingLab.jar")
       }
+      /*function assert(condition) {
+        if (!condition) {
+          console.warn("Assertion failed");
+        }
+      }*/
       main();
+      
   </script>
 </html>

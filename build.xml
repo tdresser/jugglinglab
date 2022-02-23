@@ -24,7 +24,7 @@
     </path>
 
     <target name="compile" depends="init">
-        <javac debug="${debug}" srcdir="${src}/." destdir="${build}/." target="11" source="11" deprecation="${deprecation}" includeAntRuntime="false" includes="**" excludes="gifwriter/*,resources/*,jugglinglab/notation/*.jj">
+        <javac debug="${debug}" srcdir="${src}/." destdir="${build}/." target="8" source="8" deprecation="${deprecation}" includeAntRuntime="false" includes="**" excludes="gifwriter/*,resources/*,jugglinglab/notation/*.jj">
             <classpath refid="master-classpath" />
             <compilerarg value="-Xlint:-options" />
             <compilerarg value="-Xlint:unchecked" />

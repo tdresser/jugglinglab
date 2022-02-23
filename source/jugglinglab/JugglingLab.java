@@ -11,9 +11,12 @@ import jugglinglab.util.JuggleExceptionUser;
 
 public class JugglingLab {   
     public static void main(String[] args) {
-        System.out.println("MAIN");
+        System.out.println("MAIN 4");
         try {
+            System.out.println("TRY");
             JMLPattern pattern = JMLPattern.fromBasePattern("siteswap", "531");
+            System.out.println("MADE PATTERN");
+
             pattern.layoutPattern();
             System.out.println("Paths: " + pattern.getNumberOfPaths());
             Coordinate c = new Coordinate();

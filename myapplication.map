@@ -206,7 +206,6 @@ jugglinglab.jml.JMLPosition -> jugglinglab.b.f:
     void setPrevious(jugglinglab.jml.JMLPosition) -> a
     jugglinglab.jml.JMLPosition getNext() -> f
     void setNext(jugglinglab.jml.JMLPosition) -> b
-    void writeJML(java.io.PrintWriter) -> a
 jugglinglab.jml.JMLSymmetry -> jugglinglab.b.g:
     int type -> a
     int numjugglers -> e
@@ -217,7 +216,6 @@ jugglinglab.jml.JMLSymmetry -> jugglinglab.b.g:
     void <init>() -> <init>
     void <init>(int,int,java.lang.String,int,java.lang.String,double) -> <init>
     jugglinglab.util.Permutation getPathPerm() -> a
-    void writeJML(java.io.PrintWriter) -> a
 jugglinglab.jml.JMLTransition -> jugglinglab.b.h:
     int path -> a
     java.lang.String type -> b
@@ -236,7 +234,6 @@ jugglinglab.jml.JMLTransition -> jugglinglab.b.h:
     void setOutgoingPathLink(jugglinglab.jml.PathLink) -> b
     jugglinglab.jml.PathLink getOutgoingPathLink() -> f
     jugglinglab.jml.JMLTransition duplicate() -> g
-    void writeJML(java.io.PrintWriter) -> a
 jugglinglab.jml.PathLink -> jugglinglab.b.i:
     jugglinglab.jml.JMLEvent startevent -> a
     jugglinglab.jml.JMLEvent endevent -> b
@@ -255,7 +252,6 @@ jugglinglab.jml.PropDef -> jugglinglab.b.j:
     jugglinglab.prop.Prop prop -> c
     void <init>() -> <init>
     void <init>(java.lang.String,java.lang.String) -> <init>
-    void writeJML(java.io.PrintWriter) -> a
 jugglinglab.jml.VelocityRef -> jugglinglab.b.k:
     int VR_THROW -> a
     int VR_CATCH -> b
@@ -314,7 +310,7 @@ jugglinglab.notation.MHNPattern -> jugglinglab.c.c:
     int numpaths -> c
     int period -> d
     int max_occupancy -> e
-    jugglinglab.notation.MHNThrow[][][][] th -> f
+    jugglinglab.util.JLFunc[][][][] th$62aa3faa -> f
     jugglinglab.notation.MHNHands hands -> g
     jugglinglab.notation.MHNBody bodies -> h
     int max_throw -> i
@@ -338,11 +334,17 @@ jugglinglab.notation.MHNPattern -> jugglinglab.c.c:
     jugglinglab.notation.MHNPattern fromParameters(jugglinglab.util.ParameterList) -> a
     java.lang.String toString() -> toString
     void buildJugglingMatrix() -> c
-    boolean isCatchOrderIncorrect(jugglinglab.notation.MHNThrow,jugglinglab.notation.MHNThrow) -> a
+    boolean isCatchOrderIncorrect$56a8c839(jugglinglab.util.JLFunc,jugglinglab.util.JLFunc) -> a
     jugglinglab.jml.JMLPattern asJMLPattern() -> d
-    void addEventsForGapsToJML(jugglinglab.jml.JMLPattern) -> a
-    void addLocationsForIncompleteEventsToJML(jugglinglab.jml.JMLPattern) -> b
-    void addMissingHoldsToJML(jugglinglab.jml.JMLPattern) -> c
+    void addSymmetriesToJML(jugglinglab.jml.JMLPattern) -> a
+    void findCatchThrowTimes() -> f
+    void addPrimaryEventsToJML(jugglinglab.jml.JMLPattern,boolean[][],boolean[]) -> a
+    void addJugglerPositionsToJML(jugglinglab.jml.JMLPattern) -> b
+    void addEventsForUntouchedHandsToJML(jugglinglab.jml.JMLPattern,boolean[][]) -> a
+    void addEventsForUntouchedPathsToJML(jugglinglab.jml.JMLPattern,boolean[]) -> a
+    void addEventsForGapsToJML(jugglinglab.jml.JMLPattern) -> c
+    void addLocationsForIncompleteEventsToJML(jugglinglab.jml.JMLPattern) -> d
+    void addMissingHoldsToJML(jugglinglab.jml.JMLPattern) -> e
     void <clinit>() -> <clinit>
 jugglinglab.notation.MHNSymmetry -> jugglinglab.c.d:
     int type -> a
@@ -350,32 +352,7 @@ jugglinglab.notation.MHNSymmetry -> jugglinglab.c.d:
     jugglinglab.util.Permutation jugglerperm -> c
     int delay -> d
     void <init>(int,int,java.lang.String,int) -> <init>
-jugglinglab.notation.MHNThrow -> jugglinglab.c.e:
-    int juggler -> a
-    int hand -> b
-    int index -> c
-    int slot -> d
-    int targetjuggler -> e
-    int targethand -> f
-    int targetindex -> g
-    int targetslot -> h
-    java.lang.String mod -> i
-    jugglinglab.notation.MHNThrow master -> j
-    jugglinglab.notation.MHNThrow source -> k
-    int pathnum -> l
-    boolean catching -> m
-    int catchnum -> n
-    int dwellwindow -> o
-    double throwtime -> p
-    double catchtime -> q
-    int handsindex -> r
-    void <init>() -> <init>
-    void <init>(int,int,int,int,int,int,int,int,java.lang.String) -> <init>
-    java.lang.String toString() -> toString
-    boolean isZero() -> a
-    int throwValue() -> c
-    boolean isThrownOne() -> b
-jugglinglab.notation.Pattern -> jugglinglab.c.f:
+jugglinglab.notation.Pattern -> jugglinglab.c.e:
     void <init>() -> <init>
     jugglinglab.notation.Pattern newPattern(java.lang.String) -> a
     java.lang.String getNotationName() -> e
@@ -383,17 +360,17 @@ jugglinglab.notation.Pattern -> jugglinglab.c.f:
     java.lang.String toString() -> toString
     jugglinglab.jml.JMLPattern asJMLPattern() -> d
     void <clinit>() -> <clinit>
-jugglinglab.notation.SiteswapPattern -> jugglinglab.c.g:
+jugglinglab.notation.SiteswapPattern -> jugglinglab.c.f:
     boolean oddperiod -> l
     boolean[] right_on_even -> m
     void <init>() -> <init>
     java.lang.String getNotationName() -> e
+    jugglinglab.notation.SiteswapPattern fromString(java.lang.String) -> c
     jugglinglab.notation.SiteswapPattern fromParameters(jugglinglab.util.ParameterList) -> b
-    int getNorepPeriod() -> f
-    void parseSiteswapNotation() -> g
+    void parseSiteswapNotation() -> f
     void doFirstPass(jugglinglab.notation.ssparser.SiteswapTreeItem) -> a
     void doSecondPass(jugglinglab.notation.ssparser.SiteswapTreeItem,boolean,int) -> a
-    void resolveModifiers() -> h
+    void resolveModifiers() -> g
     jugglinglab.notation.MHNPattern fromParameters(jugglinglab.util.ParameterList) -> a
     jugglinglab.notation.Pattern fromString(java.lang.String) -> b
 jugglinglab.notation.ssparser.ParseException -> jugglinglab.c.a.a:
@@ -403,42 +380,13 @@ jugglinglab.notation.ssparser.ParseException -> jugglinglab.c.a.a:
     void <init>(java.lang.String) -> <init>
     java.lang.String initialise(jugglinglab.notation.ssparser.Token,int[][],java.lang.String[]) -> a
     java.lang.String add_escapes(java.lang.String) -> a
-jugglinglab.notation.ssparser.SimpleCharStream -> jugglinglab.c.a.b:
-    int bufsize -> a
-    int available -> b
-    int tokenBegin -> c
-    int bufpos -> d
-    int[] bufline -> e
-    int[] bufcolumn -> f
-    int column -> g
-    int line -> h
-    boolean prevCharIsCR -> i
-    boolean prevCharIsLF -> j
-    java.io.Reader inputStream -> k
-    char[] buffer -> l
-    int maxNextCharInd -> m
-    int inBuf -> n
-    int tabSize -> o
-    void ExpandBuff(boolean) -> a
-    void FillBuff() -> h
-    char BeginToken() -> a
-    void UpdateLineColumn(char) -> a
-    char readChar() -> b
-    int getEndColumn() -> c
-    int getEndLine() -> d
-    int getBeginColumn() -> e
-    int getBeginLine() -> f
-    void backup(int) -> a
-    void <init>(java.io.Reader,int,int,int) -> <init>
-    void <init>(java.io.Reader,int,int) -> <init>
-    java.lang.String GetImage() -> g
-jugglinglab.notation.ssparser.SiteswapParser -> jugglinglab.c.a.c:
+jugglinglab.notation.ssparser.SiteswapParser -> jugglinglab.c.a.b:
     int jugglers -> b
     int current_juggler -> c
     int current_beat -> d
     int current_beat_sub -> e
     jugglinglab.notation.ssparser.SiteswapParserTokenManager token_source -> f
-    jugglinglab.notation.ssparser.SimpleCharStream jj_input_stream -> g
+    jugglinglab.notation.ssparser.SiteswapParser$1 jj_input_stream$288a5ba1 -> g
     jugglinglab.notation.ssparser.Token token -> h
     jugglinglab.notation.ssparser.Token jj_nt -> i
     int jj_ntk -> j
@@ -533,6 +481,35 @@ jugglinglab.notation.ssparser.SiteswapParser -> jugglinglab.c.a.c:
     void jj_rescan_token() -> an
     void jj_save(int,int) -> b
     void <clinit>() -> <clinit>
+jugglinglab.notation.ssparser.SiteswapParser$1 -> jugglinglab.c.a.c:
+    int bufsize -> a
+    int available -> b
+    int tokenBegin -> c
+    int bufpos -> d
+    int[] bufline -> e
+    int[] bufcolumn -> f
+    int column -> g
+    int line -> h
+    boolean prevCharIsCR -> i
+    boolean prevCharIsLF -> j
+    java.io.Reader inputStream -> k
+    char[] buffer -> l
+    int maxNextCharInd -> m
+    int inBuf -> n
+    int tabSize -> o
+    void ExpandBuff(boolean) -> a
+    void FillBuff() -> a
+    char BeginToken() -> b
+    void UpdateLineColumn(char) -> a
+    char readChar() -> c
+    int getEndColumn() -> d
+    int getEndLine() -> e
+    int getBeginColumn() -> f
+    int getBeginLine() -> g
+    void backup(int) -> a
+    void <init>(java.io.Reader,int,int,int) -> <init>
+    void <init>(java.io.Reader,int,int) -> <init>
+    java.lang.String GetImage() -> h
 jugglinglab.notation.ssparser.SiteswapParser$JJCalls -> jugglinglab.c.a.d:
     int gen -> a
     jugglinglab.notation.ssparser.Token first -> b
@@ -541,13 +518,14 @@ jugglinglab.notation.ssparser.SiteswapParser$JJCalls -> jugglinglab.c.a.d:
     void <init>() -> <init>
 jugglinglab.notation.ssparser.SiteswapParser$LookaheadSuccess -> jugglinglab.c.a.e:
     void <init>() -> <init>
+    void <init>(byte) -> <init>
 jugglinglab.notation.ssparser.SiteswapParserConstants -> jugglinglab.c.a.f:
     java.lang.String[] tokenImage -> a
     void <clinit>() -> <clinit>
 jugglinglab.notation.ssparser.SiteswapParserTokenManager -> jugglinglab.c.a.g:
     java.lang.String[] jjstrLiteralImages -> b
     long[] jjtoToken -> c
-    jugglinglab.notation.ssparser.SimpleCharStream input_stream -> d
+    jugglinglab.notation.ssparser.SiteswapParser$1 input_stream$288a5ba1 -> d
     int[] jjrounds -> e
     int[] jjstateSet -> f
     char curChar -> g
@@ -558,7 +536,7 @@ jugglinglab.notation.ssparser.SiteswapParserTokenManager -> jugglinglab.c.a.g:
     int jjmatchedKind -> l
     int jjStopAtPos(int,int) -> a
     int jjMoveNfa_0(int,int) -> b
-    void <init>(jugglinglab.notation.ssparser.SimpleCharStream) -> <init>
+    void <init>(jugglinglab.notation.ssparser.SiteswapParser$1) -> <init>
     jugglinglab.notation.ssparser.Token jjFillToken() -> b
     jugglinglab.notation.ssparser.Token getNextToken() -> a
     void jjCheckNAdd(int) -> a
@@ -605,7 +583,6 @@ jugglinglab.notation.ssparser.Token -> jugglinglab.c.a.i:
     jugglinglab.notation.ssparser.Token newToken(int,java.lang.String) -> a
 jugglinglab.notation.ssparser.TokenMgrError -> jugglinglab.c.a.j:
     java.lang.String addEscapes(java.lang.String) -> a
-    java.lang.String LexicalError$5e3d1f51(boolean,int,int,java.lang.String,char) -> a
     java.lang.String getMessage() -> getMessage
     void <init>() -> <init>
     void <init>(java.lang.String,int) -> <init>
@@ -685,11 +662,35 @@ jugglinglab.util.Coordinate -> jugglinglab.f.a:
     double getIndex(int) -> a
     java.lang.String toString() -> toString
 jugglinglab.util.JLFunc -> jugglinglab.f.b:
-    java.text.NumberFormat nf -> a
+    java.text.NumberFormat nf -> s
+    int juggler -> a
+    int hand -> b
+    int index -> c
+    int slot -> d
+    int targetjuggler -> e
+    int targethand -> f
+    int targetindex -> g
+    int targetslot -> h
+    java.lang.String mod -> i
+    jugglinglab.util.JLFunc master$b832996 -> j
+    jugglinglab.util.JLFunc source$b832996 -> k
+    int pathnum -> l
+    boolean catching -> m
+    int catchnum -> n
+    int dwellwindow -> o
+    double throwtime -> p
+    double catchtime -> q
+    int handsindex -> r
     java.lang.String expandRepeats(java.lang.String) -> a
     void addExpansionToBuffer(java.lang.String,java.lang.StringBuffer) -> a
     double parseDouble(java.lang.String) -> b
     java.lang.String toStringRounded(double,int) -> a
+    void <init>() -> <init>
+    void <init>(int,int,int,int,int,int,int,int,java.lang.String) -> <init>
+    java.lang.String toString() -> toString
+    boolean isZero() -> a
+    int throwValue() -> b
+    boolean isThrownOne() -> c
 jugglinglab.util.JuggleException -> jugglinglab.f.c:
     void <init>() -> <init>
     void <init>(java.lang.String) -> <init>
