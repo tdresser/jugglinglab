@@ -8,4 +8,8 @@
  */
 
 rootProject.name = "jugglinglab"
-include("lib")
+// include("lib")
+
+//dependencies {
+    //compileOnly("com.guardsquare:proguard-gradle:7.1.0")
+//}

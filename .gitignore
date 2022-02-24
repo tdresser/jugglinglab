@@ -13,3 +13,5 @@ www/resources
 build
 
 gradle
+
+bin/main
