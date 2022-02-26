@@ -6,7 +6,8 @@
  * User Manual available at https://docs.gradle.org/7.4/userguide/building_java_projects.html
  */
 
- // Proguard: https://www.guardsquare.com/manual/setup/gradle
+// Proguard: https://www.guardsquare.com/manual/setup/gradle
+// Kotlin DSL: https://docs.gradle.org/current/userguide/kotlin_dsl.html
 
 plugins {
     // TODO - switch to library.
@@ -77,6 +78,9 @@ tasks.register<Jar>("uberJar") {
 }
 
 tasks.register<proguard.gradle.ProGuardTask>("proguard") {
+    dependsOn("uberJar")
+    injars(tasks.named<Jar>("uberJar").get().archiveFileName.get())
+    outjars(tasks.named<Jar>("jar").get().ar)
     configuration("buildconfig/proguard_config.pro")
 }
 
