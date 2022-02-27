@@ -9,6 +9,8 @@
 // Proguard: https://www.guardsquare.com/manual/setup/gradle
 // Kotlin DSL: https://docs.gradle.org/current/userguide/kotlin_dsl.html
 
+import de.undercouch.gradle.tasks.download.Download
+
 plugins {
     // TODO - switch to library.
     // Apply the java-library plugin for API and implementation separation.
@@ -88,8 +90,8 @@ tasks.register<proguard.gradle.ProGuardTask>("proguard") {
 }
 
 val downloadCheerpJ = tasks.register<Download>("downloadCheerpJ") {
-    src('https://github.com/michel-kraemer/gradle-download-task/archive/1.0.zip')
-    dest(File(buildDir, '1.0.zip'))
+    src("https://d3415aa6bfa4.leaningtech.com/cheerpj_linux_2.2.tar.gz")
+    dest(File(buildDir, "cheerpj_linux_2.2.tar.gz"))
 }.get()
 
 tasks.register<Copy>("unzipCheerpJ") {
