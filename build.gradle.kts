@@ -13,7 +13,8 @@ plugins {
     // TODO - switch to library.
     // Apply the java-library plugin for API and implementation separation.
     //`java-library`
-    application
+    application,
+    //id("de.undercouch.download") version "5.0.1"
 }
 
 // APPLICATION BITS
@@ -64,7 +65,7 @@ dependencies {
 // TODO - why doesn't this work?
 // defaultTasks("upper")
 
-tasks.register<Jar>("uberJar") {
+val uberJar = tasks.register<Jar>("uberJar") {
     archiveClassifier.set("uber")
 
     from(sourceSets.main.get().output)
@@ -75,17 +76,26 @@ tasks.register<Jar>("uberJar") {
     from({
         configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
     })
-}
+}.get()
 
 tasks.register<proguard.gradle.ProGuardTask>("proguard") {
+    val input = uberJar.archiveFile.get()
+    val resultPath : String by extra(input.asFile.parent + "/Proguarded.jar")
     dependsOn("uberJar")
-    injars(tasks.named<Jar>("uberJar").get().archiveFileName.get())
-    outjars(tasks.named<Jar>("jar").get().ar)
+    injars(input)
+    outjars(resultPath)
     configuration("buildconfig/proguard_config.pro")
 }
 
 tasks.register("dev") {
     dependsOn("proguard")
+}
+
+tasks.register("debug") {
+    dependsOn("uberJar")
+    doLast {
+        println(uberJar.archiveFileName.get())
+    }
 }
 
 version = "1.6.2"
