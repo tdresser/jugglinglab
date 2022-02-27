@@ -78,10 +78,10 @@ val uberJar = tasks.register<Jar>("uberJar") {
     from({
         configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
     })
-}.get()
+}
 
-tasks.register<proguard.gradle.ProGuardTask>("proguard") {
-    val input = uberJar.archiveFile.get()
+val proguard = tasks.register<proguard.gradle.ProGuardTask>("proguard") {
+    val input = uberJar.get().archiveFile.get()
     val result by extra(File(buildDir, "Proguarded.jar"))
     dependsOn("uberJar")
     injars(input)
@@ -92,23 +92,38 @@ tasks.register<proguard.gradle.ProGuardTask>("proguard") {
 val downloadCheerpJ = tasks.register<Download>("downloadCheerpJ") {
     src("https://d3415aa6bfa4.leaningtech.com/cheerpj_linux_2.2.tar.gz")
     dest(File(buildDir, "cheerpj_linux_2.2.tar.gz"))
-}.get()
+    onlyIfModified(true)
+}
 
 tasks.register<Copy>("unzipCheerpJ") {
     dependsOn("downloadCheerpJ")
-    from(downloadCheerpJ.dest)
-    into(buildDir)
+    from(tarTree(downloadCheerpJ.get().dest))
+    into(File(buildDir, "cheerpJ"))
 }
 
-tasks.register("dev") {
+tasks.register<Exec>("cheerpify") {
+    val result by extra(File(buildDir, "Cheerpjfied.jar"))
+    dependsOn("unzipCheerpJ")
     dependsOn("proguard")
+    commandLine("python3 " +
+            File(buildDir, "cheerpJ/cheerpj_2.2/cheerpjfy.py") + " " +
+            (proguard.get().extra.get("result") as File) + " " + 
+            "--pack-jar " + result + " " +
+            "--pack-strip-binaries "
+    )
+}
+
+
+tasks.register("dev") {
+    dependsOn("cheerpify")
 }
 
 tasks.register("debug") {
     dependsOn("uberJar")
     doLast {
-        println(uberJar.archiveFileName.get())
+        println(uberJar.get().archiveFileName.get())
     }
 }
+
 
 version = "1.6.2"
