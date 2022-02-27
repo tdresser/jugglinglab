@@ -13,8 +13,8 @@ plugins {
     // TODO - switch to library.
     // Apply the java-library plugin for API and implementation separation.
     //`java-library`
-    application,
-    //id("de.undercouch.download") version "5.0.1"
+    application
+    id("de.undercouch.download") version "5.0.1"
 }
 
 // APPLICATION BITS
@@ -80,11 +80,22 @@ val uberJar = tasks.register<Jar>("uberJar") {
 
 tasks.register<proguard.gradle.ProGuardTask>("proguard") {
     val input = uberJar.archiveFile.get()
-    val resultPath : String by extra(input.asFile.parent + "/Proguarded.jar")
+    val result by extra(File(buildDir, "Proguarded.jar"))
     dependsOn("uberJar")
     injars(input)
-    outjars(resultPath)
+    outjars(result)
     configuration("buildconfig/proguard_config.pro")
+}
+
+val downloadCheerpJ = tasks.register<Download>("downloadCheerpJ") {
+    src('https://github.com/michel-kraemer/gradle-download-task/archive/1.0.zip')
+    dest(File(buildDir, '1.0.zip'))
+}.get()
+
+tasks.register<Copy>("unzipCheerpJ") {
+    dependsOn("downloadCheerpJ")
+    from(downloadCheerpJ.dest)
+    into(buildDir)
 }
 
 tasks.register("dev") {
