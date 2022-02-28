@@ -101,21 +101,36 @@ tasks.register<Copy>("unzipCheerpJ") {
     into(File(buildDir, "cheerpJ"))
 }
 
-tasks.register<Exec>("cheerpify") {
+val cheerpjfy = tasks.register<Exec>("cheerpjfy") {
     val result by extra(File(buildDir, "Cheerpjfied.jar"))
+    val proguardJar = proguard.get().extra.get("result") as File
+    // Can't customize this, it's based on the input jar.
+    val jsResult by extra(proguardJar.path + ".js") 
     dependsOn("unzipCheerpJ")
     dependsOn("proguard")
-    commandLine("python3 " +
-            File(buildDir, "cheerpJ/cheerpj_2.2/cheerpjfy.py") + " " +
-            (proguard.get().extra.get("result") as File) + " " + 
-            "--pack-jar " + result + " " +
-            "--pack-strip-binaries "
+    executable("python3")
+    args(
+            File(buildDir, "cheerpJ/cheerpj_2.2/cheerpjfy.py"),
+            (proguard.get().extra.get("result") as File),
+            "--pack-jar", result,
+            "--pack-strip-binaries"
     )
 }
 
+tasks.register<Copy>("cleanCheerpjfy") {
+    dependsOn("cheerpjfy")
+    val defaultCheerpjOutput = cheerpjfy.get().extra.get("jsResult") as String
+    val jsResult by extra((cheerpjfy.get().extra.get("result") as File).path + ".js")
+    from(buildDir)
+    include(defaultCheerpjOutput)
+    into(buildDir)
+    rename(defaultCheerpjOutput, jsResult)
+}
+
+
 
 tasks.register("dev") {
-    dependsOn("cheerpify")
+    dependsOn("cleanCheerpjfy")
 }
 
 tasks.register("debug") {
