@@ -105,7 +105,7 @@ val cheerpjfy = tasks.register<Exec>("cheerpjfy") {
     val result by extra(File(buildDir, "Cheerpjfied.jar"))
     val proguardJar = proguard.get().extra.get("result") as File
     // Can't customize this, it's based on the input jar.
-    val jsResult by extra(proguardJar.path + ".js") 
+    val jsResult by extra(File(proguardJar.path + ".js")) 
     dependsOn("unzipCheerpJ")
     dependsOn("proguard")
     executable("python3")
@@ -117,26 +117,34 @@ val cheerpjfy = tasks.register<Exec>("cheerpjfy") {
     )
 }
 
-tasks.register<Copy>("cleanCheerpjfy") {
+val nameCheerpjfy = tasks.register<Copy>("nameCheerpjfy") {
     dependsOn("cheerpjfy")
-    val defaultCheerpjOutput = cheerpjfy.get().extra.get("jsResult") as String
-    val jsResult by extra((cheerpjfy.get().extra.get("result") as File).path + ".js")
+    val defaultCheerpjOutput = cheerpjfy.get().extra.get("jsResult") as File
+    val jsResult by extra(File((cheerpjfy.get().extra.get("result") as File).path + ".js"))
     from(buildDir)
-    include(defaultCheerpjOutput)
+    include(defaultCheerpjOutput.name)
     into(buildDir)
-    rename(defaultCheerpjOutput, jsResult)
+    rename(defaultCheerpjOutput.name, jsResult.name)
 }
 
-
+tasks.register<Copy>("outputWWW") {
+    dependsOn("nameCheerpjfy")
+    val jsFile = nameCheerpjfy.get().extra.get("jsResult") as File;
+    val jar = cheerpjfy.get().extra.get("result") as File;
+    from(buildDir)
+    include(listOf(jsFile.name, jar.name))
+    rename(jar.name + "(.*)", "JugglingLab$1")
+    into(File("www/resources"))
+}
 
 tasks.register("dev") {
-    dependsOn("cleanCheerpjfy")
+    dependsOn("outputWWW")
 }
 
 tasks.register("debug") {
-    dependsOn("uberJar")
+    val defaultCheerpjOutput = cheerpjfy.get().extra.get("jsResult") as File
     doLast {
-        println(uberJar.get().archiveFileName.get())
+        println(defaultCheerpjOutput.name)
     }
 }
 
