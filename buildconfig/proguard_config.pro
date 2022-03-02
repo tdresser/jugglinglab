@@ -6,11 +6,15 @@
 
 -printmapping myapplication.map
 
-# These are scary...
--dontwarn com.google.ortools.**
--dontwarn com.google.protobuf.**
+# -optimizationpasses 3
+# -overloadaggressively
+# -repackageclasses ''
+# -allowaccessmodification
+
+-dontwarn java.util.logging.**
 -dontwarn java.awt.geom.**
 -dontwarn com.sun.jna.**
+-dontwarn sun.misc.**
 
 
 -keep public class jugglinglab.JugglingLab {

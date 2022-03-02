@@ -47,7 +47,7 @@ repositories {
 sourceSets {
     main {
         java {
-            setSrcDirs(listOf("source/jugglinglab", "source/alternatives"))
+            setSrcDirs(listOf("source"))
         }
     }
 }
@@ -63,6 +63,7 @@ dependencies {
 // defaultTasks("upper")
 
 val uberJar = tasks.register<Jar>("uberJar") {
+    dependsOn("jar")
     archiveClassifier.set("uber")
 
     from(sourceSets.main.get().output)
