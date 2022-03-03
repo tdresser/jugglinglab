@@ -66,6 +66,10 @@ val uberJar = tasks.register<Jar>("uberJar") {
     dependsOn("jar")
     archiveClassifier.set("uber")
 
+    // manifest {
+    //    attributes["Main-Class"] = "jugglinglab.JugglingLab"
+    //}
+
     from(sourceSets.main.get().output)
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
