@@ -3,6 +3,12 @@
 // Kotlin DSL: https://docs.gradle.org/current/userguide/kotlin_dsl.html
 
 import de.undercouch.gradle.tasks.download.Download
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.github.jengelman.gradle.plugins.shadow.transformers.Transformer
+import com.github.jengelman.gradle.plugins.shadow.transformers.TransformerContext
+import com.github.jengelman.gradle.plugins.shadow.transformers.CacheableTransformer
+
+import shadow.org.apache.tools.zip.ZipOutputStream
 
 val cheerpjfyPy = File(buildDir, "cheerpJ/cheerpj_2.2/cheerpjfy.py")
 
@@ -12,6 +18,7 @@ plugins {
     //`java-library`
     application
     id("de.undercouch.download") version "5.0.1"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 // APPLICATION BITS
@@ -19,7 +26,7 @@ application {
     mainClass.set("jugglingLab.JugglingLab")
 }
 
-tasks.withType<Jar> {
+val jar = tasks.named<Jar>("jar") {
     manifest {
         attributes["Main-Class"] = "jugglinglab.JugglingLab"
     }
@@ -48,6 +55,7 @@ sourceSets {
     main {
         java {
             setSrcDirs(listOf("source"))
+            //exclude("gifwriter/**")
         }
     }
 }
@@ -62,7 +70,44 @@ dependencies {
 // TODO - why doesn't this work?
 // defaultTasks("upper")
 
-val uberJar = tasks.register<Jar>("uberJar") {
+@CacheableTransformer
+class MyTransformer() : Transformer {
+    override fun canTransformResource(element:FileTreeElement) : Boolean { 
+        if (element.file != null) {
+            println(element.file.path)
+        }
+        return true 
+    }
+
+    override fun transform(context:TransformerContext) {}
+    override fun hasTransformedResource():Boolean { return true }
+    //override fun modifyOutputStream(jos:ZipOutputStream,  preserveFileTimestamps:Boolean) {}
+    //override fun modifyOutputStream(p0: ZipOutputStream?, p1: Boolean) {}
+    override fun modifyOutputStream(os: ZipOutputStream, preserveFileTimestamps: Boolean) {}
+    override fun getName() : String {
+        return "myTransformer"
+    }
+}
+
+val uberJar = tasks.named<ShadowJar>("shadowJar") {
+    dependsOn(jar)
+    //minimize()
+    transform(MyTransformer())
+    //include("**.class")
+    //include("*.class")
+    //include("*.properties")
+    /*exclude("*.MF")
+    exclude("*.so")
+    exclude("*.xml")
+    exclude("*.html")
+    exclude("*.txt")
+    exclude("*.1000")
+    exclude("*.proto")
+    exclude("*.properties")
+    exclude("*.template")*/
+}
+
+/*val uberJar = tasks.register<Jar>("uberJar") {
     dependsOn("jar")
     archiveClassifier.set("uber")
 
@@ -78,12 +123,12 @@ val uberJar = tasks.register<Jar>("uberJar") {
     from({
         configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
     })
-}
+}*/
 
 val proguard = tasks.register<proguard.gradle.ProGuardTask>("proguard") {
     val input = uberJar.get().archiveFile.get()
     val result by extra(File(buildDir, "Proguarded.jar"))
-    dependsOn("uberJar")
+    dependsOn(uberJar)
     injars(input)
     outjars(result)
     configuration("buildconfig/proguard_config.pro")
