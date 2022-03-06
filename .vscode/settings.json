@@ -5,4 +5,5 @@
         "bin/ortools-lib/com.google.ortools.jar"
     ],
     "java.configuration.updateBuildConfiguration": "automatic",
+    "java.jdt.ls.java.home": "/usr/lib/jvm/java-8-openjdk-amd64"
 }

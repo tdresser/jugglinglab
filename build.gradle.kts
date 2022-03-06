@@ -4,9 +4,6 @@
 
 import de.undercouch.gradle.tasks.download.Download
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import com.github.jengelman.gradle.plugins.shadow.transformers.Transformer
-import com.github.jengelman.gradle.plugins.shadow.transformers.TransformerContext
-import com.github.jengelman.gradle.plugins.shadow.transformers.CacheableTransformer
 
 import shadow.org.apache.tools.zip.ZipOutputStream
 
@@ -16,6 +13,7 @@ plugins {
     // TODO - switch to library.
     // Apply the java-library plugin for API and implementation separation.
     //`java-library`
+    java // TODO: is this needed?
     application
     id("de.undercouch.download") version "5.0.1"
     id("com.github.johnrengelman.shadow") version "7.1.2"
@@ -62,37 +60,20 @@ sourceSets {
 
 // https://kotlinlang.org/docs/gradle.html#dependency-types
 dependencies {
-    // Should this be api? api doesn't exist for an application.
     implementation("org.apache.commons:commons-math3:3.6.1")
-    implementation("com.google.ortools:ortools-java:9.2.9972")
 }
 
 // TODO - why doesn't this work?
 // defaultTasks("upper")
 
-@CacheableTransformer
-class MyTransformer() : Transformer {
-    override fun canTransformResource(element:FileTreeElement) : Boolean { 
-        if (element.file != null) {
-            println(element.file.path)
-        }
-        return true 
-    }
-
-    override fun transform(context:TransformerContext) {}
-    override fun hasTransformedResource():Boolean { return true }
-    //override fun modifyOutputStream(jos:ZipOutputStream,  preserveFileTimestamps:Boolean) {}
-    //override fun modifyOutputStream(p0: ZipOutputStream?, p1: Boolean) {}
-    override fun modifyOutputStream(os: ZipOutputStream, preserveFileTimestamps: Boolean) {}
-    override fun getName() : String {
-        return "myTransformer"
-    }
-}
-
-val uberJar = tasks.named<ShadowJar>("shadowJar") {
-    dependsOn(jar)
+//val uberJar = tasks.named<ShadowJar>("shadowJar") {
+    //configurations = [project.configurations.compile]
+//}
+    /*manifest {
+        attributes["Main-Class"] = "jugglinglab.JugglingLab"
+    }*/
     //minimize()
-    transform(MyTransformer())
+    //transform(MyTransformer())
     //include("**.class")
     //include("*.class")
     //include("*.properties")
@@ -105,15 +86,15 @@ val uberJar = tasks.named<ShadowJar>("shadowJar") {
     exclude("*.proto")
     exclude("*.properties")
     exclude("*.template")*/
-}
+//}
 
-/*val uberJar = tasks.register<Jar>("uberJar") {
+val uberJar = tasks.register<Jar>("uberJar") {
     dependsOn("jar")
     archiveClassifier.set("uber")
 
-    // manifest {
-    //    attributes["Main-Class"] = "jugglinglab.JugglingLab"
-    //}
+    manifest {
+        attributes["Main-Class"] = "jugglinglab.JugglingLab"
+    }
 
     from(sourceSets.main.get().output)
 
@@ -123,7 +104,7 @@ val uberJar = tasks.named<ShadowJar>("shadowJar") {
     from({
         configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
     })
-}*/
+}
 
 val proguard = tasks.register<proguard.gradle.ProGuardTask>("proguard") {
     val input = uberJar.get().archiveFile.get()
@@ -137,12 +118,11 @@ val proguard = tasks.register<proguard.gradle.ProGuardTask>("proguard") {
 val downloadCheerpJ = tasks.register<Download>("downloadCheerpJ") {
     src("https://d3415aa6bfa4.leaningtech.com/cheerpj_linux_2.2.tar.gz")
     dest(File(buildDir, "cheerpj_linux_2.2.tar.gz"))
-    onlyIfModified(true)
-    // useETag(true) // TODO: do we want this?
+    overwrite(false) // Only ever download once.
 }
 
-tasks.register<Copy>("unzipCheerpJ") {
-    dependsOn("downloadCheerpJ")
+val unzipCheerpJ = tasks.register<Copy>("unzipCheerpJ") {
+    dependsOn(downloadCheerpJ)
     from(tarTree(downloadCheerpJ.get().dest))
     into(File(buildDir, "cheerpJ"))
 }
@@ -164,12 +144,12 @@ val cheerpjfyRelease = tasks.register<Exec>("cheerpjfyRelease") {
 }
 
 val cheerpjfyDev = tasks.register<Exec>("cheerpjfyDev") {
-    val inJar : File = tasks.named<Jar>("jar").get().archiveFile.get().asFile
+    val inJar : File = uberJar.get().archiveFile.get().asFile
     // Can't customize this, it's based on the input jar.
     val jsResult : File by extra(File(inJar.path + ".js")) 
     val jar : File by extra(inJar)
-    dependsOn("unzipCheerpJ")
-    dependsOn("jar")
+    dependsOn(unzipCheerpJ)
+    dependsOn(uberJar)
     executable("python3")
     args(
             cheerpjfyPy,
@@ -193,7 +173,7 @@ tasks.register<Copy>("outputWWWRelease") {
     val jar = cheerpjfyRelease.get().extra.get("result") as File;
     from(buildDir)
     include(listOf(jsFile.name, jar.name))
-    rename(jar.name + "(.*)", "JugglingLab$1")
+    rename(jar.name + "(.*)", "JugglingLab.jar$1")
     into(File("www/resources"))
 }
 

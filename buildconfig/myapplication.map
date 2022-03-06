@@ -1,190 +1,219 @@
-alternatives.Color -> a.a:
-    alternatives.Color white -> a
-    alternatives.Color gray -> b
-    alternatives.Color black -> c
-    alternatives.Color red -> d
-    alternatives.Color pink -> e
-    alternatives.Color orange -> f
-    alternatives.Color yellow -> g
-    alternatives.Color green -> h
-    alternatives.Color magenta -> i
-    alternatives.Color cyan -> j
-    alternatives.Color blue -> k
+alternatives.Color -> alternatives.Color:
+    int value -> value
+    alternatives.Color white -> white
+    alternatives.Color lightGray -> lightGray
+    alternatives.Color gray -> gray
+    alternatives.Color darkGray -> darkGray
+    alternatives.Color black -> black
+    alternatives.Color red -> red
+    alternatives.Color pink -> pink
+    alternatives.Color orange -> orange
+    alternatives.Color yellow -> yellow
+    alternatives.Color green -> green
+    alternatives.Color magenta -> magenta
+    alternatives.Color cyan -> cyan
+    alternatives.Color blue -> blue
     void <init>(int,int,int) -> <init>
     void <init>(int,int,int,int) -> <init>
     void <clinit>() -> <clinit>
 jugglinglab.JugglingLab -> jugglinglab.JugglingLab:
     void <init>() -> <init>
     void main(java.lang.String[]) -> main
-jugglinglab.curve.Curve -> jugglinglab.a.a:
-    int numpoints -> a
-    double[] times -> b
-    jugglinglab.util.Coordinate[] positions -> c
-    jugglinglab.util.Coordinate[] velocities -> d
+jugglinglab.curve.Curve -> jugglinglab.curve.Curve:
+    int numpoints -> numpoints
+    double[] times -> times
+    jugglinglab.util.Coordinate[] positions -> positions
+    jugglinglab.util.Coordinate[] velocities -> velocities
     void <init>() -> <init>
-    void calcCurve() -> a
-    void getCoordinate(double,jugglinglab.util.Coordinate) -> a
-    jugglinglab.util.Coordinate getMax2(double,double) -> a
-    jugglinglab.util.Coordinate getMin2(double,double) -> b
-    void setCurve(double[],jugglinglab.util.Coordinate[],jugglinglab.util.Coordinate[]) -> a
-    double getStartTime() -> b
-    double getEndTime() -> c
-    jugglinglab.util.Coordinate getMax(double,double) -> c
-    jugglinglab.util.Coordinate getMin(double,double) -> d
-    jugglinglab.util.Coordinate check(jugglinglab.util.Coordinate,double,boolean) -> a
-jugglinglab.curve.SplineCurve -> jugglinglab.a.b:
-    int n -> e
-    double[][] a -> f
-    double[][] b -> g
-    double[][] c -> h
-    double[][] d -> i
+    void calcCurve() -> calcCurve
+    void getCoordinate(double,jugglinglab.util.Coordinate) -> getCoordinate
+    jugglinglab.util.Coordinate getMax2(double,double) -> getMax2
+    jugglinglab.util.Coordinate getMin2(double,double) -> getMin2
+    void setCurve(double[],jugglinglab.util.Coordinate[],jugglinglab.util.Coordinate[]) -> setCurve
+    double getStartTime() -> getStartTime
+    double getEndTime() -> getEndTime
+    jugglinglab.util.Coordinate getMax(double,double) -> getMax
+    jugglinglab.util.Coordinate getMin(double,double) -> getMin
+    jugglinglab.util.Coordinate check(jugglinglab.util.Coordinate,double,boolean) -> check
+jugglinglab.curve.SplineCurve -> jugglinglab.curve.SplineCurve:
+    int n -> n
+    double[][] a -> a
+    double[][] b -> b
+    double[][] c -> c
+    double[][] d -> d
     void <init>() -> <init>
-    void calcCurve() -> a
-    void tridag(double[],double[],double[],double[],double[],int) -> a
-    void getCoordinate(double,jugglinglab.util.Coordinate) -> a
-    jugglinglab.util.Coordinate getMax2(double,double) -> a
-    jugglinglab.util.Coordinate getMin2(double,double) -> b
-jugglinglab.jml.HandLink -> jugglinglab.b.a:
-    jugglinglab.jml.JMLEvent startevent -> a
-    jugglinglab.jml.JMLEvent endevent -> b
-    jugglinglab.jml.VelocityRef startvelref -> c
-    jugglinglab.jml.VelocityRef endvelref -> d
-    jugglinglab.curve.Curve hp -> e
+    void calcCurve() -> calcCurve
+    void findvels_edges_known(int,double[],jugglinglab.util.Coordinate[],jugglinglab.util.Coordinate[]) -> findvels_edges_known
+    void findvels_edges_unknown(int,double[],jugglinglab.util.Coordinate[],jugglinglab.util.Coordinate[]) -> findvels_edges_unknown
+    void tridag(double[],double[],double[],double[],double[],int) -> tridag
+    void getCoordinate(double,jugglinglab.util.Coordinate) -> getCoordinate
+    jugglinglab.util.Coordinate getMax2(double,double) -> getMax2
+    jugglinglab.util.Coordinate getMin2(double,double) -> getMin2
+jugglinglab.jml.EventImages -> jugglinglab.jml.EventImages:
+    jugglinglab.jml.JMLPattern pat -> pat
+    int numjugglers -> numjugglers
+    int numpaths -> numpaths
+    double looptime -> looptime
+    jugglinglab.util.Permutation loopperm -> loopperm
+    jugglinglab.jml.JMLEvent ev -> ev
+    int evjuggler -> evjuggler
+    int evhand -> evhand
+    int evtransitions -> evtransitions
+    double evtime -> evtime
+    jugglinglab.util.Permutation[][][] ea -> ea
+    int numentries -> numentries
+    int[] transitiontype -> transitiontype
+    int currentloop -> currentloop
+    int currentj -> currentj
+    int currenth -> currenth
+    int currententry -> currententry
+    void <init>(jugglinglab.jml.JMLPattern,jugglinglab.jml.JMLEvent) -> <init>
+    jugglinglab.jml.JMLEvent getNext() -> getNext
+    jugglinglab.jml.JMLEvent getPrevious() -> getPrevious
+    jugglinglab.jml.JMLEvent makeEvent() -> makeEvent
+    void resetPosition() -> resetPosition
+    boolean hasJMLTransitionForHand(int,int) -> hasJMLTransitionForHand
+    boolean hasVDJMLTransitionForHand(int,int) -> hasVDJMLTransitionForHand
+    boolean hasJMLTransitionForPath(int) -> hasJMLTransitionForPath
+    boolean hasVDJMLTransitionForPath(int) -> hasVDJMLTransitionForPath
+    void calcarray() -> calcarray
+jugglinglab.jml.HandLink -> jugglinglab.jml.HandLink:
+    int jugglernum -> jugglernum
+    int handnum -> handnum
+    jugglinglab.jml.JMLEvent startevent -> startevent
+    jugglinglab.jml.JMLEvent endevent -> endevent
+    jugglinglab.jml.VelocityRef startvelref -> startvelref
+    jugglinglab.jml.VelocityRef endvelref -> endvelref
+    jugglinglab.curve.Curve hp -> hp
+    boolean ismaster -> ismaster
+    jugglinglab.jml.HandLink[] duplicates -> duplicates
+    jugglinglab.jml.HandLink master -> master
     void <init>(int,int,jugglinglab.jml.JMLEvent,jugglinglab.jml.JMLEvent) -> <init>
-    int index(int) -> a
-    jugglinglab.jml.JMLEvent getStartEvent() -> a
-    jugglinglab.jml.JMLEvent getEndEvent() -> b
-    jugglinglab.jml.VelocityRef getStartVelocityRef() -> c
-    void setStartVelocityRef(jugglinglab.jml.VelocityRef) -> a
-    jugglinglab.jml.VelocityRef getEndVelocityRef() -> d
-    void setEndVelocityRef(jugglinglab.jml.VelocityRef) -> b
-    void setHandCurve(jugglinglab.curve.Curve) -> a
-    jugglinglab.curve.Curve getHandCurve() -> e
+    int index(int) -> index
+    jugglinglab.jml.JMLEvent getStartEvent() -> getStartEvent
+    jugglinglab.jml.JMLEvent getEndEvent() -> getEndEvent
+    jugglinglab.jml.VelocityRef getStartVelocityRef() -> getStartVelocityRef
+    void setStartVelocityRef(jugglinglab.jml.VelocityRef) -> setStartVelocityRef
+    jugglinglab.jml.VelocityRef getEndVelocityRef() -> getEndVelocityRef
+    void setEndVelocityRef(jugglinglab.jml.VelocityRef) -> setEndVelocityRef
+    void setHandCurve(jugglinglab.curve.Curve) -> setHandCurve
+    jugglinglab.curve.Curve getHandCurve() -> getHandCurve
     java.lang.String toString() -> toString
-jugglinglab.jml.JMLDefs -> jugglinglab.b.b:
+jugglinglab.jml.JMLDefs -> jugglinglab.jml.a:
     java.lang.String[] jmlprefix -> a
     java.lang.String[] jmlsuffix -> b
     void <clinit>() -> <clinit>
-jugglinglab.jml.JMLEvent -> jugglinglab.b.c:
-    double x -> d
-    double y -> e
-    double z -> f
-    double gx -> g
-    double gy -> h
-    double gz -> i
-    boolean globalvalid -> j
-    double t -> k
-    int juggler -> l
-    int hand -> m
-    java.util.ArrayList transitions -> n
-    int delay -> a
-    int delayunits -> b
-    jugglinglab.jml.JMLEvent master -> o
-    boolean calcpos -> c
-    jugglinglab.jml.JMLEvent prev -> p
-    jugglinglab.jml.JMLEvent next -> q
+jugglinglab.jml.JMLEvent -> jugglinglab.jml.JMLEvent:
+    double x -> x
+    double y -> y
+    double z -> z
+    double gx -> gx
+    double gy -> gy
+    double gz -> gz
+    boolean globalvalid -> globalvalid
+    double t -> t
+    int juggler -> juggler
+    int hand -> hand
+    java.util.ArrayList transitions -> transitions
+    int delay -> delay
+    int delayunits -> delayunits
+    jugglinglab.util.Permutation pathpermfrommaster -> pathpermfrommaster
+    jugglinglab.jml.JMLEvent master -> master
+    boolean calcpos -> calcpos
+    jugglinglab.jml.JMLEvent prev -> prev
+    jugglinglab.jml.JMLEvent next -> next
     void <init>() -> <init>
-    jugglinglab.util.Coordinate getLocalCoordinate() -> a
-    void setLocalCoordinate(jugglinglab.util.Coordinate) -> a
-    jugglinglab.util.Coordinate getGlobalCoordinate() -> b
-    void setGlobalCoordinate(jugglinglab.util.Coordinate) -> b
-    double getT() -> c
-    void setT(double) -> a
-    int getHand() -> d
-    void setHand(int,int) -> a
-    int getJuggler() -> e
-    int getNumberOfTransitions() -> f
-    jugglinglab.jml.JMLTransition getTransition(int) -> a
-    void addTransition(jugglinglab.jml.JMLTransition) -> a
-    boolean isMaster() -> g
-    jugglinglab.jml.JMLEvent getMaster() -> h
-    void setMaster(jugglinglab.jml.JMLEvent) -> a
-    jugglinglab.jml.JMLEvent getPrevious() -> i
-    void setPrevious(jugglinglab.jml.JMLEvent) -> b
-    jugglinglab.jml.JMLEvent getNext() -> j
-    void setNext(jugglinglab.jml.JMLEvent) -> c
-    boolean isDelayOf(jugglinglab.jml.JMLEvent) -> d
-    jugglinglab.jml.JMLTransition getPathTransition(int,int) -> b
-    jugglinglab.jml.JMLEvent duplicate(int,int) -> c
-    void writeJML(java.io.PrintWriter) -> a
+    jugglinglab.util.Coordinate getLocalCoordinate() -> getLocalCoordinate
+    void setLocalCoordinate(jugglinglab.util.Coordinate) -> setLocalCoordinate
+    jugglinglab.util.Coordinate getGlobalCoordinate() -> getGlobalCoordinate
+    void setGlobalCoordinate(jugglinglab.util.Coordinate) -> setGlobalCoordinate
+    double getT() -> getT
+    void setT(double) -> setT
+    int getHand() -> getHand
+    void setHand(int,int) -> setHand
+    int getJuggler() -> getJuggler
+    int getNumberOfTransitions() -> getNumberOfTransitions
+    jugglinglab.jml.JMLTransition getTransition(int) -> getTransition
+    void addTransition(jugglinglab.jml.JMLTransition) -> addTransition
+    boolean isMaster() -> isMaster
+    jugglinglab.jml.JMLEvent getMaster() -> getMaster
+    void setMaster(jugglinglab.jml.JMLEvent) -> setMaster
+    jugglinglab.jml.JMLEvent getPrevious() -> getPrevious
+    void setPrevious(jugglinglab.jml.JMLEvent) -> setPrevious
+    jugglinglab.jml.JMLEvent getNext() -> getNext
+    void setNext(jugglinglab.jml.JMLEvent) -> setNext
+    void setPathPermFromMaster(jugglinglab.util.Permutation) -> setPathPermFromMaster
+    boolean isDelayOf(jugglinglab.jml.JMLEvent) -> isDelayOf
+    jugglinglab.jml.JMLTransition getPathTransition(int,int) -> getPathTransition
+    jugglinglab.jml.JMLEvent duplicate(int,int) -> duplicate
+    void writeJML(java.io.PrintWriter) -> writeJML
     java.lang.String toString() -> toString
-jugglinglab.jml.JMLNode -> jugglinglab.b.d:
-    jugglinglab.jml.JMLPattern pat -> a
-    int numjugglers -> b
-    int numpaths -> c
-    double looptime -> d
-    jugglinglab.util.Permutation loopperm -> e
-    jugglinglab.jml.JMLEvent ev -> f
-    int evjuggler -> g
-    int evhand -> h
-    int evtransitions -> i
-    double evtime -> j
-    jugglinglab.util.Permutation[][][] ea -> k
-    int numentries -> l
-    int[] transitiontype -> m
-    int currentloop -> n
-    int currentj -> o
-    int currenth -> p
-    int currententry -> q
+jugglinglab.jml.JMLNode -> jugglinglab.jml.b:
     java.lang.String xmlescape(java.lang.String) -> a
-    void <init>(jugglinglab.jml.JMLPattern,jugglinglab.jml.JMLEvent) -> <init>
-    jugglinglab.jml.JMLEvent getNext() -> a
-    jugglinglab.jml.JMLEvent getPrevious() -> b
-    jugglinglab.jml.JMLEvent makeEvent() -> c
-    void resetPosition() -> d
-    boolean hasJMLTransitionForHand(int,int) -> a
-    boolean hasVDJMLTransitionForHand(int,int) -> b
-    boolean hasJMLTransitionForPath(int) -> a
-    boolean hasVDJMLTransitionForPath(int) -> b
-    void calcarray() -> e
-jugglinglab.jml.JMLPattern -> jugglinglab.b.e:
-    java.lang.String version -> a
-    java.lang.String title -> b
-    java.lang.String info -> c
-    java.util.ArrayList tags -> d
-    int numjugglers -> e
-    int numpaths -> f
-    java.util.ArrayList props -> g
-    int[] propassignment -> h
-    java.lang.String base_pattern_notation -> i
-    java.lang.String base_pattern_config -> j
-    boolean[] hasVDPathJMLTransition -> k
-    boolean[][] hasVDHandJMLTransition -> l
-    java.util.ArrayList symmetries -> m
-    jugglinglab.jml.JMLEvent eventlist -> n
-    jugglinglab.jml.JMLPosition positionlist -> o
-    java.util.ArrayList pathlinks -> p
-    java.util.ArrayList handlinks -> q
-    jugglinglab.curve.Curve[] jugglercurve -> r
-    jugglinglab.curve.Curve[] jugglerangle -> s
-    boolean laidout -> t
-    boolean valid -> u
+jugglinglab.jml.JMLPattern -> jugglinglab.jml.JMLPattern:
+    java.lang.String version -> version
+    java.lang.String title -> title
+    java.lang.String info -> info
+    java.util.ArrayList tags -> tags
+    int numjugglers -> numjugglers
+    int numpaths -> numpaths
+    java.util.ArrayList props -> props
+    int[] propassignment -> propassignment
+    java.lang.String base_pattern_notation -> base_pattern_notation
+    java.lang.String base_pattern_config -> base_pattern_config
+    boolean base_pattern_hashcode_valid -> base_pattern_hashcode_valid
+    boolean[] hasVDPathJMLTransition -> hasVDPathJMLTransition
+    boolean[][] hasVDHandJMLTransition -> hasVDHandJMLTransition
+    java.util.ArrayList symmetries -> symmetries
+    jugglinglab.jml.JMLEvent eventlist -> eventlist
+    jugglinglab.jml.JMLPosition positionlist -> positionlist
+    java.util.ArrayList pathlinks -> pathlinks
+    java.util.ArrayList handlinks -> handlinks
+    jugglinglab.curve.Curve[] jugglercurve -> jugglercurve
+    jugglinglab.curve.Curve[] jugglerangle -> jugglerangle
+    java.lang.String loadingversion -> loadingversion
+    boolean laidout -> laidout
+    boolean valid -> valid
     void <init>() -> <init>
-    void setTitle(java.lang.String) -> a
-    void setNumberOfJugglers(int) -> a
-    void setNumberOfPaths(int) -> b
-    void addProp(jugglinglab.jml.PropDef) -> a
-    void setPropAssignments(int[]) -> a
-    void addSymmetry(jugglinglab.jml.JMLSymmetry) -> a
-    void addEvent(jugglinglab.jml.JMLEvent) -> a
-    void removeEvent(jugglinglab.jml.JMLEvent) -> b
-    jugglinglab.jml.JMLEvent getEventList() -> a
-    void addPosition(jugglinglab.jml.JMLPosition) -> a
-    jugglinglab.jml.JMLPattern fromBasePattern(java.lang.String,java.lang.String) -> a
-    double scaleTimeToFitThrows(double) -> a
-    jugglinglab.jml.JMLPattern layoutPattern() -> b
-    void buildEventList() -> c
-    void layoutHandPaths() -> h
-    int getNumberOfJugglers() -> d
-    int getNumberOfPaths() -> e
-    int getPropAssignment(int) -> d
-    int getNumberOfSymmetries() -> f
-    jugglinglab.jml.JMLSymmetry getSymmetry(int) -> c
-    double getLoopEndTime() -> g
-    void getHandCoordinate(int,int,double,jugglinglab.util.Coordinate) -> a
-    void writeJML(java.io.Writer,boolean,boolean) -> a
+    void setTitle(java.lang.String) -> setTitle
+    void setNumberOfJugglers(int) -> setNumberOfJugglers
+    void setNumberOfPaths(int) -> setNumberOfPaths
+    void addProp(jugglinglab.jml.PropDef) -> addProp
+    void setPropAssignments(int[]) -> setPropAssignments
+    void addSymmetry(jugglinglab.jml.JMLSymmetry) -> addSymmetry
+    void addEvent(jugglinglab.jml.JMLEvent) -> addEvent
+    void removeEvent(jugglinglab.jml.JMLEvent) -> removeEvent
+    jugglinglab.jml.JMLEvent getEventList() -> getEventList
+    java.util.ArrayList getPathLinks() -> getPathLinks
+    void addPosition(jugglinglab.jml.JMLPosition) -> addPosition
+    jugglinglab.jml.JMLPosition getPositionList() -> getPositionList
+    jugglinglab.jml.JMLPattern fromBasePattern(java.lang.String,java.lang.String) -> fromBasePattern
+    void scaleTime(double) -> scaleTime
+    double scaleTimeToFitThrows(double) -> scaleTimeToFitThrows
+    jugglinglab.jml.JMLPattern layoutPattern() -> layoutPattern
+    void setNeedsLayout() -> setNeedsLayout
+    void buildEventList() -> buildEventList
+    void findMasterEvents() -> findMasterEvents
+    void findPositions() -> findPositions
+    void gotoGlobalCoordinates() -> gotoGlobalCoordinates
+    void buildLinkLists() -> buildLinkLists
+    void layoutHandPaths() -> layoutHandPaths
+    int getNumberOfJugglers() -> getNumberOfJugglers
+    int getNumberOfPaths() -> getNumberOfPaths
+    int getNumberOfProps() -> getNumberOfProps
+    int getPropAssignment(int) -> getPropAssignment
+    int getNumberOfSymmetries() -> getNumberOfSymmetries
+    jugglinglab.jml.JMLSymmetry getSymmetry(int) -> getSymmetry
+    double getLoopStartTime() -> getLoopStartTime
+    double getLoopEndTime() -> getLoopEndTime
+    void getJugglerPosition(int,double,jugglinglab.util.Coordinate) -> getJugglerPosition
+    double getJugglerAngle(int,double) -> getJugglerAngle
+    jugglinglab.util.Coordinate convertLocalToGlobal(jugglinglab.util.Coordinate,int,double) -> convertLocalToGlobal
+    void getHandCoordinate(int,int,double,jugglinglab.util.Coordinate) -> getHandCoordinate
+    jugglinglab.util.Permutation getPathPermutation() -> getPathPermutation
+    void writeJML(java.io.Writer,boolean,boolean) -> writeJML
     java.lang.String toString() -> toString
-jugglinglab.jml.JMLPosition -> jugglinglab.b.f:
+jugglinglab.jml.JMLPosition -> jugglinglab.jml.c:
     double x -> a
     double y -> b
     double z -> c
@@ -206,63 +235,81 @@ jugglinglab.jml.JMLPosition -> jugglinglab.b.f:
     void setPrevious(jugglinglab.jml.JMLPosition) -> a
     jugglinglab.jml.JMLPosition getNext() -> f
     void setNext(jugglinglab.jml.JMLPosition) -> b
-jugglinglab.jml.JMLSymmetry -> jugglinglab.b.g:
-    int type -> a
-    int numjugglers -> e
-    int numpaths -> f
-    jugglinglab.util.Permutation jugglerperm -> b
-    jugglinglab.util.Permutation pathperm -> c
-    double delay -> d
+jugglinglab.jml.JMLSymmetry -> jugglinglab.jml.JMLSymmetry:
+    int type -> type
+    int numjugglers -> numjugglers
+    int numpaths -> numpaths
+    jugglinglab.util.Permutation jugglerperm -> jugglerperm
+    jugglinglab.util.Permutation pathperm -> pathperm
+    double delay -> delay
     void <init>() -> <init>
     void <init>(int,int,java.lang.String,int,java.lang.String,double) -> <init>
-    jugglinglab.util.Permutation getPathPerm() -> a
-jugglinglab.jml.JMLTransition -> jugglinglab.b.h:
-    int path -> a
-    java.lang.String type -> b
-    java.lang.String mod -> c
-    jugglinglab.jml.PathLink ipl -> d
-    jugglinglab.jml.PathLink opl -> e
-    int transitiontype -> f
+    int getType() -> getType
+    void setType(int) -> setType
+    jugglinglab.util.Permutation getJugglerPerm() -> getJugglerPerm
+    void setJugglerPerm(int,java.lang.String) -> setJugglerPerm
+    jugglinglab.util.Permutation getPathPerm() -> getPathPerm
+    void setPathPerm(int,java.lang.String) -> setPathPerm
+    double getDelay() -> getDelay
+    void setDelay(double) -> setDelay
+    void writeJML(java.io.PrintWriter) -> writeJML
+jugglinglab.jml.JMLTransition -> jugglinglab.jml.JMLTransition:
+    int path -> path
+    java.lang.String type -> type
+    java.lang.String mod -> mod
+    jugglinglab.jml.PathLink ipl -> ipl
+    jugglinglab.jml.PathLink opl -> opl
+    int transitiontype -> transitiontype
     void <init>(int,int,java.lang.String,java.lang.String) -> <init>
-    int getType() -> a
-    int getPath() -> b
-    void setPath(int) -> a
-    java.lang.String getThrowType() -> c
-    java.lang.String getMod() -> d
-    void setIncomingPathLink(jugglinglab.jml.PathLink) -> a
-    jugglinglab.jml.PathLink getIncomingPathLink() -> e
-    void setOutgoingPathLink(jugglinglab.jml.PathLink) -> b
-    jugglinglab.jml.PathLink getOutgoingPathLink() -> f
-    jugglinglab.jml.JMLTransition duplicate() -> g
-jugglinglab.jml.PathLink -> jugglinglab.b.i:
-    jugglinglab.jml.JMLEvent startevent -> a
-    jugglinglab.jml.JMLEvent endevent -> b
-    java.lang.String throwtype -> c
-    java.lang.String mod -> d
-    jugglinglab.path.Path proppath -> e
-    boolean inhand -> f
+    int getType() -> getType
+    int getPath() -> getPath
+    void setPath(int) -> setPath
+    java.lang.String getThrowType() -> getThrowType
+    java.lang.String getMod() -> getMod
+    void setIncomingPathLink(jugglinglab.jml.PathLink) -> setIncomingPathLink
+    jugglinglab.jml.PathLink getIncomingPathLink() -> getIncomingPathLink
+    void setOutgoingPathLink(jugglinglab.jml.PathLink) -> setOutgoingPathLink
+    jugglinglab.jml.PathLink getOutgoingPathLink() -> getOutgoingPathLink
+    jugglinglab.jml.JMLTransition duplicate() -> duplicate
+    void writeJML(java.io.PrintWriter) -> writeJML
+jugglinglab.jml.PathLink -> jugglinglab.jml.PathLink:
+    int pathnum -> pathnum
+    jugglinglab.jml.JMLEvent startevent -> startevent
+    jugglinglab.jml.JMLEvent endevent -> endevent
+    java.lang.String throwtype -> throwtype
+    java.lang.String mod -> mod
+    jugglinglab.path.Path proppath -> proppath
+    boolean inhand -> inhand
+    int juggler -> juggler
+    int hand -> hand
     void <init>(int,jugglinglab.jml.JMLEvent,jugglinglab.jml.JMLEvent) -> <init>
-    void setThrow(java.lang.String,java.lang.String) -> a
-    void setInHand(int,int) -> a
-    jugglinglab.path.Path getPath() -> a
+    void setThrow(java.lang.String,java.lang.String) -> setThrow
+    void setInHand(int,int) -> setInHand
+    jugglinglab.path.Path getPath() -> getPath
     java.lang.String toString() -> toString
-jugglinglab.jml.PropDef -> jugglinglab.b.j:
-    java.lang.String proptype -> a
-    java.lang.String mod -> b
-    jugglinglab.prop.Prop prop -> c
+jugglinglab.jml.PropDef -> jugglinglab.jml.PropDef:
+    java.lang.String proptype -> proptype
+    java.lang.String mod -> mod
+    jugglinglab.prop.Prop prop -> prop
     void <init>() -> <init>
     void <init>(java.lang.String,java.lang.String) -> <init>
-jugglinglab.jml.VelocityRef -> jugglinglab.b.k:
-    int VR_THROW -> a
-    int VR_CATCH -> b
-    int VR_SOFTCATCH -> c
-    jugglinglab.path.Path pp -> d
-    int src -> e
+    java.lang.String getType() -> getType
+    void setType(java.lang.String) -> setType
+    java.lang.String getMod() -> getMod
+    void setMod(java.lang.String) -> setMod
+    void layoutProp() -> layoutProp
+    void writeJML(java.io.PrintWriter) -> writeJML
+jugglinglab.jml.VelocityRef -> jugglinglab.jml.VelocityRef:
+    int VR_THROW -> VR_THROW
+    int VR_CATCH -> VR_CATCH
+    int VR_SOFTCATCH -> VR_SOFTCATCH
+    jugglinglab.path.Path pp -> pp
+    int src -> src
     void <init>(jugglinglab.path.Path,int) -> <init>
-    jugglinglab.util.Coordinate getVelocity() -> a
-    int getSource() -> b
+    jugglinglab.util.Coordinate getVelocity() -> getVelocity
+    int getSource() -> getSource
     void <clinit>() -> <clinit>
-jugglinglab.notation.MHNBody -> jugglinglab.c.a:
+jugglinglab.notation.MHNBody -> jugglinglab.notation.a:
     int jugglers -> a
     int[] size -> b
     int[][] coords -> c
@@ -272,7 +319,7 @@ jugglinglab.notation.MHNBody -> jugglinglab.c.a:
     int getPeriod(int) -> a
     int getNumberOfPositions(int,int) -> a
     jugglinglab.jml.JMLPosition getPosition(int,int,int) -> a
-jugglinglab.notation.MHNHands -> jugglinglab.c.b:
+jugglinglab.notation.MHNHands -> jugglinglab.notation.b:
     int jugglers -> a
     int[] size -> b
     int[][] coords -> c
@@ -283,508 +330,586 @@ jugglinglab.notation.MHNHands -> jugglinglab.c.b:
     int getNumberOfCoordinates(int,int) -> a
     int getCatchIndex(int,int) -> b
     jugglinglab.util.Coordinate getCoordinate(int,int,int) -> a
-jugglinglab.notation.MHNPattern -> jugglinglab.c.c:
-    double bps_default -> l
-    double dwell_default -> m
-    double gravity_default -> n
-    double propdiam_default -> o
-    double bouncefrac_default -> p
-    double squeezebeats_default -> q
-    java.lang.String prop_default -> r
-    boolean hold_default -> s
-    boolean dwellmax_default -> t
-    java.lang.String config -> u
-    java.lang.String pattern -> a
-    double bps_set -> v
-    double dwell -> w
-    double gravity -> x
-    double propdiam -> y
-    double bouncefrac -> z
-    double squeezebeats -> A
-    java.lang.String prop -> B
-    java.lang.String[] color -> C
-    java.lang.String title -> D
-    java.lang.String hss -> E
-    double[] dwellarray -> F
-    int numjugglers -> b
-    int numpaths -> c
-    int period -> d
-    int max_occupancy -> e
-    jugglinglab.util.JLFunc[][][][] th$62aa3faa -> f
-    jugglinglab.notation.MHNHands hands -> g
-    jugglinglab.notation.MHNBody bodies -> h
-    int max_throw -> i
-    int indexes -> j
-    java.util.ArrayList symmetry -> k
-    double bps -> G
-    double[] samethrowx -> H
-    double[] crossingthrowx -> I
-    double[] catchx -> J
-    double BEATS_ONE_THROW_EARLY -> K
-    double BEATS_AIRTIME_MIN -> L
-    double BEATS_THROW_CATCH_MIN -> M
-    double BEATS_CATCH_THROW_MIN -> N
-    double SECS_EVENT_GAP_MAX -> O
-    double[] throwspersec -> P
+jugglinglab.notation.MHNPattern -> jugglinglab.notation.MHNPattern:
+    double bps_default -> bps_default
+    double dwell_default -> dwell_default
+    double gravity_default -> gravity_default
+    double propdiam_default -> propdiam_default
+    double bouncefrac_default -> bouncefrac_default
+    double squeezebeats_default -> squeezebeats_default
+    java.lang.String prop_default -> prop_default
+    boolean hold_default -> hold_default
+    boolean dwellmax_default -> dwellmax_default
+    java.lang.String config -> config
+    java.lang.String pattern -> pattern
+    double bps_set -> bps_set
+    double dwell -> dwell
+    double gravity -> gravity
+    double propdiam -> propdiam
+    double bouncefrac -> bouncefrac
+    double squeezebeats -> squeezebeats
+    java.lang.String prop -> prop
+    java.lang.String[] color -> color
+    java.lang.String title -> title
+    java.lang.String hss -> hss
+    boolean hold -> hold
+    boolean dwellmax -> dwellmax
+    java.lang.String handspec -> handspec
+    double[] dwellarray -> dwellarray
+    int numjugglers -> numjugglers
+    int numpaths -> numpaths
+    int period -> period
+    int max_occupancy -> max_occupancy
+    jugglinglab.notation.MHNThrow[][][][] th -> th
+    jugglinglab.notation.MHNHands hands -> hands
+    jugglinglab.notation.MHNBody bodies -> bodies
+    int max_throw -> max_throw
+    int indexes -> indexes
+    java.util.ArrayList symmetry -> symmetry
+    double bps -> bps
+    double[] samethrowx -> samethrowx
+    double[] crossingthrowx -> crossingthrowx
+    double[] catchx -> catchx
+    double BEATS_ONE_THROW_EARLY -> BEATS_ONE_THROW_EARLY
+    double BEATS_AIRTIME_MIN -> BEATS_AIRTIME_MIN
+    double BEATS_THROW_CATCH_MIN -> BEATS_THROW_CATCH_MIN
+    double BEATS_CATCH_THROW_MIN -> BEATS_CATCH_THROW_MIN
+    double SECS_EVENT_GAP_MAX -> SECS_EVENT_GAP_MAX
+    double[] throwspersec -> throwspersec
     void <init>() -> <init>
-    int getNumberOfJugglers() -> a
-    int getPeriod() -> b
-    void addSymmetry(jugglinglab.notation.MHNSymmetry) -> a
-    jugglinglab.notation.MHNSymmetry getSymmetry(int) -> a
-    jugglinglab.notation.MHNPattern fromParameters(jugglinglab.util.ParameterList) -> a
+    int getNumberOfJugglers() -> getNumberOfJugglers
+    int getNumberOfPaths() -> getNumberOfPaths
+    int getPeriod() -> getPeriod
+    int getIndexes() -> getIndexes
+    int getMaxOccupancy() -> getMaxOccupancy
+    jugglinglab.notation.MHNThrow[][][][] getThrows() -> getThrows
+    int getNumberOfSymmetries() -> getNumberOfSymmetries
+    java.lang.String getPropName() -> getPropName
+    void addSymmetry(jugglinglab.notation.MHNSymmetry) -> addSymmetry
+    jugglinglab.notation.MHNSymmetry getSymmetry(int) -> getSymmetry
+    jugglinglab.notation.MHNPattern fromParameters(jugglinglab.util.ParameterList) -> fromParameters
     java.lang.String toString() -> toString
-    void buildJugglingMatrix() -> c
-    boolean isCatchOrderIncorrect$56a8c839(jugglinglab.util.JLFunc,jugglinglab.util.JLFunc) -> a
-    jugglinglab.jml.JMLPattern asJMLPattern() -> d
-    void addSymmetriesToJML(jugglinglab.jml.JMLPattern) -> a
-    void findCatchThrowTimes() -> f
-    void addPrimaryEventsToJML(jugglinglab.jml.JMLPattern,boolean[][],boolean[]) -> a
-    void addJugglerPositionsToJML(jugglinglab.jml.JMLPattern) -> b
-    void addEventsForUntouchedHandsToJML(jugglinglab.jml.JMLPattern,boolean[][]) -> a
-    void addEventsForUntouchedPathsToJML(jugglinglab.jml.JMLPattern,boolean[]) -> a
-    void addEventsForGapsToJML(jugglinglab.jml.JMLPattern) -> c
-    void addLocationsForIncompleteEventsToJML(jugglinglab.jml.JMLPattern) -> d
-    void addMissingHoldsToJML(jugglinglab.jml.JMLPattern) -> e
+    void buildJugglingMatrix() -> buildJugglingMatrix
+    void findMasterThrows() -> findMasterThrows
+    void assignPaths() -> assignPaths
+    void addThrowSources() -> addThrowSources
+    void setCatchOrder() -> setCatchOrder
+    boolean isCatchOrderIncorrect(jugglinglab.notation.MHNThrow,jugglinglab.notation.MHNThrow) -> isCatchOrderIncorrect
+    void findDwellWindows() -> findDwellWindows
+    jugglinglab.jml.JMLPattern asJMLPattern() -> asJMLPattern
+    double calcBps() -> calcBps
+    void addPropsToJML(jugglinglab.jml.JMLPattern) -> addPropsToJML
+    void addSymmetriesToJML(jugglinglab.jml.JMLPattern) -> addSymmetriesToJML
+    void findCatchThrowTimes() -> findCatchThrowTimes
+    void addPrimaryEventsToJML(jugglinglab.jml.JMLPattern,boolean[][],boolean[]) -> addPrimaryEventsToJML
+    void addJugglerPositionsToJML(jugglinglab.jml.JMLPattern) -> addJugglerPositionsToJML
+    void addEventsForUntouchedHandsToJML(jugglinglab.jml.JMLPattern,boolean[][]) -> addEventsForUntouchedHandsToJML
+    void addEventsForUntouchedPathsToJML(jugglinglab.jml.JMLPattern,boolean[]) -> addEventsForUntouchedPathsToJML
+    void addEventsForGapsToJML(jugglinglab.jml.JMLPattern) -> addEventsForGapsToJML
+    void addLocationsForIncompleteEventsToJML(jugglinglab.jml.JMLPattern) -> addLocationsForIncompleteEventsToJML
+    void addMissingHoldsToJML(jugglinglab.jml.JMLPattern) -> addMissingHoldsToJML
     void <clinit>() -> <clinit>
-jugglinglab.notation.MHNSymmetry -> jugglinglab.c.d:
-    int type -> a
-    int numjugglers -> b
-    jugglinglab.util.Permutation jugglerperm -> c
-    int delay -> d
+jugglinglab.notation.MHNSymmetry -> jugglinglab.notation.MHNSymmetry:
+    int type -> type
+    int numjugglers -> numjugglers
+    jugglinglab.util.Permutation jugglerperm -> jugglerperm
+    int delay -> delay
     void <init>(int,int,java.lang.String,int) -> <init>
-jugglinglab.notation.Pattern -> jugglinglab.c.e:
+    int getType() -> getType
+    void setType(int) -> setType
+    int getNumberOfJugglers() -> getNumberOfJugglers
+    jugglinglab.util.Permutation getJugglerPerm() -> getJugglerPerm
+    void setJugglerPerm(int,java.lang.String) -> setJugglerPerm
+    int getDelay() -> getDelay
+    void setDelay(int) -> setDelay
+jugglinglab.notation.MHNThrow -> jugglinglab.notation.MHNThrow:
+    int juggler -> juggler
+    int hand -> hand
+    int index -> index
+    int slot -> slot
+    int targetjuggler -> targetjuggler
+    int targethand -> targethand
+    int targetindex -> targetindex
+    int targetslot -> targetslot
+    java.lang.String mod -> mod
+    jugglinglab.notation.MHNThrow master -> master
+    jugglinglab.notation.MHNThrow source -> source
+    jugglinglab.notation.MHNThrow target -> target
+    int pathnum -> pathnum
+    boolean catching -> catching
+    int catchnum -> catchnum
+    int dwellwindow -> dwellwindow
+    double throwtime -> throwtime
+    double catchtime -> catchtime
+    int handsindex -> handsindex
     void <init>() -> <init>
-    jugglinglab.notation.Pattern newPattern(java.lang.String) -> a
-    java.lang.String getNotationName() -> e
-    jugglinglab.notation.Pattern fromString(java.lang.String) -> b
+    void <init>(int,int,int,int,int,int,int,int,java.lang.String) -> <init>
     java.lang.String toString() -> toString
-    jugglinglab.jml.JMLPattern asJMLPattern() -> d
-    void <clinit>() -> <clinit>
-jugglinglab.notation.SiteswapPattern -> jugglinglab.c.f:
-    boolean oddperiod -> l
-    boolean[] right_on_even -> m
+    boolean isZero() -> isZero
+    int throwValue() -> throwValue
+    boolean isThrownOne() -> isThrownOne
+jugglinglab.notation.Pattern -> jugglinglab.notation.Pattern:
+    java.lang.String[] builtinNotations -> builtinNotations
     void <init>() -> <init>
-    java.lang.String getNotationName() -> e
-    jugglinglab.notation.SiteswapPattern fromString(java.lang.String) -> c
-    jugglinglab.notation.SiteswapPattern fromParameters(jugglinglab.util.ParameterList) -> b
-    void parseSiteswapNotation() -> f
-    void doFirstPass(jugglinglab.notation.ssparser.SiteswapTreeItem) -> a
-    void doSecondPass(jugglinglab.notation.ssparser.SiteswapTreeItem,boolean,int) -> a
-    void resolveModifiers() -> g
-    jugglinglab.notation.MHNPattern fromParameters(jugglinglab.util.ParameterList) -> a
-    jugglinglab.notation.Pattern fromString(java.lang.String) -> b
-jugglinglab.notation.ssparser.ParseException -> jugglinglab.c.a.a:
+    jugglinglab.notation.Pattern newPattern(java.lang.String) -> newPattern
+    java.lang.String getNotationName() -> getNotationName
+    jugglinglab.notation.Pattern fromString(java.lang.String) -> fromString
+    java.lang.String toString() -> toString
+    jugglinglab.jml.JMLPattern asJMLPattern() -> asJMLPattern
+    void <clinit>() -> <clinit>
+jugglinglab.notation.SiteswapPattern -> jugglinglab.notation.SiteswapPattern:
+    boolean oddperiod -> oddperiod
+    boolean has_hands_specifier -> has_hands_specifier
+    boolean[] right_on_even -> right_on_even
+    void <init>() -> <init>
+    java.lang.String getNotationName() -> getNotationName
+    jugglinglab.notation.SiteswapPattern fromString(java.lang.String) -> fromString
+    jugglinglab.notation.SiteswapPattern fromParameters(jugglinglab.util.ParameterList) -> fromParameters
+    int getNorepPeriod() -> getNorepPeriod
+    void parseSiteswapNotation() -> parseSiteswapNotation
+    void doFirstPass(jugglinglab.notation.ssparser.SiteswapTreeItem) -> doFirstPass
+    void doSecondPass(jugglinglab.notation.ssparser.SiteswapTreeItem,boolean,int) -> doSecondPass
+    void resolveModifiers() -> resolveModifiers
+    jugglinglab.notation.MHNPattern fromParameters(jugglinglab.util.ParameterList) -> fromParameters
+    jugglinglab.notation.Pattern fromString(java.lang.String) -> fromString
+jugglinglab.notation.ssparser.ParseException -> jugglinglab.notation.ssparser.a:
     jugglinglab.notation.ssparser.Token currentToken -> a
     void <init>(jugglinglab.notation.ssparser.Token,int[][],java.lang.String[]) -> <init>
     void <init>() -> <init>
     void <init>(java.lang.String) -> <init>
     java.lang.String initialise(jugglinglab.notation.ssparser.Token,int[][],java.lang.String[]) -> a
     java.lang.String add_escapes(java.lang.String) -> a
-jugglinglab.notation.ssparser.SiteswapParser -> jugglinglab.c.a.b:
-    int jugglers -> b
-    int current_juggler -> c
-    int current_beat -> d
-    int current_beat_sub -> e
-    jugglinglab.notation.ssparser.SiteswapParserTokenManager token_source -> f
-    jugglinglab.notation.ssparser.SiteswapParser$1 jj_input_stream$288a5ba1 -> g
-    jugglinglab.notation.ssparser.Token token -> h
-    jugglinglab.notation.ssparser.Token jj_nt -> i
-    int jj_ntk -> j
-    jugglinglab.notation.ssparser.Token jj_scanpos -> k
-    jugglinglab.notation.ssparser.Token jj_lastpos -> l
-    int jj_la -> m
-    int jj_gen -> n
-    int[] jj_la1 -> o
-    int[] jj_la1_0 -> p
-    jugglinglab.notation.ssparser.SiteswapParser$JJCalls[] jj_2_rtns -> q
-    boolean jj_rescan -> r
-    int jj_gc -> s
-    jugglinglab.notation.ssparser.SiteswapParser$LookaheadSuccess jj_ls -> t
-    java.util.List jj_expentries -> u
-    int[] jj_expentry -> v
-    int jj_kind -> w
-    int[] jj_lasttokens -> x
-    int jj_endpos -> y
-    jugglinglab.notation.ssparser.SiteswapTreeItem parsePattern(java.lang.String) -> a
-    jugglinglab.notation.ssparser.SiteswapTreeItem Pattern() -> a
-    jugglinglab.notation.ssparser.SiteswapTreeItem GroupedPattern() -> b
-    jugglinglab.notation.ssparser.SiteswapTreeItem SoloSequence() -> c
-    jugglinglab.notation.ssparser.SiteswapTreeItem SoloPairedThrow() -> d
-    jugglinglab.notation.ssparser.SiteswapTreeItem SoloMultiThrow() -> e
-    jugglinglab.notation.ssparser.SiteswapTreeItem SoloSingleThrow() -> f
-    jugglinglab.notation.ssparser.SiteswapTreeItem SoloHandSpecifier() -> g
-    jugglinglab.notation.ssparser.SiteswapTreeItem PassingSequence() -> h
-    jugglinglab.notation.ssparser.SiteswapTreeItem PassingGroup() -> i
-    jugglinglab.notation.ssparser.SiteswapTreeItem PassingThrows() -> j
-    jugglinglab.notation.ssparser.SiteswapTreeItem PassingPairedThrow() -> k
-    jugglinglab.notation.ssparser.SiteswapTreeItem PassingMultiThrow() -> l
-    jugglinglab.notation.ssparser.SiteswapTreeItem PassingSingleThrow() -> m
-    jugglinglab.notation.ssparser.SiteswapTreeItem PassingHandSpecifier() -> n
-    int Number() -> o
-    int Wildcard() -> p
-    java.lang.String Modifier() -> q
-    boolean jj_2_1(int) -> a
-    boolean jj_2_2(int) -> b
-    boolean jj_2_3(int) -> c
-    boolean jj_3R_84() -> r
-    boolean jj_3R_14() -> s
-    boolean jj_3_2() -> t
-    boolean jj_3R_68() -> u
-    boolean jj_3R_79() -> v
-    boolean jj_3R_71() -> w
-    boolean jj_3R_13() -> x
-    boolean jj_3R_70() -> y
-    boolean jj_3_1() -> z
-    boolean jj_3R_44() -> A
-    boolean jj_3R_43() -> B
-    boolean jj_3R_42() -> C
-    boolean jj_3R_76() -> D
-    boolean jj_3R_45() -> E
-    boolean jj_3R_41() -> F
-    boolean jj_3R_69() -> G
-    boolean jj_3R_30() -> H
-    boolean jj_3R_28() -> I
-    boolean jj_3R_40() -> J
-    boolean jj_3R_39() -> K
-    boolean jj_3R_35() -> L
-    boolean jj_3R_27() -> M
-    boolean jj_3R_34() -> N
-    boolean jj_3R_24() -> O
-    boolean jj_3R_49() -> P
-    boolean jj_3R_51() -> Q
-    boolean jj_3R_46() -> R
-    boolean jj_3R_48() -> S
-    boolean jj_3R_50() -> T
-    boolean jj_3R_38() -> U
-    boolean jj_3R_47() -> V
-    boolean jj_3R_33() -> W
-    boolean jj_3R_19() -> X
-    boolean jj_3R_37() -> Y
-    boolean jj_3R_36() -> Z
-    boolean jj_3R_32() -> aa
-    boolean jj_3R_31() -> ab
-    boolean jj_3R_25() -> ac
-    boolean jj_3R_16() -> ad
-    boolean jj_3R_22() -> ae
-    boolean jj_3R_18() -> af
-    boolean jj_3R_26() -> ag
-    boolean jj_3R_15() -> ah
-    boolean jj_3R_23() -> ai
-    boolean jj_3R_17() -> aj
-    boolean jj_3_3() -> ak
-    void <init>(java.io.Reader) -> <init>
-    jugglinglab.notation.ssparser.Token jj_consume_token(int) -> d
-    boolean jj_scan_token(int) -> e
-    int jj_ntk() -> al
-    void jj_add_error_token(int,int) -> a
-    jugglinglab.notation.ssparser.ParseException generateParseException() -> am
-    void jj_rescan_token() -> an
-    void jj_save(int,int) -> b
-    void <clinit>() -> <clinit>
-jugglinglab.notation.ssparser.SiteswapParser$1 -> jugglinglab.c.a.c:
-    int bufsize -> a
-    int available -> b
-    int tokenBegin -> c
-    int bufpos -> d
-    int[] bufline -> e
-    int[] bufcolumn -> f
-    int column -> g
-    int line -> h
-    boolean prevCharIsCR -> i
-    boolean prevCharIsLF -> j
-    java.io.Reader inputStream -> k
-    char[] buffer -> l
-    int maxNextCharInd -> m
-    int inBuf -> n
-    int tabSize -> o
-    void ExpandBuff(boolean) -> a
-    void FillBuff() -> a
-    char BeginToken() -> b
-    void UpdateLineColumn(char) -> a
-    char readChar() -> c
-    int getEndColumn() -> d
-    int getEndLine() -> e
-    int getBeginColumn() -> f
-    int getBeginLine() -> g
-    void backup(int) -> a
+jugglinglab.notation.ssparser.SimpleCharStream -> jugglinglab.notation.ssparser.SimpleCharStream:
+    int bufsize -> bufsize
+    int available -> available
+    int tokenBegin -> tokenBegin
+    int bufpos -> bufpos
+    int[] bufline -> bufline
+    int[] bufcolumn -> bufcolumn
+    int column -> column
+    int line -> line
+    boolean prevCharIsCR -> prevCharIsCR
+    boolean prevCharIsLF -> prevCharIsLF
+    java.io.Reader inputStream -> inputStream
+    char[] buffer -> buffer
+    int maxNextCharInd -> maxNextCharInd
+    int inBuf -> inBuf
+    int tabSize -> tabSize
+    void ExpandBuff(boolean) -> ExpandBuff
+    void FillBuff() -> FillBuff
+    char BeginToken() -> BeginToken
+    void UpdateLineColumn(char) -> UpdateLineColumn
+    char readChar() -> readChar
+    int getEndColumn() -> getEndColumn
+    int getEndLine() -> getEndLine
+    int getBeginColumn() -> getBeginColumn
+    int getBeginLine() -> getBeginLine
+    void backup(int) -> backup
     void <init>(java.io.Reader,int,int,int) -> <init>
     void <init>(java.io.Reader,int,int) -> <init>
-    java.lang.String GetImage() -> h
-jugglinglab.notation.ssparser.SiteswapParser$JJCalls -> jugglinglab.c.a.d:
-    int gen -> a
-    jugglinglab.notation.ssparser.Token first -> b
-    int arg -> c
-    jugglinglab.notation.ssparser.SiteswapParser$JJCalls next -> d
+    java.lang.String GetImage() -> GetImage
+jugglinglab.notation.ssparser.SiteswapParser -> jugglinglab.notation.ssparser.SiteswapParser:
+    int jugglers -> jugglers
+    int current_juggler -> current_juggler
+    int current_beat -> current_beat
+    int current_beat_sub -> current_beat_sub
+    jugglinglab.notation.ssparser.SiteswapParserTokenManager token_source -> token_source
+    jugglinglab.notation.ssparser.SimpleCharStream jj_input_stream -> jj_input_stream
+    jugglinglab.notation.ssparser.Token token -> token
+    jugglinglab.notation.ssparser.Token jj_nt -> jj_nt
+    int jj_ntk -> jj_ntk
+    jugglinglab.notation.ssparser.Token jj_scanpos -> jj_scanpos
+    jugglinglab.notation.ssparser.Token jj_lastpos -> jj_lastpos
+    int jj_la -> jj_la
+    int jj_gen -> jj_gen
+    int[] jj_la1 -> jj_la1
+    int[] jj_la1_0 -> jj_la1_0
+    jugglinglab.notation.ssparser.SiteswapParser$JJCalls[] jj_2_rtns -> jj_2_rtns
+    boolean jj_rescan -> jj_rescan
+    int jj_gc -> jj_gc
+    jugglinglab.notation.ssparser.SiteswapParser$LookaheadSuccess jj_ls -> jj_ls
+    java.util.List jj_expentries -> jj_expentries
+    int[] jj_expentry -> jj_expentry
+    int jj_kind -> jj_kind
+    int[] jj_lasttokens -> jj_lasttokens
+    int jj_endpos -> jj_endpos
+    jugglinglab.notation.ssparser.SiteswapTreeItem parsePattern(java.lang.String) -> parsePattern
+    jugglinglab.notation.ssparser.SiteswapTreeItem MakeTree() -> MakeTree
+    jugglinglab.notation.ssparser.SiteswapTreeItem Pattern() -> Pattern
+    jugglinglab.notation.ssparser.SiteswapTreeItem GroupedPattern() -> GroupedPattern
+    jugglinglab.notation.ssparser.SiteswapTreeItem SoloSequence() -> SoloSequence
+    jugglinglab.notation.ssparser.SiteswapTreeItem SoloPairedThrow() -> SoloPairedThrow
+    jugglinglab.notation.ssparser.SiteswapTreeItem SoloMultiThrow() -> SoloMultiThrow
+    jugglinglab.notation.ssparser.SiteswapTreeItem SoloSingleThrow() -> SoloSingleThrow
+    jugglinglab.notation.ssparser.SiteswapTreeItem SoloHandSpecifier() -> SoloHandSpecifier
+    jugglinglab.notation.ssparser.SiteswapTreeItem PassingSequence() -> PassingSequence
+    jugglinglab.notation.ssparser.SiteswapTreeItem PassingGroup() -> PassingGroup
+    jugglinglab.notation.ssparser.SiteswapTreeItem PassingThrows() -> PassingThrows
+    jugglinglab.notation.ssparser.SiteswapTreeItem PassingPairedThrow() -> PassingPairedThrow
+    jugglinglab.notation.ssparser.SiteswapTreeItem PassingMultiThrow() -> PassingMultiThrow
+    jugglinglab.notation.ssparser.SiteswapTreeItem PassingSingleThrow() -> PassingSingleThrow
+    jugglinglab.notation.ssparser.SiteswapTreeItem PassingHandSpecifier() -> PassingHandSpecifier
+    int Number() -> Number
+    int Wildcard() -> Wildcard
+    java.lang.String Modifier() -> Modifier
+    boolean jj_2_1(int) -> jj_2_1
+    boolean jj_2_2(int) -> jj_2_2
+    boolean jj_2_3(int) -> jj_2_3
+    boolean jj_3R_74() -> jj_3R_74
+    boolean jj_3R_84() -> jj_3R_84
+    boolean jj_3R_14() -> jj_3R_14
+    boolean jj_3_2() -> jj_3_2
+    boolean jj_3R_73() -> jj_3R_73
+    boolean jj_3R_68() -> jj_3R_68
+    boolean jj_3R_79() -> jj_3R_79
+    boolean jj_3R_83() -> jj_3R_83
+    boolean jj_3R_82() -> jj_3R_82
+    boolean jj_3R_81() -> jj_3R_81
+    boolean jj_3R_77() -> jj_3R_77
+    boolean jj_3R_52() -> jj_3R_52
+    boolean jj_3R_80() -> jj_3R_80
+    boolean jj_3R_71() -> jj_3R_71
+    boolean jj_3R_21() -> jj_3R_21
+    boolean jj_3R_13() -> jj_3R_13
+    boolean jj_3R_70() -> jj_3R_70
+    boolean jj_3_1() -> jj_3_1
+    boolean jj_3R_54() -> jj_3R_54
+    boolean jj_3R_44() -> jj_3R_44
+    boolean jj_3R_43() -> jj_3R_43
+    boolean jj_3R_42() -> jj_3R_42
+    boolean jj_3R_76() -> jj_3R_76
+    boolean jj_3R_45() -> jj_3R_45
+    boolean jj_3R_41() -> jj_3R_41
+    boolean jj_3R_29() -> jj_3R_29
+    boolean jj_3R_69() -> jj_3R_69
+    boolean jj_3R_30() -> jj_3R_30
+    boolean jj_3R_28() -> jj_3R_28
+    boolean jj_3R_40() -> jj_3R_40
+    boolean jj_3R_39() -> jj_3R_39
+    boolean jj_3R_20() -> jj_3R_20
+    boolean jj_3R_53() -> jj_3R_53
+    boolean jj_3R_35() -> jj_3R_35
+    boolean jj_3R_27() -> jj_3R_27
+    boolean jj_3R_34() -> jj_3R_34
+    boolean jj_3R_67() -> jj_3R_67
+    boolean jj_3R_66() -> jj_3R_66
+    boolean jj_3R_72() -> jj_3R_72
+    boolean jj_3R_64() -> jj_3R_64
+    boolean jj_3R_63() -> jj_3R_63
+    boolean jj_3R_65() -> jj_3R_65
+    boolean jj_3R_24() -> jj_3R_24
+    boolean jj_3R_62() -> jj_3R_62
+    boolean jj_3R_60() -> jj_3R_60
+    boolean jj_3R_58() -> jj_3R_58
+    boolean jj_3R_61() -> jj_3R_61
+    boolean jj_3R_57() -> jj_3R_57
+    boolean jj_3R_59() -> jj_3R_59
+    boolean jj_3R_56() -> jj_3R_56
+    boolean jj_3R_55() -> jj_3R_55
+    boolean jj_3R_49() -> jj_3R_49
+    boolean jj_3R_51() -> jj_3R_51
+    boolean jj_3R_46() -> jj_3R_46
+    boolean jj_3R_48() -> jj_3R_48
+    boolean jj_3R_50() -> jj_3R_50
+    boolean jj_3R_38() -> jj_3R_38
+    boolean jj_3R_47() -> jj_3R_47
+    boolean jj_3R_33() -> jj_3R_33
+    boolean jj_3R_19() -> jj_3R_19
+    boolean jj_3R_37() -> jj_3R_37
+    boolean jj_3R_36() -> jj_3R_36
+    boolean jj_3R_32() -> jj_3R_32
+    boolean jj_3R_31() -> jj_3R_31
+    boolean jj_3R_25() -> jj_3R_25
+    boolean jj_3R_16() -> jj_3R_16
+    boolean jj_3R_22() -> jj_3R_22
+    boolean jj_3R_18() -> jj_3R_18
+    boolean jj_3R_87() -> jj_3R_87
+    boolean jj_3R_26() -> jj_3R_26
+    boolean jj_3R_88() -> jj_3R_88
+    boolean jj_3R_15() -> jj_3R_15
+    boolean jj_3R_23() -> jj_3R_23
+    boolean jj_3R_86() -> jj_3R_86
+    boolean jj_3R_75() -> jj_3R_75
+    boolean jj_3R_85() -> jj_3R_85
+    boolean jj_3R_17() -> jj_3R_17
+    boolean jj_3_3() -> jj_3_3
+    boolean jj_3R_78() -> jj_3R_78
+    void jj_la1_init_0() -> jj_la1_init_0
+    void <init>(java.io.Reader) -> <init>
+    jugglinglab.notation.ssparser.Token jj_consume_token(int) -> jj_consume_token
+    boolean jj_scan_token(int) -> jj_scan_token
+    int jj_ntk() -> jj_ntk
+    void jj_add_error_token(int,int) -> jj_add_error_token
+    jugglinglab.notation.ssparser.ParseException generateParseException() -> generateParseException
+    void jj_rescan_token() -> jj_rescan_token
+    void jj_save(int,int) -> jj_save
+    void <clinit>() -> <clinit>
+jugglinglab.notation.ssparser.SiteswapParser$1 -> jugglinglab.notation.ssparser.b:
+jugglinglab.notation.ssparser.SiteswapParser$JJCalls -> jugglinglab.notation.ssparser.SiteswapParser$JJCalls:
+    int gen -> gen
+    jugglinglab.notation.ssparser.Token first -> first
+    int arg -> arg
+    jugglinglab.notation.ssparser.SiteswapParser$JJCalls next -> next
     void <init>() -> <init>
-jugglinglab.notation.ssparser.SiteswapParser$LookaheadSuccess -> jugglinglab.c.a.e:
+jugglinglab.notation.ssparser.SiteswapParser$LookaheadSuccess -> jugglinglab.notation.ssparser.SiteswapParser$LookaheadSuccess:
     void <init>() -> <init>
-    void <init>(byte) -> <init>
-jugglinglab.notation.ssparser.SiteswapParserConstants -> jugglinglab.c.a.f:
+    void <init>(jugglinglab.notation.ssparser.SiteswapParser$1) -> <init>
+jugglinglab.notation.ssparser.SiteswapParserConstants -> jugglinglab.notation.ssparser.c:
     java.lang.String[] tokenImage -> a
     void <clinit>() -> <clinit>
-jugglinglab.notation.ssparser.SiteswapParserTokenManager -> jugglinglab.c.a.g:
-    java.lang.String[] jjstrLiteralImages -> b
-    long[] jjtoToken -> c
-    jugglinglab.notation.ssparser.SiteswapParser$1 input_stream$288a5ba1 -> d
-    int[] jjrounds -> e
-    int[] jjstateSet -> f
-    char curChar -> g
-    int curLexState -> h
-    int jjnewStateCnt -> i
-    int jjround -> j
-    int jjmatchedPos -> k
-    int jjmatchedKind -> l
-    int jjStopAtPos(int,int) -> a
-    int jjMoveNfa_0(int,int) -> b
-    void <init>(jugglinglab.notation.ssparser.SiteswapParser$1) -> <init>
-    jugglinglab.notation.ssparser.Token jjFillToken() -> b
-    jugglinglab.notation.ssparser.Token getNextToken() -> a
-    void jjCheckNAdd(int) -> a
+jugglinglab.notation.ssparser.SiteswapParserTokenManager -> jugglinglab.notation.ssparser.SiteswapParserTokenManager:
+    java.io.PrintStream debugStream -> debugStream
+    int[] jjnextStates -> jjnextStates
+    java.lang.String[] jjstrLiteralImages -> jjstrLiteralImages
+    java.lang.String[] lexStateNames -> lexStateNames
+    long[] jjtoToken -> jjtoToken
+    long[] jjtoSkip -> jjtoSkip
+    jugglinglab.notation.ssparser.SimpleCharStream input_stream -> input_stream
+    int[] jjrounds -> jjrounds
+    int[] jjstateSet -> jjstateSet
+    char curChar -> curChar
+    int curLexState -> curLexState
+    int defaultLexState -> defaultLexState
+    int jjnewStateCnt -> jjnewStateCnt
+    int jjround -> jjround
+    int jjmatchedPos -> jjmatchedPos
+    int jjmatchedKind -> jjmatchedKind
+    int jjStopAtPos(int,int) -> jjStopAtPos
+    int jjMoveStringLiteralDfa0_0() -> jjMoveStringLiteralDfa0_0
+    int jjMoveNfa_0(int,int) -> jjMoveNfa_0
+    void <init>(jugglinglab.notation.ssparser.SimpleCharStream) -> <init>
+    void ReInitRounds() -> ReInitRounds
+    jugglinglab.notation.ssparser.Token jjFillToken() -> jjFillToken
+    jugglinglab.notation.ssparser.Token getNextToken() -> getNextToken
+    void jjCheckNAdd(int) -> jjCheckNAdd
     void <clinit>() -> <clinit>
-jugglinglab.notation.ssparser.SiteswapTreeItem -> jugglinglab.c.a.h:
-    int type -> a
-    java.util.ArrayList children -> b
-    int jugglers -> c
-    int repeats -> d
-    boolean switchrepeat -> e
-    int beats -> f
-    int seq_beatnum -> g
-    int source_juggler -> h
-    int value -> i
-    boolean x -> j
-    int dest_juggler -> k
-    java.lang.String mod -> l
-    boolean spec_left -> m
-    int throw_sum -> n
-    int beatnum -> o
-    boolean left -> p
-    boolean vanilla_async -> q
-    boolean sync_throw -> r
-    jugglinglab.notation.ssparser.SiteswapTreeItem transition -> s
-    java.lang.String[] typenames -> t
-    int[][] field_defined_types -> u
+jugglinglab.notation.ssparser.SiteswapTreeItem -> jugglinglab.notation.ssparser.SiteswapTreeItem:
+    int type -> type
+    java.util.ArrayList children -> children
+    int jugglers -> jugglers
+    int repeats -> repeats
+    boolean switchrepeat -> switchrepeat
+    int beats -> beats
+    int seq_beatnum -> seq_beatnum
+    int source_juggler -> source_juggler
+    int value -> value
+    boolean x -> x
+    int dest_juggler -> dest_juggler
+    java.lang.String mod -> mod
+    boolean spec_left -> spec_left
+    int throw_sum -> throw_sum
+    int beatnum -> beatnum
+    boolean left -> left
+    boolean vanilla_async -> vanilla_async
+    boolean sync_throw -> sync_throw
+    jugglinglab.notation.ssparser.SiteswapTreeItem transition -> transition
+    java.lang.String[] typenames -> typenames
+    int[][] field_defined_types -> field_defined_types
     void <init>(int) -> <init>
-    void addChild(jugglinglab.notation.ssparser.SiteswapTreeItem) -> a
-    jugglinglab.notation.ssparser.SiteswapTreeItem getChild(int) -> a
+    void addChild(jugglinglab.notation.ssparser.SiteswapTreeItem) -> addChild
+    jugglinglab.notation.ssparser.SiteswapTreeItem getChild(int) -> getChild
+    void removeChildren() -> removeChildren
+    int getNumberOfChildren() -> getNumberOfChildren
     java.lang.Object clone() -> clone
     java.lang.String toString() -> toString
-    java.lang.String toString(int) -> b
-    boolean field_active(int,int) -> a
+    java.lang.String toString(int) -> toString
+    boolean field_active(int,int) -> field_active
     void <clinit>() -> <clinit>
-jugglinglab.notation.ssparser.Token -> jugglinglab.c.a.i:
-    int kind -> a
-    int beginLine -> b
-    int beginColumn -> c
-    java.lang.String image -> d
-    jugglinglab.notation.ssparser.Token next -> e
+jugglinglab.notation.ssparser.Token -> jugglinglab.notation.ssparser.Token:
+    int kind -> kind
+    int beginLine -> beginLine
+    int beginColumn -> beginColumn
+    int endLine -> endLine
+    int endColumn -> endColumn
+    java.lang.String image -> image
+    jugglinglab.notation.ssparser.Token next -> next
     void <init>() -> <init>
     void <init>(int,java.lang.String) -> <init>
     java.lang.String toString() -> toString
-    jugglinglab.notation.ssparser.Token newToken(int,java.lang.String) -> a
-jugglinglab.notation.ssparser.TokenMgrError -> jugglinglab.c.a.j:
+    jugglinglab.notation.ssparser.Token newToken(int,java.lang.String) -> newToken
+jugglinglab.notation.ssparser.TokenMgrError -> jugglinglab.notation.ssparser.d:
     java.lang.String addEscapes(java.lang.String) -> a
     java.lang.String getMessage() -> getMessage
     void <init>() -> <init>
     void <init>(java.lang.String,int) -> <init>
     void <init>(boolean,int,int,int,java.lang.String,char,int) -> <init>
-jugglinglab.path.BouncePath -> jugglinglab.d.a:
-    double bx -> e
-    double by -> f
-    double[] az -> g
-    double[] bz -> h
-    double[] cz -> i
-    double[] endtime -> j
-    int bounces -> k
-    boolean forced -> l
-    boolean hyper -> m
-    double bounceplane -> n
-    double g -> o
-    double bouncefracsqrt -> p
-    int numbounces -> q
+jugglinglab.path.BouncePath -> jugglinglab.path.a:
+    double bx -> a
+    double by -> b
+    double[] az -> c
+    double[] bz -> d
+    double[] cz -> e
+    double[] endtime -> f
+    int bounces -> g
+    boolean forced -> h
+    boolean hyper -> i
+    double bounceplane -> j
+    double g -> k
+    double bouncefracsqrt -> l
+    int numbounces -> m
     void <init>() -> <init>
-    void initPath(java.lang.String) -> a
-    void calcPath() -> a
+    void initPath(java.lang.String) -> initPath
+    void calcPath() -> calcPath
     int solveBounceEquation(int,double,double[],boolean[]) -> a
     boolean isFeasibleDuration(double) -> a
-    double getMinDuration() -> b
-    jugglinglab.util.Coordinate getStartVelocity() -> c
-    jugglinglab.util.Coordinate getEndVelocity() -> d
+    double getMinDuration() -> getMinDuration
+    jugglinglab.util.Coordinate getStartVelocity() -> getStartVelocity
+    jugglinglab.util.Coordinate getEndVelocity() -> getEndVelocity
     double evalPolynomial(double[],int,double) -> a
     double bracketOpenInterval(double[],int,double,boolean) -> a
     double findRoot(double[],int,double,double) -> a
     int findRealRootsPolynomial(double[],int,double[]) -> a
-jugglinglab.path.Path -> jugglinglab.d.b:
-    double start_time -> a
-    double end_time -> b
-    jugglinglab.util.Coordinate start_coord -> c
-    jugglinglab.util.Coordinate end_coord -> d
+jugglinglab.path.Path -> jugglinglab.path.Path:
+    double start_time -> start_time
+    double end_time -> end_time
+    jugglinglab.util.Coordinate start_coord -> start_coord
+    jugglinglab.util.Coordinate end_coord -> end_coord
+    java.lang.String[] builtinPaths -> builtinPaths
     void <init>() -> <init>
-    jugglinglab.path.Path newPath(java.lang.String) -> b
-    void setStart(jugglinglab.util.Coordinate,double) -> a
-    void setEnd(jugglinglab.util.Coordinate,double) -> b
-    double getDuration() -> e
-    double getMinDuration() -> b
-    void initPath(java.lang.String) -> a
-    void calcPath() -> a
-    jugglinglab.util.Coordinate getStartVelocity() -> c
-    jugglinglab.util.Coordinate getEndVelocity() -> d
+    jugglinglab.path.Path newPath(java.lang.String) -> newPath
+    void setStart(jugglinglab.util.Coordinate,double) -> setStart
+    void setEnd(jugglinglab.util.Coordinate,double) -> setEnd
+    double getDuration() -> getDuration
+    double getMinDuration() -> getMinDuration
+    void initPath(java.lang.String) -> initPath
+    void calcPath() -> calcPath
+    jugglinglab.util.Coordinate getStartVelocity() -> getStartVelocity
+    jugglinglab.util.Coordinate getEndVelocity() -> getEndVelocity
     void <clinit>() -> <clinit>
-jugglinglab.path.TossPath -> jugglinglab.d.c:
-    double bx -> e
-    double by -> f
-    double az -> g
-    double bz -> h
+jugglinglab.path.TossPath -> jugglinglab.path.TossPath:
+    double bx -> bx
+    double cx -> cx
+    double by -> by
+    double cy -> cy
+    double az -> az
+    double bz -> bz
+    double cz -> cz
+    double g -> g
     void <init>() -> <init>
-    void initPath(java.lang.String) -> a
-    void calcPath() -> a
-    jugglinglab.util.Coordinate getStartVelocity() -> c
-    jugglinglab.util.Coordinate getEndVelocity() -> d
-jugglinglab.prop.BallProp -> jugglinglab.e.a:
-    java.lang.String[] colornames -> a
-    alternatives.Color[] colorvals -> b
+    void initPath(java.lang.String) -> initPath
+    void calcPath() -> calcPath
+    jugglinglab.util.Coordinate getStartVelocity() -> getStartVelocity
+    jugglinglab.util.Coordinate getEndVelocity() -> getEndVelocity
+jugglinglab.prop.BallProp -> jugglinglab.prop.BallProp:
+    java.lang.String[] colornames -> colornames
+    alternatives.Color[] colorvals -> colorvals
+    double diam -> diam
+    int colornum -> colornum
+    alternatives.Color color -> color
+    boolean highlight -> highlight
     void <init>() -> <init>
-    void init(java.lang.String) -> a
+    void init(java.lang.String) -> init
     void <clinit>() -> <clinit>
-jugglinglab.prop.Prop -> jugglinglab.e.b:
+jugglinglab.prop.Prop -> jugglinglab.prop.Prop:
+    java.lang.String initString -> initString
+    java.lang.String[] builtinProps -> builtinProps
     void <init>() -> <init>
-    jugglinglab.prop.Prop newProp$5ee43a7c() -> a
-    void initProp(java.lang.String) -> b
-    void init(java.lang.String) -> a
+    jugglinglab.prop.Prop newProp(java.lang.String) -> newProp
+    void initProp(java.lang.String) -> initProp
+    void init(java.lang.String) -> init
     void <clinit>() -> <clinit>
-jugglinglab.util.Coordinate -> jugglinglab.f.a:
-    double x -> a
-    double y -> b
-    double z -> c
+jugglinglab.util.Coordinate -> jugglinglab.util.Coordinate:
+    double x -> x
+    double y -> y
+    double z -> z
     void <init>() -> <init>
     void <init>(double,double,double) -> <init>
     void <init>(jugglinglab.util.Coordinate) -> <init>
-    void setCoordinate(double,double,double) -> a
-    double getIndex(int) -> a
+    void setCoordinate(double,double,double) -> setCoordinate
+    double getIndex(int) -> getIndex
+    void setIndex(int,double) -> setIndex
+    jugglinglab.util.Coordinate max(jugglinglab.util.Coordinate,jugglinglab.util.Coordinate) -> max
+    jugglinglab.util.Coordinate min(jugglinglab.util.Coordinate,jugglinglab.util.Coordinate) -> min
     java.lang.String toString() -> toString
-jugglinglab.util.JLFunc -> jugglinglab.f.b:
-    java.text.NumberFormat nf -> s
-    int juggler -> a
-    int hand -> b
-    int index -> c
-    int slot -> d
-    int targetjuggler -> e
-    int targethand -> f
-    int targetindex -> g
-    int targetslot -> h
-    java.lang.String mod -> i
-    jugglinglab.util.JLFunc master$b832996 -> j
-    jugglinglab.util.JLFunc source$b832996 -> k
-    int pathnum -> l
-    boolean catching -> m
-    int catchnum -> n
-    int dwellwindow -> o
-    double throwtime -> p
-    double catchtime -> q
-    int handsindex -> r
-    java.lang.String expandRepeats(java.lang.String) -> a
-    void addExpansionToBuffer(java.lang.String,java.lang.StringBuffer) -> a
-    double parseDouble(java.lang.String) -> b
-    java.lang.String toStringRounded(double,int) -> a
+jugglinglab.util.JLFunc -> jugglinglab.util.JLFunc:
+    java.text.NumberFormat nf -> nf
     void <init>() -> <init>
-    void <init>(int,int,int,int,int,int,int,int,java.lang.String) -> <init>
+    java.lang.String expandRepeats(java.lang.String) -> expandRepeats
+    void addExpansionToBuffer(java.lang.String,java.lang.StringBuffer) -> addExpansionToBuffer
+    int[] tryParseRepeat(java.lang.String,int) -> tryParseRepeat
+    java.text.NumberFormat nf() -> nf
+    double parseDouble(java.lang.String) -> parseDouble
+    java.lang.String toStringRounded(double,int) -> toStringRounded
+jugglinglab.util.JuggleException -> jugglinglab.util.a:
+    void <init>() -> <init>
+    void <init>(java.lang.String) -> <init>
+jugglinglab.util.JuggleExceptionInternal -> jugglinglab.util.b:
+    void <init>() -> <init>
+    void <init>(java.lang.String) -> <init>
+jugglinglab.util.JuggleExceptionUser -> jugglinglab.util.c:
+    void <init>() -> <init>
+    void <init>(java.lang.String) -> <init>
+jugglinglab.util.ParameterList -> jugglinglab.util.ParameterList:
+    int size -> size
+    java.util.ArrayList names -> names
+    java.util.ArrayList values -> values
+    void <init>() -> <init>
+    void <init>(java.lang.String) -> <init>
+    boolean addParameter(java.lang.String,java.lang.String) -> addParameter
+    java.lang.String getParameter(java.lang.String) -> getParameter
+    java.lang.String removeParameter(java.lang.String) -> removeParameter
+    java.lang.String getParameterName(int) -> getParameterName
+    java.lang.String getParameterValue(int) -> getParameterValue
+    int getNumberOfParameters() -> getNumberOfParameters
+    void readParameters(java.lang.String) -> readParameters
     java.lang.String toString() -> toString
-    boolean isZero() -> a
-    int throwValue() -> b
-    boolean isThrownOne() -> c
-jugglinglab.util.JuggleException -> jugglinglab.f.c:
-    void <init>() -> <init>
-    void <init>(java.lang.String) -> <init>
-jugglinglab.util.JuggleExceptionInternal -> jugglinglab.f.d:
-    void <init>() -> <init>
-    void <init>(java.lang.String) -> <init>
-jugglinglab.util.JuggleExceptionUser -> jugglinglab.f.e:
-    void <init>() -> <init>
-    void <init>(java.lang.String) -> <init>
-jugglinglab.util.ParameterList -> jugglinglab.f.f:
-    int size -> a
-    java.util.ArrayList names -> b
-    java.util.ArrayList values -> c
-    void <init>() -> <init>
-    void <init>(java.lang.String) -> <init>
-    boolean addParameter(java.lang.String,java.lang.String) -> a
-    java.lang.String getParameter(java.lang.String) -> a
-    java.lang.String removeParameter(java.lang.String) -> b
-    java.lang.String getParameterName(int) -> a
-    java.lang.String getParameterValue(int) -> b
-    int getNumberOfParameters() -> a
-    java.lang.String toString() -> toString
-jugglinglab.util.Permutation -> jugglinglab.f.g:
-    int size -> a
-    int[] mapping -> b
-    boolean reverses -> c
+    void errorIfParametersLeft() -> errorIfParametersLeft
+jugglinglab.util.Permutation -> jugglinglab.util.Permutation:
+    int size -> size
+    int[] mapping -> mapping
+    boolean reverses -> reverses
     void <init>(int,boolean) -> <init>
     void <init>(int,int[],boolean) -> <init>
     void <init>(int,java.lang.String,boolean) -> <init>
     java.lang.String toString() -> toString
-    java.lang.String toString(boolean) -> a
-    java.lang.String convertReverse(int) -> d
-    boolean equals(jugglinglab.util.Permutation) -> a
-    int getMapping(int) -> a
-    int getMapping(int,int) -> a
-    jugglinglab.util.Permutation apply(jugglinglab.util.Permutation) -> b
-    int getInverseMapping(int) -> e
-    jugglinglab.util.Permutation getInverse() -> a
-    int lcm(int,int) -> b
-    int getOrder() -> b
-    int getOrder(int) -> b
-    int[] getCycle(int) -> c
-org.apache.commons.math3.exception.DimensionMismatchException -> org.a.a.a.a.a:
+    java.lang.String toString(boolean) -> toString
+    java.lang.String convertReverse(int) -> convertReverse
+    int getSize() -> getSize
+    boolean hasReverses() -> hasReverses
+    boolean equals(jugglinglab.util.Permutation) -> equals
+    int getMapping(int) -> getMapping
+    int getMapping(int,int) -> getMapping
+    jugglinglab.util.Permutation apply(jugglinglab.util.Permutation) -> apply
+    int getInverseMapping(int) -> getInverseMapping
+    jugglinglab.util.Permutation getInverse() -> getInverse
+    int lcm(int,int) -> lcm
+    int getOrder() -> getOrder
+    int getOrder(int) -> getOrder
+    int[] getCycle(int) -> getCycle
+org.apache.commons.math3.exception.DimensionMismatchException -> org.apache.commons.math3.a.a:
     void <init>(org.apache.commons.math3.exception.util.Localizable,int,int) -> <init>
     void <init>(int,int) -> <init>
-org.apache.commons.math3.exception.MathIllegalArgumentException -> org.a.a.a.a.b:
+org.apache.commons.math3.exception.MathIllegalArgumentException -> org.apache.commons.math3.a.b:
     org.apache.commons.math3.exception.util.ExceptionContext context -> a
     void <init>(org.apache.commons.math3.exception.util.Localizable,java.lang.Object[]) -> <init>
     java.lang.String getMessage() -> getMessage
     java.lang.String getLocalizedMessage() -> getLocalizedMessage
-org.apache.commons.math3.exception.MathIllegalNumberException -> org.a.a.a.a.c:
+org.apache.commons.math3.exception.MathIllegalNumberException -> org.apache.commons.math3.a.c:
     void <init>(org.apache.commons.math3.exception.util.Localizable,java.lang.Number,java.lang.Object[]) -> <init>
     void <clinit>() -> <clinit>
-org.apache.commons.math3.exception.MathIllegalStateException -> org.a.a.a.a.d:
+org.apache.commons.math3.exception.MathIllegalStateException -> org.apache.commons.math3.a.d:
     org.apache.commons.math3.exception.util.ExceptionContext context -> a
     void <init>(org.apache.commons.math3.exception.util.Localizable,java.lang.Object[]) -> <init>
     void <init>() -> <init>
     java.lang.String getMessage() -> getMessage
     java.lang.String getLocalizedMessage() -> getLocalizedMessage
-org.apache.commons.math3.exception.MathUnsupportedOperationException -> org.a.a.a.a.e:
+org.apache.commons.math3.exception.MathUnsupportedOperationException -> org.apache.commons.math3.a.e:
     org.apache.commons.math3.exception.util.ExceptionContext context -> a
     void <init>() -> <init>
     void <init>(org.apache.commons.math3.exception.util.Localizable,java.lang.Object[]) -> <init>
     java.lang.String getMessage() -> getMessage
     java.lang.String getLocalizedMessage() -> getLocalizedMessage
-org.apache.commons.math3.exception.NoDataException -> org.a.a.a.a.f:
+org.apache.commons.math3.exception.NoDataException -> org.apache.commons.math3.a.f:
     void <init>() -> <init>
     void <init>(org.apache.commons.math3.exception.util.Localizable) -> <init>
-org.apache.commons.math3.exception.NullArgumentException -> org.a.a.a.a.g:
+org.apache.commons.math3.exception.NullArgumentException -> org.apache.commons.math3.a.g:
     void <init>() -> <init>
     void <init>(org.apache.commons.math3.exception.util.Localizable,java.lang.Object[]) -> <init>
-org.apache.commons.math3.exception.OutOfRangeException -> org.a.a.a.a.h:
+org.apache.commons.math3.exception.OutOfRangeException -> org.apache.commons.math3.a.h:
     void <init>(org.apache.commons.math3.exception.util.Localizable,java.lang.Number,java.lang.Number,java.lang.Number) -> <init>
-org.apache.commons.math3.exception.util.ArgUtils -> org.a.a.a.a.a.a:
-    java.lang.String prefix -> a
-    java.lang.String suffix -> b
-    java.lang.String rowPrefix -> c
-    java.lang.String rowSuffix -> d
-    java.lang.String rowSeparator -> e
-    java.lang.String columnSeparator -> f
-    java.text.NumberFormat format -> g
+org.apache.commons.math3.exception.util.ArgUtils -> org.apache.commons.math3.a.a.a:
     java.lang.Object[] flatten(java.lang.Object[]) -> a
-    void <init>() -> <init>
-    void <init>(java.text.NumberFormat) -> <init>
-    void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> <init>
-    void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.text.NumberFormat) -> <init>
-    java.text.NumberFormat getFormat() -> a
-    org.apache.commons.math3.exception.util.ArgUtils getInstance$7ef0c724(java.util.Locale) -> a
-    java.lang.String format(org.apache.commons.math3.linear.RealMatrix) -> a
-    java.lang.StringBuffer format(org.apache.commons.math3.linear.RealMatrix,java.lang.StringBuffer,java.text.FieldPosition) -> a
-    java.text.NumberFormat getDefaultNumberFormat(java.util.Locale) -> b
-    java.lang.StringBuffer formatDouble(double,java.text.NumberFormat,java.lang.StringBuffer,java.text.FieldPosition) -> a
-    void checkNotNull(java.lang.Object) -> a
-org.apache.commons.math3.exception.util.ExceptionContext -> org.a.a.a.a.a.b:
+org.apache.commons.math3.exception.util.ExceptionContext -> org.apache.commons.math3.a.a.b:
     java.util.List msgPatterns -> a
     java.util.List msgArguments -> b
     void <init>(java.lang.Throwable) -> <init>
@@ -792,9 +917,9 @@ org.apache.commons.math3.exception.util.ExceptionContext -> org.a.a.a.a.a.b:
     java.lang.String getMessage() -> a
     java.lang.String getLocalizedMessage() -> b
     java.lang.String buildMessage(java.util.Locale,java.lang.String) -> a
-org.apache.commons.math3.exception.util.Localizable -> org.a.a.a.a.a.c:
+org.apache.commons.math3.exception.util.Localizable -> org.apache.commons.math3.a.a.c:
     java.lang.String getLocalizedString(java.util.Locale) -> a
-org.apache.commons.math3.exception.util.LocalizedFormats -> org.a.a.a.a.a.d:
+org.apache.commons.math3.exception.util.LocalizedFormats -> org.apache.commons.math3.a.a.d:
     org.apache.commons.math3.exception.util.LocalizedFormats ARGUMENT_OUTSIDE_DOMAIN -> o
     org.apache.commons.math3.exception.util.LocalizedFormats ARRAY_SIZE_EXCEEDS_MAX_VARIABLES -> p
     org.apache.commons.math3.exception.util.LocalizedFormats ARRAY_SIZES_SHOULD_HAVE_DIFFERENCE_1 -> q
@@ -1127,95 +1252,147 @@ org.apache.commons.math3.exception.util.LocalizedFormats -> org.a.a.a.a.a.d:
     void <init>(java.lang.String,int,java.lang.String) -> <init>
     java.lang.String getLocalizedString(java.util.Locale) -> a
     void <clinit>() -> <clinit>
-org.apache.commons.math3.linear.AbstractRealMatrix -> org.a.a.a.b.a:
-    org.apache.commons.math3.exception.util.ArgUtils DEFAULT_FORMAT$62110e30 -> a
+org.apache.commons.math3.linear.AbstractRealMatrix -> org.apache.commons.math3.linear.AbstractRealMatrix:
+    org.apache.commons.math3.linear.RealMatrixFormat DEFAULT_FORMAT -> DEFAULT_FORMAT
     void <init>() -> <init>
-    double[][] getData() -> a
-    void setSubMatrix(double[][],int,int) -> a
-    boolean isSquare() -> b
-    int getRowDimension() -> c
-    int getColumnDimension() -> d
+    double[][] getData() -> getData
+    void setSubMatrix(double[][],int,int) -> setSubMatrix
+    boolean isSquare() -> isSquare
+    int getRowDimension() -> getRowDimension
+    int getColumnDimension() -> getColumnDimension
     java.lang.String toString() -> toString
     boolean equals(java.lang.Object) -> equals
     int hashCode() -> hashCode
-    double getEntry(int,int) -> a
-    void setEntry(int,int,double) -> a
+    double getEntry(int,int) -> getEntry
+    void setEntry(int,int,double) -> setEntry
     void <clinit>() -> <clinit>
-org.apache.commons.math3.linear.AnyMatrix -> org.a.a.a.b.b:
-    boolean isSquare() -> b
-    int getRowDimension() -> c
-    int getColumnDimension() -> d
-org.apache.commons.math3.linear.Array2DRowRealMatrix -> org.a.a.a.b.c:
-    double[][] data -> a
+org.apache.commons.math3.linear.AnyMatrix -> org.apache.commons.math3.linear.a:
+    boolean isSquare() -> isSquare
+    int getRowDimension() -> getRowDimension
+    int getColumnDimension() -> getColumnDimension
+org.apache.commons.math3.linear.Array2DRowRealMatrix -> org.apache.commons.math3.linear.Array2DRowRealMatrix:
+    double[][] data -> data
     void <init>() -> <init>
     void <init>(double[][]) -> <init>
-    double[][] getData() -> a
-    void setSubMatrix(double[][],int,int) -> a
-    double getEntry(int,int) -> a
-    void setEntry(int,int,double) -> a
-    int getRowDimension() -> c
-    int getColumnDimension() -> d
-org.apache.commons.math3.linear.ArrayRealVector -> org.a.a.a.b.d:
-    org.apache.commons.math3.linear.LUDecomposition$1 DEFAULT_FORMAT$cd69192 -> a
-    double[] data -> b
+    double[][] getData() -> getData
+    void setSubMatrix(double[][],int,int) -> setSubMatrix
+    double getEntry(int,int) -> getEntry
+    void setEntry(int,int,double) -> setEntry
+    int getRowDimension() -> getRowDimension
+    int getColumnDimension() -> getColumnDimension
+    double[][] copyOut() -> copyOut
+    void copyIn(double[][]) -> copyIn
+org.apache.commons.math3.linear.ArrayRealVector -> org.apache.commons.math3.linear.ArrayRealVector:
+    org.apache.commons.math3.linear.RealVectorFormat DEFAULT_FORMAT -> DEFAULT_FORMAT
+    double[] data -> data
     void <init>() -> <init>
     void <init>(double[]) -> <init>
     void <init>(double[],boolean) -> <init>
-    double getEntry(int) -> a
-    int getDimension() -> a
+    double getEntry(int) -> getEntry
+    int getDimension() -> getDimension
     java.lang.String toString() -> toString
-    boolean isNaN() -> b
+    boolean isNaN() -> isNaN
     boolean equals(java.lang.Object) -> equals
     int hashCode() -> hashCode
     void <clinit>() -> <clinit>
-org.apache.commons.math3.linear.DecompositionSolver -> org.a.a.a.b.e:
-    org.apache.commons.math3.linear.RealVector solve(org.apache.commons.math3.linear.RealVector) -> a
-org.apache.commons.math3.linear.LUDecomposition -> org.a.a.a.b.f:
-    double[][] lu -> a
-    int[] pivot -> b
-    boolean even -> c
-    boolean singular -> d
+org.apache.commons.math3.linear.DecompositionSolver -> org.apache.commons.math3.linear.b:
+    org.apache.commons.math3.linear.RealVector solve(org.apache.commons.math3.linear.RealVector) -> solve
+org.apache.commons.math3.linear.LUDecomposition -> org.apache.commons.math3.linear.LUDecomposition:
+    double[][] lu -> lu
+    int[] pivot -> pivot
+    boolean even -> even
+    boolean singular -> singular
+    org.apache.commons.math3.linear.RealMatrix cachedL -> cachedL
+    org.apache.commons.math3.linear.RealMatrix cachedU -> cachedU
+    org.apache.commons.math3.linear.RealMatrix cachedP -> cachedP
     void <init>(org.apache.commons.math3.linear.RealMatrix) -> <init>
     void <init>(org.apache.commons.math3.linear.RealMatrix,double) -> <init>
-    org.apache.commons.math3.linear.DecompositionSolver getSolver() -> a
-org.apache.commons.math3.linear.LUDecomposition$1 -> org.a.a.a.b.g:
-    java.lang.String prefix -> a
-    java.lang.String suffix -> b
-    java.lang.String separator -> c
-    java.text.NumberFormat format -> d
-    void <init>() -> <init>
-    void <init>(java.text.NumberFormat) -> <init>
-    void <init>(java.lang.String,java.lang.String,java.lang.String,java.text.NumberFormat) -> <init>
-    java.lang.String format(org.apache.commons.math3.linear.RealVector) -> a
-    java.lang.StringBuffer format(org.apache.commons.math3.linear.RealVector,java.lang.StringBuffer,java.text.FieldPosition) -> a
-org.apache.commons.math3.linear.LUDecomposition$Solver -> org.a.a.a.b.h:
-    double[][] lu -> a
-    int[] pivot -> b
-    boolean singular -> c
+    org.apache.commons.math3.linear.DecompositionSolver getSolver() -> getSolver
+org.apache.commons.math3.linear.LUDecomposition$1 -> org.apache.commons.math3.linear.c:
+org.apache.commons.math3.linear.LUDecomposition$Solver -> org.apache.commons.math3.linear.LUDecomposition$Solver:
+    double[][] lu -> lu
+    int[] pivot -> pivot
+    boolean singular -> singular
     void <init>(double[][],int[],boolean) -> <init>
-    org.apache.commons.math3.linear.RealVector solve(org.apache.commons.math3.linear.RealVector) -> a
-    void <init>(double[][],int[],boolean,byte) -> <init>
-org.apache.commons.math3.linear.MatrixUtils -> org.a.a.a.b.i:
+    org.apache.commons.math3.linear.RealVector solve(org.apache.commons.math3.linear.RealVector) -> solve
+    void <init>(double[][],int[],boolean,org.apache.commons.math3.linear.LUDecomposition$1) -> <init>
+org.apache.commons.math3.linear.MatrixUtils -> org.apache.commons.math3.linear.d:
     void checkMatrixIndex(org.apache.commons.math3.linear.AnyMatrix,int,int) -> a
     void checkRowIndex(org.apache.commons.math3.linear.AnyMatrix,int) -> a
     void checkColumnIndex(org.apache.commons.math3.linear.AnyMatrix,int) -> b
     void <clinit>() -> <clinit>
-org.apache.commons.math3.linear.NonSquareMatrixException -> org.a.a.a.b.j:
+org.apache.commons.math3.linear.NonSquareMatrixException -> org.apache.commons.math3.linear.e:
     void <init>(int,int) -> <init>
-org.apache.commons.math3.linear.RealLinearOperator -> org.a.a.a.b.k:
+org.apache.commons.math3.linear.RealLinearOperator -> org.apache.commons.math3.linear.RealLinearOperator:
     void <init>() -> <init>
-org.apache.commons.math3.linear.RealMatrix -> org.a.a.a.b.l:
-    double[][] getData() -> a
-    double getEntry(int,int) -> a
-org.apache.commons.math3.linear.RealVector -> org.a.a.a.b.m:
+org.apache.commons.math3.linear.RealMatrix -> org.apache.commons.math3.linear.f:
+    double[][] getData() -> getData
+    double getEntry(int,int) -> getEntry
+org.apache.commons.math3.linear.RealMatrixFormat -> org.apache.commons.math3.linear.RealMatrixFormat:
+    java.lang.String prefix -> prefix
+    java.lang.String suffix -> suffix
+    java.lang.String rowPrefix -> rowPrefix
+    java.lang.String rowSuffix -> rowSuffix
+    java.lang.String rowSeparator -> rowSeparator
+    java.lang.String columnSeparator -> columnSeparator
+    java.text.NumberFormat format -> format
     void <init>() -> <init>
-    int getDimension() -> a
-    double getEntry(int) -> a
-    boolean isNaN() -> b
+    void <init>(java.text.NumberFormat) -> <init>
+    void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> <init>
+    void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.text.NumberFormat) -> <init>
+    java.text.NumberFormat getFormat() -> getFormat
+    org.apache.commons.math3.linear.RealMatrixFormat getInstance() -> getInstance
+    org.apache.commons.math3.linear.RealMatrixFormat getInstance(java.util.Locale) -> getInstance
+    java.lang.String format(org.apache.commons.math3.linear.RealMatrix) -> format
+    java.lang.StringBuffer format(org.apache.commons.math3.linear.RealMatrix,java.lang.StringBuffer,java.text.FieldPosition) -> format
+org.apache.commons.math3.linear.RealVector -> org.apache.commons.math3.linear.RealVector:
+    void <init>() -> <init>
+    int getDimension() -> getDimension
+    double getEntry(int) -> getEntry
+    boolean isNaN() -> isNaN
     boolean equals(java.lang.Object) -> equals
     int hashCode() -> hashCode
-org.apache.commons.math3.linear.SingularMatrixException -> org.a.a.a.b.n:
+org.apache.commons.math3.linear.RealVectorFormat -> org.apache.commons.math3.linear.RealVectorFormat:
+    java.lang.String prefix -> prefix
+    java.lang.String suffix -> suffix
+    java.lang.String separator -> separator
+    java.lang.String trimmedPrefix -> trimmedPrefix
+    java.lang.String trimmedSuffix -> trimmedSuffix
+    java.lang.String trimmedSeparator -> trimmedSeparator
+    java.text.NumberFormat format -> format
     void <init>() -> <init>
-org.apache.commons.math3.util.FastMath -> org.a.a.a.c.a:
-    double abs(double) -> a
+    void <init>(java.text.NumberFormat) -> <init>
+    void <init>(java.lang.String,java.lang.String,java.lang.String,java.text.NumberFormat) -> <init>
+    org.apache.commons.math3.linear.RealVectorFormat getInstance() -> getInstance
+    org.apache.commons.math3.linear.RealVectorFormat getInstance(java.util.Locale) -> getInstance
+    java.lang.String format(org.apache.commons.math3.linear.RealVector) -> format
+    java.lang.StringBuffer format(org.apache.commons.math3.linear.RealVector,java.lang.StringBuffer,java.text.FieldPosition) -> format
+org.apache.commons.math3.linear.SingularMatrixException -> org.apache.commons.math3.linear.g:
+    void <init>() -> <init>
+org.apache.commons.math3.util.CompositeFormat -> org.apache.commons.math3.util.CompositeFormat:
+    void <init>() -> <init>
+    java.text.NumberFormat getDefaultNumberFormat() -> getDefaultNumberFormat
+    java.text.NumberFormat getDefaultNumberFormat(java.util.Locale) -> getDefaultNumberFormat
+    java.lang.StringBuffer formatDouble(double,java.text.NumberFormat,java.lang.StringBuffer,java.text.FieldPosition) -> formatDouble
+org.apache.commons.math3.util.FastMath -> org.apache.commons.math3.util.FastMath:
+    double LOG_MAX_VALUE -> LOG_MAX_VALUE
+    double[][] LN_QUICK_COEF -> LN_QUICK_COEF
+    double[][] LN_HI_PREC_COEF -> LN_HI_PREC_COEF
+    double[] SINE_TABLE_A -> SINE_TABLE_A
+    double[] SINE_TABLE_B -> SINE_TABLE_B
+    double[] COSINE_TABLE_A -> COSINE_TABLE_A
+    double[] COSINE_TABLE_B -> COSINE_TABLE_B
+    double[] TANGENT_TABLE_A -> TANGENT_TABLE_A
+    double[] TANGENT_TABLE_B -> TANGENT_TABLE_B
+    long[] RECIP_2PI -> RECIP_2PI
+    long[] PI_O_4_BITS -> PI_O_4_BITS
+    double[] EIGHTHS -> EIGHTHS
+    double[] CBRTTWO -> CBRTTWO
+    void <init>() -> <init>
+    double abs(double) -> abs
     void <clinit>() -> <clinit>
+org.apache.commons.math3.util.MathUtils -> org.apache.commons.math3.util.MathUtils:
+    void <init>() -> <init>
+    int hash(double) -> hash
+    int hash(double[]) -> hash
+    void checkNotNull(java.lang.Object) -> checkNotNull
