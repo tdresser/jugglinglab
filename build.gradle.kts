@@ -3,9 +3,10 @@
 // Kotlin DSL: https://docs.gradle.org/current/userguide/kotlin_dsl.html
 
 import de.undercouch.gradle.tasks.download.Download
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
-import shadow.org.apache.tools.zip.ZipOutputStream
+//import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+//import shadow.org.apache.tools.zip.ZipOutputStream
+import com.google.protobuf.gradle.*
+import org.gradle.api.internal.HasConvention
 
 val cheerpjfyPy = File(buildDir, "cheerpJ/cheerpj_2.2/cheerpjfy.py")
 
@@ -15,9 +16,13 @@ plugins {
     //`java-library`
     java // TODO: is this needed?
     application
+    id("com.google.protobuf") version "0.8.18"
     id("de.undercouch.download") version "5.0.1"
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
+
+val Project.protobuf: ProtobufConvention get() =
+    this.convention.getPlugin(ProtobufConvention::class)
 
 // APPLICATION BITS
 application {
@@ -55,12 +60,32 @@ sourceSets {
             setSrcDirs(listOf("source"))
             //exclude("gifwriter/**")
         }
+        proto {
+            setSrcDirs(listOf("source/protos"))
+        }
     }
+}
+
+protobuf {
+  //generatedFilesDir = "$buildDir/generated"
+
+  protoc {
+    // Download from repositories
+    artifact = "com.google.protobuf:protoc:3.0.0"
+  }
+
+  generateProtoTasks {
+    all().forEach { task ->
+        task.plugins {
+        }
+    }
+  }
 }
 
 // https://kotlinlang.org/docs/gradle.html#dependency-types
 dependencies {
     implementation("org.apache.commons:commons-math3:3.6.1")
+    implementation("com.google.protobuf:protobuf-java:3.19.4")
 }
 
 // TODO - why doesn't this work?

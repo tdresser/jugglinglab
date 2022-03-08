@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+message Vec3 {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+}
+
+message Path {
+    double startTime = 1;
+    double endTime = 2;
+    Vec3 start = 3;
+    Vec3 vel = 4;
+    Vec3 acc = 5;
+}
+
+message Pattern {
+    double minX = 1;
+    double maxX = 2;
+    double minY = 3;
+    double maxY = 4;
+    repeated Path paths = 5;
+}

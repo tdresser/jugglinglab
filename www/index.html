@@ -3,17 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <title>CheerpJ test</title>
-    <script src="https://cjrtnc.leaningtech.com/2.2/loader.js"></script>
+    <!--<script src="https://cjrtnc.leaningtech.com/2.2/loader.js"></script>-->
+    <script src="https://cjrtnc.leaningtech.com/latest/loader.js"></script>
   </head>
   <body></body>
   <script>
       async function main() {
-        //var w = new CheerpJWorker();
+        cheerpjInit();
+
+        window.w = new CheerpJWorker();
         //await w.cheerpjInit();
-        //await w.cheerpjRunMain("jugglingLab.JugglingLab", classPath);
-        cheerpjInit({enableProguardTrace:true});
+        //await w.cheerpjRunMain("jugglingLab.JugglingLab", "resources/JugglingLab.jar");
+        //cheerpjInit({enableProguardTrace:true});
         //cheerpjCreateDisplay(-1, -1, document.body);
-        cheerpjRunJar("resources/JugglingLab.jar"); 
+        //cheerpjRunJar("resources/JugglingLab.jar"); 
         //cheerpjRunMain("jugglinglab.JugglingLab", "resources/JugglingLab.jar")
       }
       /*function assert(condition) {

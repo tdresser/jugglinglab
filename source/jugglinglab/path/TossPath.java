@@ -10,6 +10,9 @@ import jugglinglab.util.*;
 public class TossPath extends Path {
     protected static final double g_def = 980;  // using CGS units
 
+    // c is start co-ordinate.
+    // b is velocity.
+    // a is acceleration.
     protected double bx, cx;
     protected double by, cy;
     protected double az, bz, cz;
