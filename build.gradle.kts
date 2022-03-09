@@ -8,13 +8,15 @@ import de.undercouch.gradle.tasks.download.Download
 import com.google.protobuf.gradle.*
 import org.gradle.api.internal.HasConvention
 
+// TODO: probably remove dev target, cheerpj is too slow before proguard.
+
 val cheerpjfyPy = File(buildDir, "cheerpJ/cheerpj_2.2/cheerpjfy.py")
 
 plugins {
-    // TODO - switch to library.
+    // TODO - switch to library?
     // Apply the java-library plugin for API and implementation separation.
     //`java-library`
-    java // TODO: is this needed?
+    java 
     application
     id("com.google.protobuf") version "0.8.18"
     id("de.undercouch.download") version "5.0.1"
@@ -57,7 +59,7 @@ repositories {
 sourceSets {
     main {
         java {
-            setSrcDirs(listOf("source"))
+            setSrcDirs(listOf("source", "build/generated/source/proto/main/java"))
             //exclude("gifwriter/**")
         }
         proto {

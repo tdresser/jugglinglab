@@ -1,6 +1,6 @@
 package web_bindings;
 
-import jugglinglab.protos.*;
+import jugglinglab.protos.PatternOuterClass;
 
 public class Serializer {   
     /*Person john =
