@@ -1,8 +1,8 @@
 package web_bindings;
 
-import protos.*;
+import jugglinglab.protos.*;
 
-public class Serializer {     
+public class Serializer {   
     /*Person john =
   Person.newBuilder()
     .setId(1234)

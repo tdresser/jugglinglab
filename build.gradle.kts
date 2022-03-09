@@ -67,16 +67,20 @@ sourceSets {
 }
 
 protobuf {
-  //generatedFilesDir = "$buildDir/generated"
+    //generatedFilesDir = "$buildDir/generated"
 
-  protoc {
-    // Download from repositories
-    artifact = "com.google.protobuf:protoc:3.0.0"
-  }
+    protoc {
+        // Download from repositories
+        // Keep version in line with protobuf-lite-runtime library.
+        artifact = "com.google.protobuf:protoc:3.8.0"
+    }
 
   generateProtoTasks {
     all().forEach { task ->
-        task.plugins {
+        task.builtins {
+            getByName("java") {
+                option("lite")
+            }
         }
     }
   }
@@ -85,7 +89,9 @@ protobuf {
 // https://kotlinlang.org/docs/gradle.html#dependency-types
 dependencies {
     implementation("org.apache.commons:commons-math3:3.6.1")
-    implementation("com.google.protobuf:protobuf-java:3.19.4")
+    //implementation("com.google.protobuf:protobuf-java:3.19.4")
+    // Keep version in line with protoc.
+    implementation("com.google.protobuf:protobuf-javalite:3.8.0-rc-1")
 }
 
 // TODO - why doesn't this work?
