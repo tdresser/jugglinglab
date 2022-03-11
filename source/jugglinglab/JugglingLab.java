@@ -5,9 +5,11 @@
 package jugglinglab;
 
 import jugglinglab.jml.JMLPattern;
+import jugglinglab.protos.PatternOuterClass.Pattern;
 import jugglinglab.util.Coordinate;
 import jugglinglab.util.JuggleExceptionInternal;
 import jugglinglab.util.JuggleExceptionUser;
+import web_bindings.Serializer;
 
 public class JugglingLab {   
     public static void main(String[] args) {
@@ -15,7 +17,9 @@ public class JugglingLab {
         try {
             System.out.println("TRY");
             JMLPattern pattern = JMLPattern.fromBasePattern("siteswap", "531");
+            Pattern proto = Serializer.serializePattern(pattern);
             System.out.println("MADE PATTERN");
+            System.out.println(proto);
 
             pattern.layoutPattern();
             System.out.println("Paths: " + pattern.getNumberOfPaths());
