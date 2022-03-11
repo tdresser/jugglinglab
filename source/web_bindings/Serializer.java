@@ -26,6 +26,9 @@ public class Serializer {
     for (ArrayList<PathLink> pathLinks : pattern.getPathLinks()) {
       for (PathLink pathLink : pathLinks) {
         TossPathSerializable path = (TossPathSerializable) pathLink.getPath();
+        if (path == null) {
+          continue;
+        }
         builder.addPaths(path.serialize(pathLink));
         Coordinate min = path.getMin();
         Coordinate max = path.getMin();

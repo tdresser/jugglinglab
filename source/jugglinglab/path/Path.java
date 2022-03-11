@@ -5,6 +5,7 @@
 package jugglinglab.path;
 
 import jugglinglab.util.*;
+import web_bindings.TossPathSerializable;
 
 
 // This is the base class for all Path types in Juggling Lab. A Path describes
@@ -26,7 +27,7 @@ public abstract class Path {
             throw new JuggleExceptionUser("Path type not specified");
 
         if (type.equalsIgnoreCase("toss"))
-            return new TossPath();
+            return new TossPathSerializable();
         else if (type.equalsIgnoreCase("bounce"))
             return new BouncePath();
 
