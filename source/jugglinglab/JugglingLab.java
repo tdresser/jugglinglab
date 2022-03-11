@@ -4,9 +4,10 @@
 
 package jugglinglab;
 
+import java.util.Base64;
+
 import jugglinglab.jml.JMLPattern;
 import jugglinglab.protos.PatternOuterClass.Pattern;
-import jugglinglab.util.Coordinate;
 import jugglinglab.util.JuggleExceptionInternal;
 import jugglinglab.util.JuggleExceptionUser;
 import web_bindings.Serializer;
@@ -17,15 +18,17 @@ public class JugglingLab {
         try {
             System.out.println("TRY");
             JMLPattern pattern = JMLPattern.fromBasePattern("siteswap", "531");
+            pattern.layoutPattern();
             Pattern proto = Serializer.serializePattern(pattern);
             System.out.println("MADE PATTERN");
             System.out.println(proto);
+            String encoded = Base64.getEncoder().encodeToString(proto.toByteArray());
+            System.out.println(encoded);
 
-            pattern.layoutPattern();
-            System.out.println("Paths: " + pattern.getNumberOfPaths());
+            /*System.out.println("Paths: " + pattern.getNumberOfPaths());
             Coordinate c = new Coordinate();
             pattern.getHandCoordinate(1, 0, 0.1, c);
-            System.out.println(c.toString());
+            System.out.println(c.toString());*/
         } catch (JuggleExceptionUser e) {
             System.out.println("Failure" + e.getMessage());
         } catch (JuggleExceptionInternal e) {
