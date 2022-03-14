@@ -9,6 +9,7 @@
   "author": "tdresser@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "esbuild": "^0.14.23"
+    "esbuild": "^0.14.23",
+    "pbjs": "^0.0.14"
   }
 }

@@ -1,4 +1,6 @@
-import { mkdir, cp } from 'fs/promises';
+import { mkdir, cp, readdir, writeFile, readFile } from 'fs/promises';
+
+import { parseSchema } from 'pbjs';
 
 /* require('esbuild').build({
     entryPoints: ['app.jsx'],
@@ -8,14 +10,15 @@ import { mkdir, cp } from 'fs/promises';
   */
 
 async function main() {
-    try {
-        await mkdir("resources");
-    } catch {
+    const PROTO_PATH = "../source/protos/";
+    const protos = await readdir(PROTO_PATH)
+    for (const proto of protos) {
+        console.log(proto);
+        const protoContents = await readFile(PROTO_PATH + proto);
+        const schema = parseSchema(protoContents);
+        const ts = schema.toTypeScript();
+        await writeFile("resources/protos/" + proto + ".ts", ts);
     }
-    //await cp("../bin/JugglingLabMonolithProguarded.jar", "resources/JugglingLab.jar");
-    //await cp("../bin/JugglingLabMonolithProguarded.jar.js", "resources/JugglingLab.jar.js");
-    await cp("../bin/JugglingLabMonolith.jar", "resources/JugglingLab.jar");
-    await cp("../bin/JugglingLabMonolith.jar.js", "resources/JugglingLab.jar.js");
 }
 
 main();

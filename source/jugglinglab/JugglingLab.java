@@ -4,6 +4,10 @@
 
 package jugglinglab;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Base64;
 
 import jugglinglab.jml.JMLPattern;
@@ -24,6 +28,14 @@ public class JugglingLab {
             System.out.println(proto);
             String encoded = Base64.getEncoder().encodeToString(proto.toByteArray());
             System.out.println(encoded);
+
+            Path path = Paths.get("www/resources/test2.js");
+            try {
+                Files.write(path, encoded.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
             /*System.out.println("Paths: " + pattern.getNumberOfPaths());
             Coordinate c = new Coordinate();
