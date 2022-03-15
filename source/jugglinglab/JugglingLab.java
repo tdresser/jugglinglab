@@ -16,6 +16,8 @@ import jugglinglab.util.JuggleExceptionInternal;
 import jugglinglab.util.JuggleExceptionUser;
 import web_bindings.Serializer;
 
+// Could serialize array to disk: https://stackoverflow.com/a/40303705
+
 public class JugglingLab {   
     public static void main(String[] args) {
         System.out.println("MAIN 4");
