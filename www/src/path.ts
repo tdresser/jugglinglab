@@ -13,8 +13,8 @@ export class Path {
     this.vel = Vec3.fromProto(proto.vel);
     this.acc = Vec3.fromProto(proto.acc);
 
-    this.startTime = proto.startTime;
-    this.endTime = proto.endTime;
+    this.startTime = proto.startTime || 0;
+    this.endTime = proto.endTime || 0;
 
     console.log('START TIME IN PROTO: ' + proto.startTime);
     console.log('END TIME IN PROTO: ' + proto.endTime);

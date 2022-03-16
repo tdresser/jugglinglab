@@ -10,11 +10,15 @@ const patternProto = decodePattern(new Uint8Array(buffer));
 const pattern = new Pattern(patternProto);
 
 for (let i = 0; i < 1000; ++i) {
-  for (const path of pattern.getPaths()) {
+  for (const path of pattern.paths) {
     const v = path.getPositionAtTime(i++/100.0);
     if (v != null) {
       console.log(v);
     }
   }
 }
+
+console.log(pattern.min);
+console.log(pattern.max);
+
 
