@@ -20,4 +20,5 @@ message Pattern {
     Vec3 min = 1;
     Vec3 max = 2;
     repeated Path paths = 3;
+    double loopEndTime = 4;
 }

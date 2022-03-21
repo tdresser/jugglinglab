@@ -22,6 +22,7 @@
 
 -keep public class jugglinglab.JugglingLab {
     public static void main(java.lang.String[]);
+    public static byte[] getPatternProto(java.lang.String);
 }
 
 # Copied from cjGetProguardConfiguration().

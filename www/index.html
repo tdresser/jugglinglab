@@ -3,27 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <title>CheerpJ test</title>
-    <!--<script src="https://cjrtnc.leaningtech.com/2.2/loader.js"></script>-->
-    <script src="https://cjrtnc.leaningtech.com/latest/loader.js"></script>
+    <script src="https://cjrtnc.leaningtech.com/2.2/loader.js"></script>
+    <!--<script src="https://cjrtnc.leaningtech.com/latest/loader.js"></script>-->
+    <script src="build/out.js"></script>
   </head>
   <body></body>
   <script>
       async function main() {
-        cheerpjInit();
-
-        window.w = new CheerpJWorker();
-        //await w.cheerpjInit();
-        //await w.cheerpjRunMain("jugglingLab.JugglingLab", "resources/JugglingLab.jar");
-        //cheerpjInit({enableProguardTrace:true});
-        //cheerpjCreateDisplay(-1, -1, document.body);
-        //cheerpjRunJar("resources/JugglingLab.jar"); 
-        //cheerpjRunMain("jugglinglab.JugglingLab", "resources/JugglingLab.jar")
+        await cheerpjInit();
+        await cheerpjRunMain("jugglinglab.JugglingLab", "resources/JugglingLab.jar")
+        const pattern = await getPattern("441");
+        console.log(proto);
       }
-      /*function assert(condition) {
+      function assert(condition) {
         if (!condition) {
           console.warn("Assertion failed");
         }
-      }*/
+      }
       main();
       
   </script>

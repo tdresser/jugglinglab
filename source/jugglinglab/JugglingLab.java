@@ -16,10 +16,21 @@ import jugglinglab.util.JuggleExceptionInternal;
 import jugglinglab.util.JuggleExceptionUser;
 import web_bindings.Serializer;
 
-// Could serialize array to disk: https://stackoverflow.com/a/40303705
+public class JugglingLab { 
+    public static byte[] getPatternProto(String siteswap) {
+        try {
+            JMLPattern pattern = JMLPattern.fromBasePattern("siteswap", siteswap);
+            Pattern proto = Serializer.serializePattern(pattern);
+            return proto.toByteArray();
+        } catch (JuggleExceptionUser e) {
+            e.printStackTrace();
+        } catch (JuggleExceptionInternal e) {
+            e.printStackTrace();
+        }
+        return new byte[0];
+    }  
 
-public class JugglingLab {   
-    public static void main(String[] args) {
+    public static void test() {
         System.out.println("MAIN 4");
         try {
             System.out.println("TRY");
@@ -48,6 +59,9 @@ public class JugglingLab {
         } catch (JuggleExceptionInternal e) {
             System.out.println("Failure" + e.getMessage());
         }
+    }
+
+    public static void main(String[] args) {        
     }
 
     // Verify the validity of JML file(s) whose paths are given as command-line
