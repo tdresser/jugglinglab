@@ -29,6 +29,10 @@ public class JugglingLab {
         }
         return new byte[0];
     }  
+    public static String getPatternProtoBase64(String siteswap) {
+        byte[] proto = getPatternProto(siteswap);
+        return Base64.getEncoder().encodeToString(proto);
+    }  
 
     public static void test() {
         System.out.println("MAIN 4");
