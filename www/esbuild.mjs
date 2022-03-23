@@ -1,6 +1,13 @@
 import {readdir, writeFile, readFile} from 'fs/promises';
 import {parseSchema} from 'pbjs';
-import {build} from 'esbuild';
+import {build, serve} from 'esbuild';
+import path from 'path';
+
+const BUILD_OPTIONS = {
+  entryPoints: ['src/main.ts'],
+  bundle: true,
+  outfile: 'build/out.js',
+};
 
 async function main() {
   const PROTO_PATH = '../source/protos/';
@@ -12,14 +19,25 @@ async function main() {
     const ts = schema.toTypeScript();
     await writeFile('resources/protos/' + proto + '.ts', ts);
   }
+
+  serve({
+    servedir: path.resolve(),
+  }, BUILD_OPTIONS).then((result) => {
+    console.log(result);
+  });
+
+  /* watch: {
+    onRebuild(error, result) {
+      if (error) console.error('watch build failed:', error);
+      else console.log('watch build succeeded:', result);
+    },
+  },*/
+
+  /* build(BUILD_OPTIONS).catch(() => { // TODO:, readd watch
+    console.log('Something terrible happened');
+  });*/
 }
 
 main();
 
-build({
-  entryPoints: ['src/main.ts'],
-  bundle: true,
-  outfile: 'build/out.js',
-}).catch(() => {
-  console.log('Something terrible happened');
-});
+

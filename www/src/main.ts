@@ -29,7 +29,10 @@ async function getPattern(ss:string):Promise<Pattern> {
 
 export async function main() {
   await cheerpjInit();
+  console.log('ABOUT TO RUN MAIN');
   await cheerpjRunMain('jugglinglab.JugglingLab', 'resources/JugglingLab.jar');
+  console.log('RAN MAIN');
+
   const pattern = await getPattern('441');
   console.log(pattern);
 }
