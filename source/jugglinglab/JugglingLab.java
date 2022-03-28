@@ -20,7 +20,9 @@ public class JugglingLab {
     public static byte[] getPatternProto(String siteswap) {
         try {
             JMLPattern pattern = JMLPattern.fromBasePattern("siteswap", siteswap);
-            Pattern proto = Serializer.serializePattern(pattern);
+            pattern.layoutPattern();
+            Pattern proto = Serializer.serializePattern(pattern);            
+            System.out.println("Pattern max x: " + proto.getMin().getX());
             return proto.toByteArray();
         } catch (JuggleExceptionUser e) {
             e.printStackTrace();
@@ -29,43 +31,33 @@ public class JugglingLab {
         }
         return new byte[0];
     }  
-    public static String getPatternProtoBase64(String siteswap) {
+
+    public static String getPatternProtoBase64(String siteswap) {        
+        System.out.println("getPatternProtoBase64 Java side " + siteswap);
         byte[] proto = getPatternProto(siteswap);
+        System.out.println("getPatternProtoBase64 Java side got proto");
+        System.out.println(Base64.getEncoder().encodeToString(proto));
         return Base64.getEncoder().encodeToString(proto);
     }  
 
     public static void test() {
         System.out.println("MAIN 4");
+        byte[] bytes = getPatternProto("531");
+        System.out.println("TRY");
+        String encoded = Base64.getEncoder().encodeToString(bytes);
+        System.out.println(encoded);
+
+        Path path = Paths.get("www/resources/test2.js");
         try {
-            System.out.println("TRY");
-            JMLPattern pattern = JMLPattern.fromBasePattern("siteswap", "531");
-            pattern.layoutPattern();
-            Pattern proto = Serializer.serializePattern(pattern);
-            System.out.println("MADE PATTERN");
-            System.out.println(proto);
-            String encoded = Base64.getEncoder().encodeToString(proto.toByteArray());
-            System.out.println(encoded);
-
-            Path path = Paths.get("www/resources/test2.js");
-            try {
-                Files.write(path, encoded.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            /*System.out.println("Paths: " + pattern.getNumberOfPaths());
-            Coordinate c = new Coordinate();
-            pattern.getHandCoordinate(1, 0, 0.1, c);
-            System.out.println(c.toString());*/
-        } catch (JuggleExceptionUser e) {
-            System.out.println("Failure" + e.getMessage());
-        } catch (JuggleExceptionInternal e) {
-            System.out.println("Failure" + e.getMessage());
+            Files.write(path, encoded.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {        
+    // We need to call the main function for cheerpj to work. Not sure why...
+    public static void main(String[] args) {    
+        //test();    
     }
 
     // Verify the validity of JML file(s) whose paths are given as command-line

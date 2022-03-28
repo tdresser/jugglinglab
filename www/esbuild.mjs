@@ -1,12 +1,21 @@
 import {readdir, writeFile, readFile} from 'fs/promises';
 import {parseSchema} from 'pbjs';
-import {build, serve} from 'esbuild';
-import path from 'path';
+import {build} from 'esbuild';
+
+// Can't use esbuild serve, as it doesn't support HEAD requests,
+// which cheerpj requires.
 
 const BUILD_OPTIONS = {
   entryPoints: ['src/main.ts'],
   bundle: true,
   outfile: 'build/out.js',
+  sourcemap: 'inline',
+  watch: {
+    onRebuild(error, result) {
+      if (error) console.error('watch build failed:', error);
+      else console.log('watch build succeeded:', result);
+    },
+  },
 };
 
 async function main() {
@@ -20,22 +29,9 @@ async function main() {
     await writeFile('resources/protos/' + proto + '.ts', ts);
   }
 
-  serve({
-    servedir: path.resolve(),
-  }, BUILD_OPTIONS).then((result) => {
-    console.log(result);
-  });
-
-  /* watch: {
-    onRebuild(error, result) {
-      if (error) console.error('watch build failed:', error);
-      else console.log('watch build succeeded:', result);
-    },
-  },*/
-
-  /* build(BUILD_OPTIONS).catch(() => { // TODO:, readd watch
+  build(BUILD_OPTIONS).catch(() => {
     console.log('Something terrible happened');
-  });*/
+  });
 }
 
 main();

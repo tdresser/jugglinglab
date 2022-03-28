@@ -6,6 +6,9 @@ export class Vec3 {
   z:number;
 
   static fromProto(proto: Vec3Proto) : Vec3 {
+    if (!proto) {
+      return new Vec3(0, 0, 0);
+    }
     return new Vec3(proto.x || 0, proto.y || 0, proto.z || 0);
   }
 
