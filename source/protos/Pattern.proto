@@ -1,24 +1,24 @@
-syntax = "proto3";
+syntax = "proto2";
 
 option java_package = "jugglinglab.protos";
 
 message Vec3 {
-    double x = 1;
-    double y = 2;
-    double z = 3;
+    required double x = 1;
+    required double y = 2;
+    required double z = 3;
 }
 
 message Path {
-    double startTime = 1;
-    double endTime = 2;
-    Vec3 start = 3;
-    Vec3 vel = 4;
-    Vec3 acc = 5;
+    required double startTime = 1;
+    required double endTime = 2;
+    required Vec3 start = 3;
+    required Vec3 vel = 4;
+    required Vec3 acc = 5;
 }
 
 message Pattern {
-    Vec3 min = 1;
-    Vec3 max = 2;
+    required Vec3 min = 1;
+    required Vec3 max = 2;
     repeated Path paths = 3;
-    double loopEndTime = 4;
+    required double loopEndTime = 4;
 }

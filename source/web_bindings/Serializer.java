@@ -45,6 +45,7 @@ public class Serializer {
 
     builder.setMin(Vec3.newBuilder().setX(minX).setY(minY).setZ(minZ).build());
     builder.setMax(Vec3.newBuilder().setX(maxX).setY(maxY).setZ(maxZ).build());
+    builder.setLoopEndTime(pattern.getLoopEndTime());
 
     return builder.build();
   }

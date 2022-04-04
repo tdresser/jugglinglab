@@ -2,12 +2,15 @@ import {decodePattern} from '../resources/protos/Pattern.proto';
 // import {getTestBase64Proto} from '../resources/test';
 import {decode} from 'base64-arraybuffer';
 import {Pattern} from 'pattern';
+// import '../resources/loader';
 
 // TODO: maybe prevent bare use of cjCall, and add a shim
 // that makes sure data type conversions have taken place.
 
 async function getPattern(ss:string):Promise<Pattern> {
-  const ssJavaStr = cjStringJStoJava(ss);
+  console.log('get pattern: ' + ss);
+  const ssJavaStr = cjStringJsToJava(ss);
+  console.log('java str: ' + ssJavaStr);
   console.log('Get pattern proto');
   // TODO: figure out what's going on here. The result of cjCall has no buffer.
   const protoArray : Uint8Array = new Uint8Array(await cjCall(
@@ -31,11 +34,13 @@ async function getPattern(ss:string):Promise<Pattern> {
   console.log(protoArrayFromBase64);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const patternProto = decodePattern(protoArrayFromBase64);
+  const patternProto = decodePattern(protoArrayHack);
   console.log('Decode Result');
   console.log(patternProto);
   const pattern = new Pattern(patternProto);
   console.log(pattern);
+
+  cjCall('jugglinglab.JugglingLab', 'test');
   return pattern;
 }
 

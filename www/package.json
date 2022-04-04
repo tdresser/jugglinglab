@@ -9,9 +9,11 @@
   "author": "tdresser@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "@types/three": "^0.139.0",
     "base64-arraybuffer": "^1.0.2",
     "esbuild": "^0.14.23",
-    "pbjs": "^0.0.14"
+    "pbjs": "^0.0.14",
+    "three": "^0.139.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.15.0",

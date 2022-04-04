@@ -7,3 +7,5 @@ declare function cheerpjInit(): Promise<any>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare function cheerpjRunMain(klass:string, path:string): Promise<any>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare function cjStringJsToJava(cjString:string): any;

@@ -4,11 +4,16 @@
 
 package jugglinglab;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Base64;
+
+import com.google.protobuf.CodedOutputStream;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 import jugglinglab.jml.JMLPattern;
 import jugglinglab.protos.PatternOuterClass.Pattern;
@@ -18,17 +23,29 @@ import web_bindings.Serializer;
 
 public class JugglingLab { 
     public static byte[] getPatternProto(String siteswap) {
+        System.out.println("Getting proto for " + siteswap);
+        System.out.println("Equals 531?");
+        System.out.println(siteswap.equals("531"));
         try {
             JMLPattern pattern = JMLPattern.fromBasePattern("siteswap", siteswap);
             pattern.layoutPattern();
-            Pattern proto = Serializer.serializePattern(pattern);            
-            System.out.println("Pattern max x: " + proto.getMin().getX());
-            return proto.toByteArray();
+            Pattern proto = Serializer.serializePattern(pattern); 
+            System.out.println(proto.toString());           
+            byte[] byteArray = proto.toByteArray();
+            System.out.println(Arrays.toString(byteArray));
+
+            Pattern protoDeserialized = Pattern.parseFrom(byteArray);
+            System.out.println("Deserialized on java side");
+            System.out.println(protoDeserialized.toString());
+            return byteArray;
         } catch (JuggleExceptionUser e) {
             e.printStackTrace();
         } catch (JuggleExceptionInternal e) {
             e.printStackTrace();
-        }
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+        } 
+        System.out.println("FAILURE, returning empty proto.");
         return new byte[0];
     }  
 
@@ -43,21 +60,21 @@ public class JugglingLab {
     public static void test() {
         System.out.println("MAIN 4");
         byte[] bytes = getPatternProto("531");
-        System.out.println("TRY");
+        System.out.println("test output");
         String encoded = Base64.getEncoder().encodeToString(bytes);
         System.out.println(encoded);
 
-        Path path = Paths.get("www/resources/test2.js");
+        /*Path path = Paths.get("www/resources/test2.js");
         try {
             Files.write(path, encoded.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     // We need to call the main function for cheerpj to work. Not sure why...
     public static void main(String[] args) {    
-        //test();    
+        test();    
     }
 
     // Verify the validity of JML file(s) whose paths are given as command-line
